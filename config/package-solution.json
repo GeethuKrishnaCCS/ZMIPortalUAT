@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "zmi-components-client-side-solution",
+    "id": "f9877f63-d774-43c6-9c2d-c57ccb1e573b",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.17.3"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "zmi-components description"
+      },
+      "longDescription": {
+        "default": "zmi-components description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "zmi-components Feature",
+        "description": "The feature that activates elements of the zmi-components solution.",
+        "id": "dc12436a-d4da-4835-8523-72a25754d86c",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/zmi-components.sppkg"
+  }
+}
