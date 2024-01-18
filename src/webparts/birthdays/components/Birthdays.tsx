@@ -9,15 +9,14 @@ export default class Birthdays extends React.Component<IBirthdaysProps, {}> {
       description,
       isDarkTheme,
       environmentMessage,
-      hasTeamsContext,
-      userDisplayName
+      hasTeamsContext
     } = this.props;
 
     return (
       <section className={`${styles.birthdays} ${hasTeamsContext ? styles.teams : ''}`}>
         <div className={styles.welcome}>
           <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
+
           <div>{environmentMessage}</div>
           <div>Web part property value: <strong>{escape(description)}</strong></div>
         </div>
