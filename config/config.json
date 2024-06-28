@@ -9,10 +9,19 @@
           "manifest": "./src/webparts/birthdays/BirthdaysWebPart.manifest.json"
         }
       ]
+    },
+    "finder-wp-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/finderWp/FinderWpWebPart.js",
+          "manifest": "./src/webparts/finderWp/FinderWpWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "BirthdaysWebPartStrings": "lib/webparts/birthdays/loc/{locale}.js"
+    "BirthdaysWebPartStrings": "lib/webparts/birthdays/loc/{locale}.js",
+    "FinderWpWebPartStrings": "lib/webparts/finderWp/loc/{locale}.js"
   }
 }
