@@ -9,10 +9,19 @@
           "manifest": "./src/webparts/birthdays/BirthdaysWebPart.manifest.json"
         }
       ]
+    },
+    "calender-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/calender/CalenderWebPart.js",
+          "manifest": "./src/webparts/calender/CalenderWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "BirthdaysWebPartStrings": "lib/webparts/birthdays/loc/{locale}.js"
+    "BirthdaysWebPartStrings": "lib/webparts/birthdays/loc/{locale}.js",
+    "CalenderWebPartStrings": "lib/webparts/calender/loc/{locale}.js"
   }
 }
