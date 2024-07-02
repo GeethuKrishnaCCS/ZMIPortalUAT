@@ -6,7 +6,7 @@
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
-    "isDomainIsolated": false,
+    "isDomainIsolated": true,
     "developer": {
       "name": "",
       "websiteUrl": "",
@@ -14,6 +14,20 @@
       "termsOfUseUrl": "",
       "mpnId": "Undefined-1.17.3"
     },
+    "webApiPermissionRequests": [  
+      {
+         "resource": "Microsoft Graph",
+         "scope": "Calendars.Read"
+       },
+       {
+         "resource": "Microsoft Graph",
+         "scope": "Calendars.ReadBasic"
+       },
+       {
+         "resource": "Microsoft Graph",
+         "scope": "Calendars.ReadWrite"
+       }
+      ],
     "metadata": {
       "shortDescription": {
         "default": "zmi-components description"

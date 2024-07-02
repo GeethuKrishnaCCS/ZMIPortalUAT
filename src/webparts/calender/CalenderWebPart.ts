@@ -12,24 +12,17 @@ import * as strings from 'CalenderWebPartStrings';
 import Calender from './components/Calender';
 import { ICalenderProps } from './interfaces/ICalenderProps';
 
-export interface ICalenderWebPartProps {
-  description: string;
-}
 
-export default class CalenderWebPart extends BaseClientSideWebPart<ICalenderWebPartProps> {
 
-  private _isDarkTheme: boolean = false;
-  private _environmentMessage: string = '';
+export default class CalenderWebPart extends BaseClientSideWebPart<ICalenderProps> {
 
-  public render(): void {
+   public render(): void {
     const element: React.ReactElement<ICalenderProps> = React.createElement(
       Calender,
       {
-        description: this.properties.description,
-        isDarkTheme: this._isDarkTheme,
-        environmentMessage: this._environmentMessage,
-        hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        siteUrl: this.context.pageContext.web.serverRelativeUrl,
+        eventListName: this.properties.eventListName,
+        context: this.context,
       }
     );
 
@@ -38,7 +31,7 @@ export default class CalenderWebPart extends BaseClientSideWebPart<ICalenderWebP
 
   protected onInit(): Promise<void> {
     return this._getEnvironmentMessage().then(message => {
-      this._environmentMessage = message;
+      // this._environmentMessage = message;
     });
   }
 
@@ -75,7 +68,7 @@ export default class CalenderWebPart extends BaseClientSideWebPart<ICalenderWebP
       return;
     }
 
-    this._isDarkTheme = !!currentTheme.isInverted;
+    // this._isDarkTheme = !!currentTheme.isInverted;
     const {
       semanticColors
     } = currentTheme;

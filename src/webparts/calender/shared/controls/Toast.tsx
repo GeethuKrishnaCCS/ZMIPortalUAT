@@ -2,23 +2,23 @@ import * as React from 'react';
 import toast from 'react-simple-toasts';
 import styles from './Toast.module.scss';
 
-function error(msg) {
+function error(msg: any) {
     return <div className={styles.error}>{msg}</div>
 }
 
-function info(msg) {
+function info(msg: any) {
     return <div className={styles.info}>{msg}</div>
 }
 
-function warning(msg) {
+function warning(msg: any) {
     return <div className={styles.warning}>{msg}</div>
 }
 
-function success(msg) {
+function success(msg: any) {
     return <div className={styles.success}>{msg}</div>
 }
 
-function Toast(type, message) {
+function Toast(type: string, message: any) {
     return toast(message, {
         render: message => <>{type === "error" && error(message)}
             {type === "info" && info(message)}
