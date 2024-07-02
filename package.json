@@ -23,6 +23,7 @@
     "@pnp/logging": "^3.23.0",
     "@pnp/queryable": "^3.23.0",
     "@pnp/sp": "^3.23.0",
+    "@pnp/spfx-property-controls": "^3.17.0",
     "react-datepicker": "^5.1.0",
     "react-simple-toasts": "^5.10.0"
   },

@@ -31,6 +31,7 @@
   "localizedResources": {
     "BirthdaysWebPartStrings": "lib/webparts/birthdays/loc/{locale}.js",
     "FinderWpWebPartStrings": "lib/webparts/finderWp/loc/{locale}.js",
-    "CalenderWebPartStrings": "lib/webparts/calender/loc/{locale}.js"
+    "CalenderWebPartStrings": "lib/webparts/calender/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
   }
 }
