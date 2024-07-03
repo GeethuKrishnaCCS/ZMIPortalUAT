@@ -20,30 +20,32 @@ export default class Calender extends React.Component<ICalenderProps,ICalenderSt
     this._Service = new BaseService(this.props.context);
     this.submit = this.submit.bind(this);
   }
-  // public async componentDidMount(): Promise<void> {
-  //   const today = new Date();
-  //   let eventdataArray : any[] = [];
-  //   const eventdata = await this._Service.gettodayevents(this.props.context,moment(today).format('YYYY-MM-DDTHH:mm:ss.SSSSSSS'))
-  //   console.log(eventdata);
-  //   for (let i = 0; i < eventdata.length; i++) {
-  //     let startDate = moment(new Date(eventdata[i].start.dateTime)).format("DD/MMM/YYYY");
-  //     let endDate = moment(new Date(eventdata[i].end.dateTime)).format("DD/MMM/YYYY");
-  //     let starttime = moment(new Date(eventdata[i].start.dateTime)).format("hh:mm A");
-  //     let endtime = moment(new Date(eventdata[i].end.dateTime)).format("hh:mm A");
-  //       const eventdatavalue :any = {
-  //         startDate: startDate,
-  //         endDate:endDate,
-  //         subject: eventdata[i].subject,
-  //         startTime:starttime,
-  //         endTime:endtime
-  //       };
-  //       eventdataArray.push(eventdatavalue);
+  public async componentDidMount(): Promise<void> {
+    const today = moment(new Date().setMilliseconds(0)).format('YYYY-MM-DDT00:00:00.SSSSSSS');
+    const nextDay = moment(today).add(1, 'days').format('YYYY-MM-DDT00:00:00.SSSSSSS');
+   console.log(nextDay)
+    let eventdataArray : any[] = [];
+    const eventdata = await this._Service.getevents(this.props.context,today,nextDay)
+    console.log(eventdata);
+    for (let i = 0; i < eventdata.length; i++) {
+      let startDate = moment(new Date(eventdata[i].start.dateTime)).format("DD/MMM/YYYY");
+      let endDate = moment(new Date(eventdata[i].end.dateTime)).format("DD/MMM/YYYY");
+      let starttime = moment(new Date(eventdata[i].start.dateTime)).format("hh:mm A");
+      let endtime = moment(new Date(eventdata[i].end.dateTime)).format("hh:mm A");
+        const eventdatavalue :any = {
+          startDate: startDate,
+          endDate:endDate,
+          subject: eventdata[i].subject,
+          startTime:starttime,
+          endTime:endtime
+        };
+        eventdataArray.push(eventdatavalue);
       
-  //   }
-  //    console.log(eventdataArray);
-  //    this.setState({eventdataArray:eventdataArray});
+    }
+     console.log(eventdataArray);
+     this.setState({eventdataArray:eventdataArray});
 
-  // }
+  }
  public dateChange = async (dates: [any, any]) => {
   const [start, end] = dates;{
     this.setState({
@@ -62,7 +64,7 @@ export default class Calender extends React.Component<ICalenderProps,ICalenderSt
   let eventdataArray : any[] = [];
   // let selectedStartdate = moment(new Date(this.state.startDate)).format("DD/MMM/YYYY");
   // let selectedEnddate = moment(new Date(this.state.endDate)).format("DD/MMM/YYYY");
-  const eventdata = await this._Service.getevents(this.props.context,moment(this.state.startDate).format('YYYY-MM-DDTHH:mm:ss.SSSSSSS'),moment(this.state.endDate).format('YYYY-MM-DDTHH:mm:ss.SSSSSSS'))
+  const eventdata = await this._Service.getevents(this.props.context,moment(this.state.startDate).format('YYYY-MM-DDT00:00:00.SSSSSSS'),moment(this.state.endDate).format('YYYY-MM-DDT23:59:00.SSSSSSS'))
   
   for (let i = 0; i < eventdata.length; i++) {
     let startDate = moment(new Date(eventdata[i].start.dateTime)).format("DD/MMM/YYYY");
@@ -101,17 +103,28 @@ export default class Calender extends React.Component<ICalenderProps,ICalenderSt
       selectsRange
       inline
     />
-    <table className={styles.tableClass}>
+    {this.state.eventdataArray.map((item: any, key: any) => {
+        return (<div className={styles.border}>
+          <div className={styles.flex}>
+      <div className={styles.fadebg}>{item.startDate}</div>
+      <div className={styles.rightcnt}>
+        {item.startDate !== item.endDate && <div>Recurring Events</div>}
+        <div>{item.subject}</div>
+        <div>{item.startTime}-{item.endTime}</div>
+      </div>
+      </div>
+    </div>)})}
+    {/* <table className={styles.tableClass}>
     {this.state.eventdataArray.length !== 0 && <tbody className={styles.tbody}>
       <tr></tr>
       {this.state.eventdataArray.map((item: any, key: any) => {
         return (<tr >
-        <td className={styles.td1}>{item.startDate}-<br/>{item.endDate}</td>
-        <td className={styles.td2}>{item.subject}<br/>{item.startTime}-{item.endTime}</td>
+        <td className={styles.td1}>{item.startDate}</td>
+        <td className={styles.td2}>{item.subject}<hr/><br/>{item.startTime}-{item.endTime}</td>
       </tr>)})}
       </tbody>}
       
-    </table>
+    </table> */}
     
     <PrimaryButton id="b2" onClick={this.submit}>Submit</PrimaryButton>
 
