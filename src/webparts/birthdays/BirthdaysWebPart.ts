@@ -10,11 +10,8 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import * as strings from 'BirthdaysWebPartStrings';
 import Birthdays from './components/Birthdays';
-import { IBirthdaysProps } from './components/IBirthdaysProps';
+import { IBirthdaysProps, IBirthdaysWebPartProps } from './interfaces/IBirthdaysProps';
 
-export interface IBirthdaysWebPartProps {
-  description: string;
-}
 
 export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWebPartProps> {
 
@@ -29,7 +26,9 @@ export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWe
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        context: this.context,
+        listName: this.properties.listName,
       }
     );
 
@@ -109,7 +108,10 @@ export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWe
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
-                })
+                }),
+                PropertyPaneTextField('listName', {
+                  label: strings.PropertyPaneListName
+                }),
               ]
             }
           ]

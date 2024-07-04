@@ -1,0 +1,67 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.finderWp {
+  overflow: hidden;
+  padding: 1em;
+  color: "[theme:bodyText, default: #323130]";
+  color: var(--bodyText);
+  &.teams {
+    font-family: $ms-font-family-fallbacks;
+  }
+}
+
+.welcome {
+  text-align: center;
+}
+
+.welcomeImage {
+  width: 100%;
+  max-width: 420px;
+}
+
+.links {
+  a {
+    text-decoration: none;
+    color: "[theme:link, default:#03787c]";
+    color: var(--link); // note: CSS Custom Properties support is limited to modern browsers only
+
+    &:hover {
+      text-decoration: underline;
+      color: "[theme:linkHovered, default: #014446]";
+      color: var(--linkHovered); // note: CSS Custom Properties support is limited to modern browsers only
+    }
+  }
+}
+
+.button {
+  // background-color: rgb(57, 152, 175);
+  border: none;
+  border-radius: 5px;
+  color: #a51010;
+  cursor: pointer;
+  margin: 5px;
+  /* padding: 10px; */
+  height: 100px;
+  width: 270px;
+}
+.borderBox{
+  // border: 1px solid black;
+  padding: 20px;
+  box-shadow: 0 2.6px 5.6px 0 #8a8a8a, 0 0.3px 0.9px 0 #8a8a8a;
+}
+
+.doclibraryHeading{
+  font-size: xx-large;
+  font-weight: bold;
+  color: #204620;
+}
+
+.breadcrumpHeading{
+  font-size: medium;
+    color: #5b915b;
+}
+
+.searchbox{
+ border-radius: 25px;
+ height: 40px;
+}

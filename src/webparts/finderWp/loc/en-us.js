@@ -10,8 +10,6 @@ define([], function() {
     "AppSharePointEnvironment": "The app is running on SharePoint page",
     "AppTeamsTabEnvironment": "The app is running in Microsoft Teams",
     "AppOfficeEnvironment": "The app is running in office.com",
-    "AppOutlookEnvironment": "The app is running in Outlook",
-
-    "PropertyPaneListName": "List Name",
+    "AppOutlookEnvironment": "The app is running in Outlook"
   }
 });

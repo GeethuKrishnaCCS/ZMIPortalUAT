@@ -10,6 +10,14 @@
         }
       ]
     },
+    "finder-wp-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/finderWp/FinderWpWebPart.js",
+          "manifest": "./src/webparts/finderWp/FinderWpWebPart.manifest.json"
+        }
+      ]
+    },
     "calender-web-part": {
       "components": [
         {
@@ -22,6 +30,8 @@
   "externals": {},
   "localizedResources": {
     "BirthdaysWebPartStrings": "lib/webparts/birthdays/loc/{locale}.js",
-    "CalenderWebPartStrings": "lib/webparts/calender/loc/{locale}.js"
+    "FinderWpWebPartStrings": "lib/webparts/finderWp/loc/{locale}.js",
+    "CalenderWebPartStrings": "lib/webparts/calender/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
   }
 }
