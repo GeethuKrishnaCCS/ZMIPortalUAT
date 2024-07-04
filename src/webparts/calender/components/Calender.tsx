@@ -32,12 +32,16 @@ export default class Calender extends React.Component<ICalenderProps,ICalenderSt
       let endDate = moment(new Date(eventdata[i].end.dateTime)).format("DD/MMM/YYYY");
       let starttime = moment(new Date(eventdata[i].start.dateTime)).format("hh:mm A");
       let endtime = moment(new Date(eventdata[i].end.dateTime)).format("hh:mm A");
+      let recurrence = eventdata[i].recurrence
+    let recurrenddate =recurrence !== null? recurrence.range.endDate:""
         const eventdatavalue :any = {
           startDate: startDate,
           endDate:endDate,
           subject: eventdata[i].subject,
           startTime:starttime,
-          endTime:endtime
+          endTime:endtime,
+          recurrence:recurrence,
+        recurrenddate:recurrenddate
         };
         eventdataArray.push(eventdatavalue);
       
