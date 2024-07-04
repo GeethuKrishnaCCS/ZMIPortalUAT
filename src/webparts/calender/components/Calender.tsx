@@ -4,7 +4,7 @@ import { ICalenderProps, ICalenderState } from '../interfaces/ICalenderProps';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BaseService } from '../services';
-import { PrimaryButton } from '@fluentui/react';
+import { IIconProps, IconButton } from '@fluentui/react';
 import * as moment from "moment";
 
 export default class Calender extends React.Component<ICalenderProps,ICalenderState, {}> {
@@ -18,7 +18,8 @@ export default class Calender extends React.Component<ICalenderProps,ICalenderSt
 
     }
     this._Service = new BaseService(this.props.context);
-    this.submit = this.submit.bind(this);
+    this.dateChange =this.dateChange.bind(this);
+    this.searchEvents = this.searchEvents.bind(this);
   }
   public async componentDidMount(): Promise<void> {
     const today = moment(new Date().setMilliseconds(0)).format('YYYY-MM-DDT00:00:00.SSSSSSS');
@@ -64,7 +65,7 @@ export default class Calender extends React.Component<ICalenderProps,ICalenderSt
   }
  
  }
- public async submit(){
+ public async searchEvents(){
   let eventdataArray : any[] = [];
   // let selectedStartdate = moment(new Date(this.state.startDate)).format("DD/MMM/YYYY");
   // let selectedEnddate = moment(new Date(this.state.endDate)).format("DD/MMM/YYYY");
@@ -99,7 +100,7 @@ export default class Calender extends React.Component<ICalenderProps,ICalenderSt
 //   this._Service.getevents(this.state.startDate,this.state.endDate);
 //  }
   public render(): React.ReactElement<ICalenderProps> {
-   
+   const searchicon: IIconProps = { iconName: 'Search' };
 
     return (
       <section className={`${styles.calender} `}>
@@ -112,7 +113,8 @@ export default class Calender extends React.Component<ICalenderProps,ICalenderSt
       selectsRange
       inline
     />
-    <PrimaryButton id="b2" onClick={this.submit}>Submit</PrimaryButton>
+    <IconButton iconProps={searchicon} onClick={this.searchEvents} ariaLabel={"Search"} />
+    {/* <PrimaryButton id="b2" onClick={this.submit}>Submit</PrimaryButton> */}
     {this.state.eventdataArray.map((item: any, key: any) => {
         return (<div className={styles.border}>
           <div className={styles.flex}>
