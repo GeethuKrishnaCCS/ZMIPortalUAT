@@ -71,13 +71,17 @@ export default class Calender extends React.Component<ICalenderProps,ICalenderSt
     let endDate = moment(new Date(eventdata[i].end.dateTime)).format("DD/MMM/YYYY");
     let starttime = moment(new Date(eventdata[i].start.dateTime)).format("hh:mm A");
     let endtime = moment(new Date(eventdata[i].end.dateTime)).format("hh:mm A");
+    let recurrence = eventdata[i].recurrence
+    let recurrenddate =recurrence !== null? recurrence.range.endDate:""
     // if(new Date(startDate) <= new Date(selectedStartdate) && new Date(selectedEnddate)>=new Date(endDate)){
       const eventdatavalue :any = {
         startDate: startDate,
         endDate:endDate,
         subject: eventdata[i].subject,
         startTime:starttime,
-        endTime:endtime
+        endTime:endtime,
+        recurrence:recurrence,
+        recurrenddate:recurrenddate
       };
       eventdataArray.push(eventdatavalue);
     // }
@@ -95,6 +99,7 @@ export default class Calender extends React.Component<ICalenderProps,ICalenderSt
 
     return (
       <section className={`${styles.calender} `}>
+        
       <DatePicker
       selected={this.state.startDate}
       onChange={this.dateChange}
@@ -103,30 +108,21 @@ export default class Calender extends React.Component<ICalenderProps,ICalenderSt
       selectsRange
       inline
     />
+    <PrimaryButton id="b2" onClick={this.submit}>Submit</PrimaryButton>
     {this.state.eventdataArray.map((item: any, key: any) => {
         return (<div className={styles.border}>
           <div className={styles.flex}>
       <div className={styles.fadebg}>{item.startDate}</div>
       <div className={styles.rightcnt}>
-        {item.startDate !== item.endDate && <div>Recurring Events</div>}
+        {item.recurrence !== null && <div>Recurring Events</div>}
         <div>{item.subject}</div>
         <div>{item.startTime}-{item.endTime}</div>
       </div>
       </div>
     </div>)})}
-    {/* <table className={styles.tableClass}>
-    {this.state.eventdataArray.length !== 0 && <tbody className={styles.tbody}>
-      <tr></tr>
-      {this.state.eventdataArray.map((item: any, key: any) => {
-        return (<tr >
-        <td className={styles.td1}>{item.startDate}</td>
-        <td className={styles.td2}>{item.subject}<hr/><br/>{item.startTime}-{item.endTime}</td>
-      </tr>)})}
-      </tbody>}
-      
-    </table> */}
     
-    <PrimaryButton id="b2" onClick={this.submit}>Submit</PrimaryButton>
+    
+    
 
       </section>
     );

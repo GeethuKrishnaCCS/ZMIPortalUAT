@@ -23,7 +23,7 @@ export class BaseService {
         const response = await client
             .api('me/events')
             .filter(filterQuery) // Apply the filter query here
-            .select(['start','end','subject'])
+            .select(['start','end','subject','recurrence'])
             .orderby('start/dateTime')
             .version('v1.0')
             .get();
@@ -41,19 +41,6 @@ export class BaseService {
 //         console.log(response.value);
 //           return response.value          
     }
-    public async gettodayevents(context: any, date: string): Promise<any> {
-        // const today = new Date(date).toISOString(); // Ensure the date is in ISO format
-        const filterQuery = `start/dateTime eq '${date}' and end/dateTime eq '${date}'`; // Use the correct field name in your query
-        const client = await context.msGraphClientFactory.getClient("3");
-        const response = await client
-            .api('me/calendarview')
-            .filter(filterQuery) // Apply the filter query here
-            .select(['start','end','subject'])
-            .orderby('start/dateTime')
-            .version('v1.0')
-            .get();
-        console.log(response.value);
-        return response.value;
-    }
+   
 
 } 
