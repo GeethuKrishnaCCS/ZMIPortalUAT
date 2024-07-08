@@ -180,7 +180,7 @@ export default class StackStyle extends React.Component<
             disabled={this.state.Next >= this.props.News.length}
             // style={{ boxShadow: '0 1px 4px rgb(0 0 0 / 30%), 0 0 40px rgb(0 0 0 / 10%)' }}
             className={styles.NavigationRightButtonStyling}
-             ariaLabel={"Search"} /></td>
+             ariaLabel={"Next"} /></td>
             </tr>
           </table>
         <br></br>
