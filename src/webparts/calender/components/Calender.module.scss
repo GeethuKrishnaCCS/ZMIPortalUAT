@@ -6,6 +6,9 @@
     width: 70%;
     border-collapse: collapse;
     border-radius: 1em;
+    padding: 1em;
+    max-height: 15em;
+    overflow-y: scroll;
   }
   div.flex {
     display: flex;

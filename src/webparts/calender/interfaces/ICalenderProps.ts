@@ -9,4 +9,5 @@ export interface ICalenderState {
   startDate:any;
   endDate:any;
   eventdataArray:any[];
+  nodataFound:string;
 }
