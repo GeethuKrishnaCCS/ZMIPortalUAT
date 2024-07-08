@@ -3,6 +3,7 @@ import { StylingState, StylingProps } from './StylingPropsState';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 import styles from './Znews.module.scss';
+import * as moment from 'moment';
 export const iconClass = mergeStyles({
   fontSize: 15,
   height: 15,
@@ -92,6 +93,12 @@ export default class StackStyle extends React.Component<StylingProps, StylingSta
       return true;
     }
   }
+  public formatDateTime(dateTime:any) {
+    const formattedDate = moment(dateTime).format('MMM DD, YYYY');
+    const formattedTime = moment(dateTime).format('h:mm a');
+    const timezone = moment(dateTime).format('z');
+    return `${formattedDate} at ${formattedTime} ${timezone}`;
+  }
   public render(): React.ReactElement<StylingProps> {
     let Height: any;
     switch (this.state.RenderedNews.length) {
@@ -127,7 +134,9 @@ export default class StackStyle extends React.Component<StylingProps, StylingSta
                 </label>
               </div>
               <div className={styles.AuthorContainer}>
-                {this.props.AuthorToggle ? <></> : Post.Author} Created {Post.Created}
+                {this.props.AuthorToggle ? <></> : Post.Author}
+                {this.props.DateToggle ? ( <></> ) : ( <div style={{fontWeight:"bold"}}> {this.formatDateTime(Post.Created)} </div> )}{" "}
+                     
               </div>
             </div>
           </div>;
