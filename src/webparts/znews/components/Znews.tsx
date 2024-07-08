@@ -94,8 +94,8 @@ export default class Znews extends React.Component<IZnewsProps,IZnewsState, {}> 
    return (
       <section className={`${styles.znews}`}>
          {this.props.StyleToggle ?
-      <StackStyle News={this.state.News} AuthorToggle={this.props.AuthorToggle} Reload={this.state.Reload} context={this.props.context} description={this.props.description}/> :
-      <SingleStyle News={this.state.News} AuthorToggle={this.props.AuthorToggle} Reload={this.state.Reload} context={this.props.context} description={this.props.description}/>}
+      <StackStyle News={this.state.News} AuthorToggle={this.props.AuthorToggle} DateToggle={this.props.DateToggle}Reload={this.state.Reload} context={this.props.context} description={this.props.description}/> :
+      <SingleStyle News={this.state.News} AuthorToggle={this.props.AuthorToggle}DateToggle={this.props.DateToggle} Reload={this.state.Reload} context={this.props.context} description={this.props.description}/>}
       </section>
     );
   }

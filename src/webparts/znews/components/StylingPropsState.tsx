@@ -7,6 +7,7 @@ export interface StylingState {
     Next: number; 
     Count: number; 
     Reload: boolean;
+
  }
 export interface StylingProps {
     News: any[]; 
@@ -14,4 +15,5 @@ export interface StylingProps {
     Reload: boolean; 
     context: WebPartContext; 
     description: string;
+    DateToggle:string;
 }

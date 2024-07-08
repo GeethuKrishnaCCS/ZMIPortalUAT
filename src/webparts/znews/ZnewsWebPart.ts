@@ -18,6 +18,7 @@ export default class ZnewsWebPart extends BaseClientSideWebPart<IZnewsProps> {
         sites: this.properties.sites,
         context: this.context,
         AuthorToggle: this.properties.AuthorToggle,
+        DateToggle: this.properties.DateToggle,
         Site: this.properties.Site,
         onChangeProperty: this.onChangeProperty
       }
@@ -81,6 +82,11 @@ export default class ZnewsWebPart extends BaseClientSideWebPart<IZnewsProps> {
                   onText: 'Hidden',
                   offText: 'Shown',
                   label: 'Author'
+                }),
+                PropertyPaneToggle('DateToggle', {
+                  onText: 'Hidden',
+                  offText: 'Shown',
+                  label: 'Created Date'
                 }),
                 PropertyFieldSitePicker('sites', {
                   label: 'Select sites',

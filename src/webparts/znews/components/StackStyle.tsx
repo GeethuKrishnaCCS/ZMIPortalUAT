@@ -150,7 +150,8 @@ export default class StackStyle extends React.Component<
                     <div className={styles.footer}>
                     <div className={styles.AuthorContainer}>
                     {this.props.AuthorToggle ? ( <></> ) : ( <div style={{fontWeight:"bold"}}> {Post.Author}, <br/> </div> )}{" "}
-                      {this.formatDateTime(Post.Created)}
+                    {this.props.DateToggle ? ( <></> ) : ( <div style={{fontWeight:"bold"}}> {this.formatDateTime(Post.Created)} </div> )}{" "}
+                        
                     </div>
                     </div>
                     

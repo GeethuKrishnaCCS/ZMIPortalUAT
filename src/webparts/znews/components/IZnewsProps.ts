@@ -4,6 +4,7 @@ export interface IZnewsProps {
   description: string;
   StyleToggle: string;
   AuthorToggle: string;
+  DateToggle: string;
   sites: IPropertyFieldSite[];
   context: WebPartContext;
   Site: any[];
