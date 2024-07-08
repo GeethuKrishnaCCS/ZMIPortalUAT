@@ -120,9 +120,10 @@ export default class Calender extends React.Component<ICalenderProps,ICalenderSt
           <div className={styles.flex}>
       <div className={styles.fadebg}>{item.startDate}</div>
       <div className={styles.rightcnt}>
-        {item.recurrence !== null && <div>Recurring Events</div>}
-        <div>{item.subject}</div>
+        {item.recurrence !== null && <div className={styles.recurr}>Recurring Events</div>}
+        <div className={styles.subject}>{item.subject}</div>
         <div>{item.startTime}-{item.endTime}</div>
+        <br/>
       </div>
       </div>
     </div>)})}

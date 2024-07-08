@@ -5,13 +5,12 @@
     border: 1px solid #000000;
     width: 70%;
     border-collapse: collapse;
-    background-color: #f2f2f2;
+    border-radius: 1em;
   }
   div.flex {
     display: flex;
   }
   .fadebg {
-    background: #f5f6f8;
     padding: 30px 20px 30px 5px;
     width: 25%;
     border-right: 1px solid #c9c9c9;
@@ -20,34 +19,17 @@
     padding: 30px 20px 20px 9px;
     width: 50%;
   }
-  .tableClass {
-    border: 1px solid #ddd;
-    width: 100%;
+  .recurr{
+    font-size:small;
+    font-weight: bold;
+  } 
+  .subject{
+    border: 1px solid #000000;
     border-collapse: collapse;
-    background-color: #f2f2f2;
-  }
-    
-    .tbody {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .td1 {
-      border: 1px solid #000000;
-      padding: "8px";
-      width: "5px";
-      border-collapse: collapse;
-      text-align: left;
-      color: #000000;
-    }
-    .td2 {
-      border: 1px solid #000000;
-      padding: "8px";
-      width: "1em";
-      border-collapse: collapse;
-      text-align: left;
-      color: #000000;
-    }
+    text-align: center;
+    background-color:$ms-color-themePrimary;
+    border-radius: 1em;
+  } 
   
   
 }
