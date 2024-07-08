@@ -17,11 +17,21 @@
           "manifest": "./src/webparts/calender/CalenderWebPart.manifest.json"
         }
       ]
+    },
+    "znews-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/znews/ZnewsWebPart.js",
+          "manifest": "./src/webparts/znews/ZnewsWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "BirthdaysWebPartStrings": "lib/webparts/birthdays/loc/{locale}.js",
-    "CalenderWebPartStrings": "lib/webparts/calender/loc/{locale}.js"
+    "CalenderWebPartStrings": "lib/webparts/calender/loc/{locale}.js",
+    "ZnewsWebPartStrings": "lib/webparts/znews/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
   }
 }
