@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { BaseService } from '../services';
 // import { IIconProps, IconButton } from '@fluentui/react';
 import * as moment from "moment";
+// import { rrulestr } from 'rrule';
 
 export default class Calender extends React.Component<ICalenderProps,ICalenderState, {}> {
   private _Service: BaseService;
@@ -19,7 +20,7 @@ export default class Calender extends React.Component<ICalenderProps,ICalenderSt
 
     }
     this._Service = new BaseService(this.props.context);
-    this.dateChange =this.dateChange.bind(this);
+    //this.dateChange =this.dateChange.bind(this);
     this.searchEvents = this.searchEvents.bind(this);
   }
   public async componentDidMount(): Promise<void> {
@@ -75,19 +76,21 @@ public dateChange(dates: DateObject[]){
   const [start, end] = dates;
     const startDate = start.toDate();
     const endDate = end !== undefined ? end.toDate() : start.toDate();
-this.searchEvents(startDate,endDate);
     this.setState({
-      startDate: start,
-      endDate: end
+      startDate: startDate,
+      endDate: endDate
     });
-  
+  this.searchEvents(startDate,endDate);
  
 }
- public async searchEvents(startDate:any,endDate:any){
+ public async searchEvents(startDate:Date,endDate:Date){
   const eventdataArray : any[] = [];
+  console.log()
   // let selectedStartdate = moment(new Date(this.state.startDate)).format("DD/MMM/YYYY");
   // let selectedEnddate = moment(new Date(this.state.endDate)).format("DD/MMM/YYYY");
-  const eventdata = await this._Service.getevents(this.props.context,moment(startDate).format('YYYY-MM-DDT00:00:00.SSSSSSS'),moment(endDate).format('YYYY-MM-DDT23:59:00.SSSSSSS'))
+  const eventdata = await this._Service.getevents(this.props.context,
+    moment(startDate.setMilliseconds(0)).format('YYYY-MM-DDT00:00:00.SSSSSSS'),
+    moment(endDate.setMilliseconds(0)).format('YYYY-MM-DDT23:59:00.SSSSSSS'))
   if(eventdata.length >0){
   for (let i = 0; i < eventdata.length; i++) {
     const startDate = moment(new Date(eventdata[i].start.dateTime)).format("DD/MMM/YYYY");
@@ -95,6 +98,14 @@ this.searchEvents(startDate,endDate);
     const starttime = moment(new Date(eventdata[i].start.dateTime)).format("hh:mm A");
     const endtime = moment(new Date(eventdata[i].end.dateTime)).format("hh:mm A");
     const recurrence = eventdata[i].recurrence
+    // if(recurrence!=null){
+    //   if (eventdata[i].RecurrenceData) {
+    //     const recurrenceInstances = this.parseRecurrenceData(eventdata[i].RecurrenceData, startDate);
+    //     console.log(recurrenceInstances)
+    //   }
+   
+    // //console.log(processedEvents)
+    // }
     const recurrenddate =recurrence !== null? recurrence.range.endDate:""
     // if(new Date(startDate) <= new Date(selectedStartdate) && new Date(selectedEnddate)>=new Date(endDate)){
       const eventdatavalue :any = {
@@ -117,6 +128,29 @@ else{
    
   this.setState({eventdataArray:eventdataArray});
 }
+// public parseRecurrenceData(recurrenceData: string, startDate: any) {
+//   const ruleSet = rrulestr(recurrenceData, { dtstart: startDate });
+//   return ruleSet.all();
+// }
+ 
+// public processRecurringEvents(events:any) {
+  
+  
+//   return events.map((event: { ID: any; Title: any; EventDate: string | number; EndDate: string | number; fAllDayEvent: any; RecurrenceData: any; }) => ({
+//     id: event.ID,
+//     subject: event.Title,
+//     startDate: new Date(event.EventDate).toLocaleString(),
+//     endDate: event.EndDate ? new Date(event.EndDate).toLocaleString() : null,
+//     isAllDay: event.fAllDayEvent,    
+//     recurrenceData: event.RecurrenceData,
+  
+//         startTime:moment(new Date(event.EventDate)).format("hh:mm A"),
+//         endTime: moment(new Date(event.EndDate)).format("hh:mm A"),
+        
+//         // recurrence:recurrence,
+//         // recurrenddate:recurrenddate
+//   }));
+// }
 //  public loadtasks(){
 //   //Send Email uisng MS Graph
 //   this._Service.getevents(this.state.startDate,this.state.endDate);
@@ -127,7 +161,6 @@ else{
     return (
       <section className={`${styles.calender} `}>
         <Calendar
-  value={this.state.startDate}
   onChange={(dateObjects) => this.dateChange(dateObjects)}
   range
   rangeHover
@@ -144,8 +177,10 @@ else{
     {/* <PrimaryButton id="b2" onClick={this.submit}>Submit</PrimaryButton> */}
     <div>       </div>
     <div>       </div>
-    {this.state.nodataFound === "" && <div className={styles.border}>
-    {this.state.eventdataArray.map((item: any, key: any) => {
+   {/* {this.state.nodataFound === "" &&  */}
+   {this.state.eventdataArray.length>0 &&
+   <div className={styles.border}>
+     {this.state.eventdataArray.map((item: any, key: any) => {
         return (
           <div className={styles.flex}>
       <div className={styles.fadebg}>{item.startDate}</div>
@@ -157,8 +192,16 @@ else{
       </div>
       </div>
     )})}
-    </div>}
-    {this.state.nodataFound !== "" && <div className={styles.border}> No Events Found</div>}
+    </div>
+  }
+    {/* } */}
+    {this.state.eventdataArray.length === 0 &&
+    <div>
+      {this.state.nodataFound !== "" && 
+      <div className={styles.border}> No Events Found</div>
+      }
+      </div>
+      }
     
     
     
