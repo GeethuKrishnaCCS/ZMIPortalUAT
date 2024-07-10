@@ -10,4 +10,5 @@ export interface ICalenderState {
   endDate:any;
   eventdataArray:any[];
   nodataFound:string;
+  recurrenceDates:Date[]
 }

@@ -23,7 +23,7 @@ export class BaseService {
         const response = await client
             .api('me/events')
             .filter(filterQuery) // Apply the filter query here
-            .select(['start','end','subject','recurrence'])
+            // .select(['start','end','subject','recurrence'])
             .orderby('start/dateTime')
             .version('v1.0')
             .get();
