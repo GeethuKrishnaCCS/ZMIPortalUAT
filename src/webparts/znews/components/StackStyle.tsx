@@ -129,7 +129,7 @@ export default class StackStyle extends React.Component<
          className={styles.NavigationLeftButtonStyling}
           ariaLabel={"Back"} /></td>
             <td>
-            {this.state.RenderedNews.map((Post) => {
+            {this.state.RenderedNews.map((Post,key) => {
               i = i + 1;
               return (
                 <div
@@ -183,7 +183,7 @@ export default class StackStyle extends React.Component<
              ariaLabel={"Next"} /></td>
             </tr>
           </table>
-        <br></br>
+        <br/>
         <div className={styles.NavigationContainer}>
           <div className={styles.NavigationPageNumStyling}>{this.state.Count} out of {Math.ceil(this.props.News.length / 3)}</div>
         </div>
