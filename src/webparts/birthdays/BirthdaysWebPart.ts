@@ -3,7 +3,8 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneToggle
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
@@ -11,6 +12,8 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'BirthdaysWebPartStrings';
 import Birthdays from './components/Birthdays';
 import { IBirthdaysProps, IBirthdaysWebPartProps } from './interfaces/IBirthdaysProps';
+import { SharePointProvider } from '@microsoft/mgt-sharepoint-provider';
+import { Providers } from '@microsoft/mgt-element';
 
 
 export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWebPartProps> {
@@ -29,6 +32,10 @@ export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWe
         userDisplayName: this.context.pageContext.user.displayName,
         context: this.context,
         listName: this.properties.listName,
+        NoOfItemDisplay: this.properties.NoOfItemDisplay,
+        BdayToggleValue: this.properties.BdayToggleValue,
+        WorkToggleValue: this.properties.WorkToggleValue,
+        WeddingToggleValue: this.properties.WeddingToggleValue,
       }
     );
 
@@ -36,6 +43,9 @@ export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWe
   }
 
   protected onInit(): Promise<void> {
+    if (!Providers.globalProvider) {
+      Providers.globalProvider = new SharePointProvider(this.context);
+    }
     return this._getEnvironmentMessage().then(message => {
       this._environmentMessage = message;
     });
@@ -112,6 +122,21 @@ export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWe
                 PropertyPaneTextField('listName', {
                   label: strings.PropertyPaneListName
                 }),
+                PropertyPaneToggle('BdayToggleValue', {
+                  label: strings.BdayToggleValue,  // Set your toggle label here
+                  checked: this.properties.BdayToggleValue  // Set initial value
+                }),
+                PropertyPaneToggle('WorkToggleValue', {
+                  label: strings.WorkToggleValue,  // Set your toggle label here
+                  checked: this.properties.WorkToggleValue  // Set initial value
+                }),
+                PropertyPaneToggle('WeddingToggleValue', {
+                  label: strings.WeddingToggleValue,  // Set your toggle label here
+                  checked: this.properties.WeddingToggleValue  // Set initial value
+                }),
+                PropertyPaneTextField('NoOfItemDisplay', {
+                  label: strings.PropertyPaneNoOfItemDisplay
+                }),                
               ]
             }
           ]

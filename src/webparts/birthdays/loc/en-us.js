@@ -13,5 +13,10 @@ define([], function() {
     "AppOutlookEnvironment": "The app is running in Outlook",
 
     "PropertyPaneListName": "List Name",
+    "BdayToggleValue": "Birthday",
+    "WorkToggleValue": "Work Anniversary",
+    "WeddingToggleValue": "Wedding Anniversary",
+    "PropertyPaneNoOfItemDisplay": "Wedding Anniversary",
+    "PropertyPaneNoOfItemDisplay": "No. Of Items to Display",
   }
 });

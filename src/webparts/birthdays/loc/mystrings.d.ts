@@ -12,6 +12,11 @@ declare interface IBirthdaysWebPartStrings {
   AppOutlookEnvironment: string;
 
   PropertyPaneListName: string;
+
+  BdayToggleValue: string;
+  WorkToggleValue: string;
+  WeddingToggleValue: string;
+  PropertyPaneNoOfItemDisplay: string;
 }
 
 declare module 'BirthdaysWebPartStrings' {

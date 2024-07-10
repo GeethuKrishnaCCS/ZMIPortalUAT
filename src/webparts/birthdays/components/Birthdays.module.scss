@@ -46,10 +46,11 @@
 
 
 .defaultBirthdayLabel {
-  font-family: Inter;
+  // font-family: Inter;
   font-size: 30px;
   font-weight: 700;
   color: "[theme:link, default:#03787c]";
+  margin-bottom: 30px; 
 }
 
 .bdayHeader {
@@ -89,4 +90,12 @@
   padding: 0 20px;
   height: calc(100% - 138px);
   overflow-y: hidden;
+}
+
+.customIconButton:hover {
+  background-color: lightblue;
+}
+
+.customIconButton:disabled {
+  background: none;
 }
