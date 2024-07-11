@@ -25,6 +25,14 @@
           "manifest": "./src/webparts/calender/CalenderWebPart.manifest.json"
         }
       ]
+    },
+    "welcome-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/welcome/WelcomeWebPart.js",
+          "manifest": "./src/webparts/welcome/WelcomeWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -32,6 +40,7 @@
     "BirthdaysWebPartStrings": "lib/webparts/birthdays/loc/{locale}.js",
     "FinderWpWebPartStrings": "lib/webparts/finderWp/loc/{locale}.js",
     "CalenderWebPartStrings": "lib/webparts/calender/loc/{locale}.js",
-    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
+    "WelcomeWebPartStrings": "lib/webparts/welcome/loc/{locale}.js"
   }
 }

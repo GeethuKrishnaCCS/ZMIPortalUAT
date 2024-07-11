@@ -14,20 +14,20 @@
       "termsOfUseUrl": "",
       "mpnId": "Undefined-1.17.3"
     },
-    "webApiPermissionRequests": [  
+    "webApiPermissionRequests": [
       {
-         "resource": "Microsoft Graph",
-         "scope": "Calendars.Read"
-       },
-       {
-         "resource": "Microsoft Graph",
-         "scope": "Calendars.ReadBasic"
-       },
-       {
-         "resource": "Microsoft Graph",
-         "scope": "Calendars.ReadWrite"
-       }
-      ],
+        "resource": "Microsoft Graph",
+        "scope": "Calendars.Read"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Calendars.ReadBasic"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Calendars.ReadWrite"
+      }
+    ],
     "metadata": {
       "shortDescription": {
         "default": "zmi-components description"
