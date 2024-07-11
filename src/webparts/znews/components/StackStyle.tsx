@@ -2,7 +2,6 @@ import * as React from "react";
 import { StylingState, StylingProps } from "./StylingPropsState";
 import { mergeStyles } from "office-ui-fabric-react/lib/Styling";
 import styles from "./Znews.module.scss";
-import { Link } from "office-ui-fabric-react";
 import * as moment from "moment";
 import { IIconProps, IconButton } from "@fluentui/react";
 export const iconClass = mergeStyles({
@@ -116,12 +115,8 @@ export default class StackStyle extends React.Component<
       <div className={styles.StackStyleContainer}>
         <div  className={styles.heading}>
         <div  className={styles.title}>{this.props.description}</div>
-        <div  className={styles.seeall}>
-          < Link  className={styles.link}  href={this.props.context.pageContext.web.serverRelativeUrl + "/_layouts/15/news.aspx"} target="_blank" underline>See all event news</Link>
-          </div>
-        </div>
-
-          <table>
+       </div>
+<table>
             <tr>
          <td> <IconButton iconProps={backicon} 
          onClick={() => this.Back(this.props.News)} disabled={this.state.Next === 3}
