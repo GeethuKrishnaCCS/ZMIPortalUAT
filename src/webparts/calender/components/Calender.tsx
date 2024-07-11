@@ -94,7 +94,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
             recurrencedaysArray = [];
             const daysOfWeek = eventdata[i].recurrence.pattern.daysOfWeek
             for (let i = 0; i < daysOfWeek.length; i++) {
-            recurrenceday = "Every "+daysOfWeek[i];
+            recurrenceday = "(Every "+daysOfWeek[i]+")";
             recurrencedaysArray.push(recurrenceday);
           }
           recurrencedays = recurrencedaysArray.join(', ');
@@ -113,13 +113,13 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
           else if(month === 2 ){monthtype = "nd"}
           else if(month === 3 ){monthtype = "rd"}
           else{monthtype = "th"}
-          recurrencedays = dayOfMonth +daytype +" day of "+ month +monthtype +" month"
+          recurrencedays = "("+dayOfMonth +daytype +" day of "+ month +monthtype +" month"+")"
         }
         else if(recurrencetype === "weekly"){
           recurrencedaysArray = [];
           const daysOfWeek = eventdata[i].recurrence.pattern.daysOfWeek
             for (let i = 0; i < daysOfWeek.length; i++) {
-            recurrenceday = "Every "+daysOfWeek[i];
+            recurrenceday = "(Every "+daysOfWeek[i]+")";
             recurrencedaysArray.push(recurrenceday);
           }
           recurrencedays = recurrencedaysArray.join(', ');
