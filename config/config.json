@@ -33,6 +33,14 @@
           "manifest": "./src/webparts/welcome/WelcomeWebPart.manifest.json"
         }
       ]
+    },
+    "welcome-employee-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/welcomeEmployee/WelcomeEmployeeWebPart.js",
+          "manifest": "./src/webparts/welcomeEmployee/WelcomeEmployeeWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -41,6 +49,7 @@
     "FinderWpWebPartStrings": "lib/webparts/finderWp/loc/{locale}.js",
     "CalenderWebPartStrings": "lib/webparts/calender/loc/{locale}.js",
     "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
-    "WelcomeWebPartStrings": "lib/webparts/welcome/loc/{locale}.js"
+    "WelcomeWebPartStrings": "lib/webparts/welcome/loc/{locale}.js",
+    "WelcomeEmployeeWebPartStrings": "lib/webparts/welcomeEmployee/loc/{locale}.js"
   }
 }
