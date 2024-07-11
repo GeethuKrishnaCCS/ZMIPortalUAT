@@ -5,7 +5,6 @@ import { Calendar, DateObject } from "react-multi-date-picker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BaseService } from '../services';
 import * as moment from "moment";
-import { addDays, addWeeks, addMonths, addYears, isBefore } from 'date-fns';
 export default class Calender extends React.Component<ICalenderProps, ICalenderState, {}> {
   private _Service: BaseService;
   public constructor(props: ICalenderProps) {
@@ -69,31 +68,73 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
   }
   public async searchEvents(startDate: Date, endDate: Date) {
     const eventdataArray: any[] = [];
+    let rstartDate:any;
+    let rendDate:any;
+    let recurrencetype:any;
+    let recurrenceday:any;
+    let recurrencedaysArray:any[]=[];
+    let recurrencedays:any;
     const eventdata = await this._Service.getevents(this.props.context,
       moment(startDate.setMilliseconds(0)).format('YYYY-MM-DDT00:00:00.SSSSSSS'),
       moment(endDate.setMilliseconds(0)).format('YYYY-MM-DDT23:59:00.SSSSSSS'));
       
     if (eventdata.length > 0) {
-      
+      console.log(eventdata)
       for (let i = 0; i < eventdata.length; i++) {
-        const startDate = moment(new Date(eventdata[i].start.dateTime)).format("DD/MMM/YYYY");
-        const endDate = moment(new Date(eventdata[i].end.dateTime)).format("DD/MMM/YYYY");
+        const startDate = moment(new Date(eventdata[i].start.dateTime)).format("MMM-DD");
+        const endDate = moment(new Date(eventdata[i].end.dateTime)).format("MMM-DD");
         const starttime = moment(new Date(eventdata[i].start.dateTime)).format("hh:mm A");
         const endtime = moment(new Date(eventdata[i].end.dateTime)).format("hh:mm A");
         const recurrence = eventdata[i].recurrence;
         if(recurrence!=null){
-          const  reccurenceData:any[]=[];
-          reccurenceData.push(eventdata[i]);
-          const recurdate = await this.generateRecurrence(reccurenceData);
-          console.log(recurdate);
-        }        
+          rstartDate = moment(new Date(recurrence.range.startDate)).format("MMM-DD");
+          rendDate = moment(new Date(recurrence.range.endDate)).format("MMM-DD");
+          recurrencetype = recurrence.pattern.type;
+          if(recurrencetype === "relativeMonthly"){
+            recurrencedaysArray = [];
+            const daysOfWeek = eventdata[i].recurrence.pattern.daysOfWeek
+            for (let i = 0; i < daysOfWeek.length; i++) {
+            recurrenceday = "Every "+daysOfWeek[i];
+            recurrencedaysArray.push(recurrenceday);
+          }
+          recurrencedays = recurrencedaysArray.join(', ');
+        }
+        else if(recurrencetype === "absoluteYearly"){
+          let daytype:any;
+          let monthtype:any;
+          recurrencedaysArray = [];
+          const dayOfMonth = eventdata[i].recurrence.pattern.dayOfMonth
+          const month = eventdata[i].recurrence.pattern.month
+          if(dayOfMonth === 1 ){daytype = "st"}
+          else if(dayOfMonth === 2 ){daytype = "nd"}
+          else if(dayOfMonth === 3 ){daytype = "rd"}
+          else{daytype = "th"}
+          if(month === 1 ){monthtype = "st"}
+          else if(month === 2 ){monthtype = "nd"}
+          else if(month === 3 ){monthtype = "rd"}
+          else{monthtype = "th"}
+          recurrencedays = dayOfMonth +daytype +" day of "+ month +monthtype +" month"
+        }
+        else if(recurrencetype === "weekly"){
+          recurrencedaysArray = [];
+          const daysOfWeek = eventdata[i].recurrence.pattern.daysOfWeek
+            for (let i = 0; i < daysOfWeek.length; i++) {
+            recurrenceday = "Every "+daysOfWeek[i];
+            recurrencedaysArray.push(recurrenceday);
+          }
+          recurrencedays = recurrencedaysArray.join(', ');
+        }   
+      }     
         const eventdatavalue: any = {
-          startDate: startDate,
-          endDate: endDate,
+          startDate:recurrence!=null?rstartDate: startDate,
+          endDate: recurrence!=null?rendDate:endDate,
           subject: eventdata[i].subject,
           startTime: starttime,
           endTime: endtime,
-          recurrence: recurrence
+          recurrence: recurrence,
+          isOnlineMeeting:eventdata[i].isOnlineMeeting,
+          onlineMeetingUrl:eventdata[i].isOnlineMeeting === true?eventdata[i].onlineMeeting.joinUrl:"",
+          eventdays:recurrencedays
         };
         
         eventdataArray.push(eventdatavalue);
@@ -106,42 +147,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
     console.log(eventdataArray)
     this.setState({ eventdataArray: eventdataArray });
   }
-  public generateRecurrence = (events: any[]) => {
-    let dates: Date[] = [];
-    events.forEach(async (event) => {
-      if(event.recurrence!=null)
-        {
-      let currentDate = new Date(event.start.dateTime);
-      let endDate = new Date(event.recurrence.range.endDate);
  
-      while (isBefore(currentDate, endDate) || currentDate.getTime() === endDate.getTime()) {
-        dates.push(new Date(event.start.dateTime));
-        let recurrancepattern = event.recurrence!== null?event.recurrence.pattern.type:""
-        currentDate = await this.getNextRecurrenceDate(event.start.dateTime,recurrancepattern);
-      }
-    }
-    });
-    console.log(dates);
-    this.setState({recurrenceDates:dates});
-  
-  };
-  public getNextRecurrenceDate = (currentDate: Date,recurrancepattern:string): Date => {
-    switch (recurrancepattern) {
-      case 'daily':
-        return addDays(currentDate, 1);
-      case 'weekly':
-        return addWeeks(currentDate, 1);
-      case 'monthly':
-        return addMonths(currentDate, 1);
-      case 'yearly':
-        return addYears(currentDate, 1);
-      case 'custom':
-        // Add custom logic here. For example, every 3 days:
-        return addDays(currentDate, 3);
-      default:
-        return currentDate;
-    }
-  };
   public render(): React.ReactElement<ICalenderProps> {
     return (
       <section className={`${styles.calender} `}>
@@ -155,10 +161,14 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
             {this.state.eventdataArray.map((item: any, key: any) => {
               return (
                 <div className={styles.flex}>
-                  <div className={styles.fadebg}>{item.startDate}</div>
+                  <div className={styles.fadebg}>{item.startDate}-{item.endDate}</div>
                   <div className={styles.rightcnt}>
                     {item.recurrence !== null && <div className={styles.recurr}>Recurring Events</div>}
-                    <div className={styles.subject}>{item.subject}</div>
+                    {item.recurrence === null && <div className={styles.recurr}>{item.subject}</div>}
+                    {item.recurrence !== null && <div className={styles.recurr}>{item.eventdays}</div>}
+                    {item.isOnlineMeeting!== false &&<div className={styles.subject}><a href={item.onlineMeetingUrl} target="_blank">
+                          Meeting
+                        </a></div>}
                     <div>{item.startTime}-{item.endTime}</div>
                     <hr />
                   </div>
