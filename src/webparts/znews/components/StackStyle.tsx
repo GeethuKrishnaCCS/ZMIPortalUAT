@@ -110,57 +110,54 @@ export default class StackStyle extends React.Component<
     let i = 0;
     const backicon: IIconProps = { iconName: 'ChevronLeftSmall' };
     const nexticon: IIconProps = { iconName: 'ChevronRightSmall' };
-    // const totalPages = Math.ceil(this.props.News.length / 3);
     return (
       <div className={styles.StackStyle}>
-      <div className={styles.StackStyleContainer}>
-        <div  className={styles.heading}>
-        <div  className={styles.title}>{this.props.description}</div>
-       </div>
-<div>
-         <div> <IconButton iconProps={backicon} 
-         onClick={() => this.Back(this.props.News)} disabled={this.state.Next === 3}
-        //  style={{ boxShadow: '0 1px 4px rgb(0 0 0 / 30%), 0 0 40px rgb(0 0 0 / 10%)'}}
-         className={styles.NavigationLeftButtonStyling}
-          ariaLabel={"Back"} /></div>
-            <div>
-            {this.state.RenderedNews.map((Post,key) => {
-              i = i + 1;
-              return (
-                <div className={styles.NewsContainer}>
-                  <div className={styles.ImgContainer}>
-                    <img src={Post.Thumbnail} className={styles.Image}/>
-                  </div>
-                  <div className={styles.NewsBody}>
-                    <div className={styles.TitleContainer}>
-                      <a className={styles.TitleStyling} href={Post.Url}>
-                        {Post.Title}</a>
-                    </div>
-                    <div className={styles.footer}>
-                    <div className={styles.AuthorContainer}>
-                    {this.props.AuthorToggle ? ( <></> ) : ( <div style={{fontWeight:"bold"}}> {Post.Author}, <br/> </div> )}{" "}
-                    {this.props.DateToggle ? ( <></> ) : ( <div style={{fontWeight:"bold"}}> {this.formatDateTime(Post.Created)} </div> )}{" "}
-                    </div>
-                    </div>
-                  </div>
-                </div>
-              );
+          <div className={styles.StackStyleContainer}>
+              <div  className={styles.heading}>
+              <div  className={styles.title}>{this.props.description}</div>
+          </div>
 
-            })}</div>
-            <div><IconButton iconProps={nexticon} 
-            onClick={() => this.Next(this.props.News)} 
-            disabled={this.state.Next >= this.props.News.length}
-            // style={{ boxShadow: '0 1px 4px rgb(0 0 0 / 30%), 0 0 40px rgb(0 0 0 / 10%)' }}
-            className={styles.NavigationRightButtonStyling}
-             ariaLabel={"Next"} /></div>
-           </div>
-        <br/>
-        <div className={styles.NavigationContainer}>
-{/* {i <= totalPages && 
-<div className={styles.dot}></div>
-} */}
-          <div className={styles.NavigationPageNumStyling}>{this.state.Count} out of {Math.ceil(this.props.News.length / 3)}</div>
-        </div>
+
+          <div className={styles.NewsSlider}>
+                <div className={styles.Prevbtn}>
+                    <IconButton iconProps={backicon} 
+                      onClick={() => this.Back(this.props.News)} disabled={this.state.Next === 3}
+                      className={styles.NavigationLeftButtonStyling}
+                      ariaLabel={"Back"} />
+                </div>
+                <div className={styles.NewsCard}>
+                        {this.state.RenderedNews.map((Post,key) => {
+                        i = i + 1;
+                        return (
+                          <div className={styles.NewsContainer}>
+                            <div className={styles.ImgContainer}>
+                              <img src={Post.Thumbnail} className={styles.Image} alt=""/>
+                            </div>
+                            <div className={styles.NewsBody}>
+                              <div className={styles.TitleContainer}>
+                                <a className={styles.TitleStyling} href={Post.Url}>
+                                  {Post.Title}</a>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                </div>
+                <div className={styles.Nextbtn}>
+                      <IconButton iconProps={nexticon} 
+                      onClick={() => this.Next(this.props.News)} 
+                      disabled={this.state.Next >= this.props.News.length}
+                      className={styles.NavigationRightButtonStyling}
+                      ariaLabel={"Next"} />
+                </div>
+          </div>
+       
+          <div className={styles.NavDot}>
+            <div className={styles.Dot}><div className={styles.InnerDot}></div></div>
+          </div>  
+          <div className={styles.NavigationContainer}>
+            <div className={styles.NavigationPageNumStyling}>{this.state.Count} out of {Math.ceil(this.props.News.length / 3)}</div>
+          </div>
       </div>
       </div>
     );
