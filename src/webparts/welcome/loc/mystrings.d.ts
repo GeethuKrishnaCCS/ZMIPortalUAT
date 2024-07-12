@@ -1,4 +1,4 @@
-declare interface IBirthdaysWebPartStrings {
+declare interface IWelcomeWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
   DescriptionFieldLabel: string;
@@ -10,16 +10,12 @@ declare interface IBirthdaysWebPartStrings {
   AppTeamsTabEnvironment: string;
   AppOfficeEnvironment: string;
   AppOutlookEnvironment: string;
+  UnknownEnvironment: string;
 
-  PropertyPaneListName: string;
-
-  BdayToggleValue: string;
-  WorkToggleValue: string;
-  WeddingToggleValue: string;
-  PropertyPaneNoOfItemDisplay: string;
+  welcomeBannerImage: string;
 }
 
-declare module 'BirthdaysWebPartStrings' {
-  const strings: IBirthdaysWebPartStrings;
+declare module 'WelcomeWebPartStrings' {
+  const strings: IWelcomeWebPartStrings;
   export = strings;
 }

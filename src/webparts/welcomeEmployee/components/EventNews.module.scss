@@ -1,0 +1,343 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.eventNews {
+  height: 100%;
+  width: 100%;
+
+  // .SingleStyle {
+  //   .SingleStyleContainer {
+  //     width: 100%;
+  //   }
+
+  //   .NewsContainer {
+  //     height: 173px;
+  //     margin-bottom: 15px;
+  //   }
+
+  //   .ImgContainer {
+  //     width: 276px;
+  //     height: 173px;
+  //     float: left;
+  //     overflow: hidden;
+  //   }
+
+  //   .Image {
+  //     object-fit: cover;
+  //     width: 100%;
+  //     height: 100%;
+  //   }
+
+  //   .NewsBody {
+  //     float: left;
+  //     margin-left: 20px;
+  //   }
+
+  //   .TitleContainer {
+  //     font-weight: 600;
+  //     font-size: 20px;
+  //     padding: 8px 0px;
+  //   }
+
+  //   .TitleStyling {
+  //     text-decoration: none;
+  //   }
+
+
+  //   .DescriptionContainer {
+  //     height: 72px;
+  //     overflow: hidden;
+  //     width: 418px;
+  //     padding: 7px 0px
+  //   }
+
+  //   .IconContainer {
+  //     float: right;
+  //     margin-top: 4px;
+  //     padding: 9px
+  //   }
+
+  //   .IconLabelStyling {
+  //     margin-left: 2px
+  //   }
+
+  //   .AuthorContainer {
+  //     float: left;
+  //     margin-top: 11px;
+  //     font-size: 12px;
+  //   }
+
+
+  //   .NavigationContainer {
+  //     width: 100%;
+  //     float: left;
+  //     height: 30px;
+  //     padding-bottom: 7px;
+  //   }
+
+  //   .NavigationLeftButtonStyling {
+  //     float: left;
+  //     padding: 20px;
+  //     border: none;
+  //     cursor: pointer;
+  //   }
+
+  //   .NavigationRightButtonStyling {
+  //     float: right;
+  //     padding: 20px;
+  //     border: none;
+  //     cursor: pointer;
+  //   }
+
+  //   .NavigationPageNumStyling {
+  //     text-align: center;
+  //     padding: 20px;
+  //   }
+  // }
+
+  .SingleStyle {
+    .SingleStyleContainer {
+      width: 100%;
+    }
+
+    .NewsContainer {
+      height: 173px;
+      margin-bottom: 15px;
+    }
+
+    .ImgContainer {
+      width: 276px;
+      height: 173px;
+      float: left;
+      overflow: hidden;
+    }
+
+    .Image {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    .NewsBody {
+      float: left;
+      margin-left: 20px;
+    }
+
+    .TitleContainer {
+      font-weight: 600;
+      font-size: 20px;
+      padding: 8px 0px;
+    }
+
+    .TitleStyling {
+      text-decoration: none;
+    }
+
+    .DescriptionContainer {
+      height: 72px;
+      overflow: hidden;
+      width: 418px;
+      padding: 7px 0px
+    }
+
+    .IconContainer {
+      float: right;
+      margin-top: 4px;
+      padding: 9px
+    }
+
+    .IconLabelStyling {
+      margin-left: 2px
+    }
+
+    .AuthorContainer {
+      float: left;
+      margin-top: 11px;
+      font-size: 12px;
+    }
+
+    .NavigationContainer {
+      width: 100%;
+      float: left;
+      height: 30px;
+      padding-bottom: 7px;
+    }
+
+    .NavigationLeftButtonStyling {
+      float: left;
+      padding: 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .NavigationRightButtonStyling {
+      float: right;
+      padding: 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .NavigationPageNumStyling {
+      text-align: center;
+      padding: 20px;
+    }
+  }
+
+  .StackStyle {
+    .StackStyleContainer {
+      width: 100%;
+      min-height: 420px;
+    }
+
+    .heading {
+      display: flex;
+      margin-bottom: 10px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .title {
+      color: #1d5447;
+      font-size: 18px;
+      margin-left: 15px;
+      text-align: left;
+      font-family: 'Inter';
+    }
+
+    .seeall {
+      font-size: 16px;
+      margin-right: 1em;
+      text-align: right;
+      font-family: 'Inter';
+    }
+
+    .link {
+      color: #1d5447;
+      text-decoration: underline;
+    }
+
+    .NewsContainer {
+      height: 360px;
+      width: calc(25% - 15px);
+      float: left;
+      border: 1px solid #b9b5b5;
+      border-radius: 10px;
+      background-color: white;
+      margin-left: 16px;
+
+      &:first-child {
+        margin-left: 0px;
+      }
+    }
+
+    .ImgContainer {
+
+      border-radius: 10px;
+      height: 144px;
+      margin: 1em;
+      overflow: hidden;
+      border: 1px solid #9c9ea3;
+    }
+
+    .Image {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      margin-left: 0.5px;
+      margin-right: 0.5px;
+    }
+
+    .NewsBody {
+      float: left;
+      height: 308px;
+      width: 100%;
+    }
+
+    .TitleContainer {
+      font-weight: bold;
+      font-size: 15px;
+      padding: 8px 12px;
+      overflow: hidden;
+      // margin-bottom:30px;
+      height: 105px;
+      // overflow-wrap: break-word;
+    }
+
+    .TitleStyling {
+      color: #1d5447;
+      text-decoration: none;
+      font-family: 'Inter';
+
+    }
+
+    .DescriptionContainer {
+      height: 85px;
+      overflow: hidden;
+      padding: 9px
+    }
+
+    .IconContainer {
+      float: right;
+      margin-top: 20px;
+      padding: 9px;
+      font-size: 12px;
+    }
+
+    .IconLabelStyling {
+      margin-left: 2px
+    }
+
+    .AuthorContainer {
+      float: left;
+      // margin-bottom: 5px;
+      font-size: 12px;
+      padding: 9x;
+      // margin-left: 9px;
+      color: #1d5447;
+      margin: 1em;
+
+      font-family: 'Inter';
+    }
+
+    .NavigationContainer {
+      width: 100%;
+      float: left;
+      height: 30px;
+      padding-top: 9px;
+      padding-bottom: 7px;
+    }
+
+    .NavigationLeftButtonStyling {
+      float: left;
+      padding: 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .NavigationRightButtonStyling {
+      float: right;
+      padding: 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .NavigationPageNumStyling {
+      text-align: center;
+      padding: 20px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .StackStyle {
+      .heading {
+        align-items: center;
+      }
+
+
+      .NewsContainer {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 1em;
+      }
+    }
+  }
+}

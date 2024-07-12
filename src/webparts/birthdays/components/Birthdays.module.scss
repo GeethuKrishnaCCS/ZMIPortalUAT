@@ -32,3 +32,70 @@
     }
   }
 }
+
+.box {
+  background: rgb(236,246,255);
+  border-radius: 15px;
+  box-shadow: 0 3.2px 7.2px 0 rgba(0, 0, 0, .132), 0 0.6px 1.8px 0 rgba(0, 0, 0, .108);
+  height: 450px;
+  width: 88%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.defaultBirthdayLabel {
+  // font-family: Inter;
+  font-size: 30px;
+  font-weight: 700;
+  color: "[theme:link, default:#03787c]";
+  margin-bottom: 30px; 
+}
+
+.bdayHeader {
+
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin-bottom: 35px;
+}
+
+.uparrow{
+  // border: 1px solid green;
+  height: 40px;
+}
+
+.downarrow{
+  // border: 1px solid black;
+  height: 40px;
+}
+.hr{
+  background-color: #d1e2fb;
+  height: 1px;
+  margin: 4px 0;
+  width: 100%;
+}
+.personaDiv{
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.07);
+  background-color: #fff;
+  padding: 8px;
+}
+.employee{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 20px;
+  height: calc(100% - 138px);
+  overflow-y: hidden;
+}
+
+.customIconButton:hover {
+  background-color: lightblue;
+}
+
+.customIconButton:disabled {
+  background: none;
+}

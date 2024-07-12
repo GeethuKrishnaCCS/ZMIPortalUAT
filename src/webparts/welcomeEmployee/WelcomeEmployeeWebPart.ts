@@ -2,40 +2,33 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
-  IPropertyPaneConfiguration,
-  PropertyPaneTextField,
-  PropertyPaneToggle
+  type IPropertyPaneConfiguration,
+  PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
-import * as strings from 'BirthdaysWebPartStrings';
-import Birthdays from './components/Birthdays';
-import { IBirthdaysProps, IBirthdaysWebPartProps } from './interfaces/IBirthdaysProps';
-import { SharePointProvider } from '@microsoft/mgt-sharepoint-provider';
-import { Providers } from '@microsoft/mgt-element';
+import * as strings from 'WelcomeEmployeeWebPartStrings';
+import WelcomeEmployee from './components/WelcomeEmployee';
+import { IWelcomeEmployeeProps, IWelcomeEmployeeWebPartProps } from './interfaces/IWelcomeEmployeeProps';
 
 
-export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWebPartProps> {
+
+export default class WelcomeEmployeeWebPart extends BaseClientSideWebPart<IWelcomeEmployeeWebPartProps> {
 
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
 
   public render(): void {
-    const element: React.ReactElement<IBirthdaysProps> = React.createElement(
-      Birthdays,
+    const element: React.ReactElement<IWelcomeEmployeeProps> = React.createElement(
+      WelcomeEmployee,
       {
         description: this.properties.description,
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
-        context: this.context,
-        listName: this.properties.listName,
-        NoOfItemDisplay: this.properties.NoOfItemDisplay,
-        BdayToggleValue: this.properties.BdayToggleValue,
-        WorkToggleValue: this.properties.WorkToggleValue,
-        WeddingToggleValue: this.properties.WeddingToggleValue,
+        context: this.context
       }
     );
 
@@ -43,9 +36,6 @@ export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWe
   }
 
   protected onInit(): Promise<void> {
-    if (!Providers.globalProvider) {
-      Providers.globalProvider = new SharePointProvider(this.context);
-    }
     return this._getEnvironmentMessage().then(message => {
       this._environmentMessage = message;
     });
@@ -66,10 +56,11 @@ export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWe
               environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
               break;
             case 'Teams': // running in Teams
+            case 'TeamsModern':
               environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
               break;
             default:
-              throw new Error('Unknown host');
+              environmentMessage = strings.UnknownEnvironment;
           }
 
           return environmentMessage;
@@ -118,25 +109,7 @@ export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWe
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
-                }),
-                PropertyPaneTextField('listName', {
-                  label: strings.PropertyPaneListName
-                }),
-                PropertyPaneToggle('BdayToggleValue', {
-                  label: strings.BdayToggleValue,  // Set your toggle label here
-                  checked: this.properties.BdayToggleValue  // Set initial value
-                }),
-                PropertyPaneToggle('WorkToggleValue', {
-                  label: strings.WorkToggleValue,  // Set your toggle label here
-                  checked: this.properties.WorkToggleValue  // Set initial value
-                }),
-                PropertyPaneToggle('WeddingToggleValue', {
-                  label: strings.WeddingToggleValue,  // Set your toggle label here
-                  checked: this.properties.WeddingToggleValue  // Set initial value
-                }),
-                PropertyPaneTextField('NoOfItemDisplay', {
-                  label: strings.PropertyPaneNoOfItemDisplay
-                }),                
+                })
               ]
             }
           ]

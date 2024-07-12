@@ -10,6 +10,14 @@
         }
       ]
     },
+    "finder-wp-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/finderWp/FinderWpWebPart.js",
+          "manifest": "./src/webparts/finderWp/FinderWpWebPart.manifest.json"
+        }
+      ]
+    },
     "calender-web-part": {
       "components": [
         {
@@ -33,6 +41,22 @@
           "manifest": "./src/webparts/quickLinks/QuickLinksWebPart.manifest.json"
         }
       ]
+    },
+    "welcome-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/welcome/WelcomeWebPart.js",
+          "manifest": "./src/webparts/welcome/WelcomeWebPart.manifest.json"
+        }
+      ]
+    },
+    "welcome-employee-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/welcomeEmployee/WelcomeEmployeeWebPart.js",
+          "manifest": "./src/webparts/welcomeEmployee/WelcomeEmployeeWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -41,6 +65,9 @@
     "CalenderWebPartStrings": "lib/webparts/calender/loc/{locale}.js",
     "ZnewsWebPartStrings": "lib/webparts/znews/loc/{locale}.js",
     "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
-    "QuickLinksWebPartStrings": "lib/webparts/quickLinks/loc/{locale}.js"
+    "QuickLinksWebPartStrings": "lib/webparts/quickLinks/loc/{locale}.js",
+    "FinderWpWebPartStrings": "lib/webparts/finderWp/loc/{locale}.js",
+    "WelcomeWebPartStrings": "lib/webparts/welcome/loc/{locale}.js",
+    "WelcomeEmployeeWebPartStrings": "lib/webparts/welcomeEmployee/loc/{locale}.js"
   }
 }
