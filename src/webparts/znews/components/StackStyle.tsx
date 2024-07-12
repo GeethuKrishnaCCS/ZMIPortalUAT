@@ -26,23 +26,23 @@ export default class StackStyle extends React.Component<
     };
   }
 
-  
+
 
   public componentDidMount() {
-    const array:any[] = [];
-      let count = 0;
-      const min = 0;
-      const max = min + 3;
-      this.props.News.map(Post => {
-        count = count + 1;
-        if (count > min && count < max) {
-          array.push(Post);
-        }
-      });
-      this.setState({ RenderedNews: array, Next: 3, Count: 1, UpdateCount: 0 });
+    const array: any[] = [];
+    let count = 0;
+    const min = 0;
+    const max = min + 3;
+    this.props.News.map(Post => {
+      count = count + 1;
+      if (count > min && count < max) {
+        array.push(Post);
+      }
+    });
+    this.setState({ RenderedNews: array, Next: 3, Count: 1, UpdateCount: 0 });
   }
 
-  public formatDateTime(dateTime:any) {
+  public formatDateTime(dateTime: any) {
     const formattedDate = moment(dateTime).format('MMM DD, YYYY');
     const formattedTime = moment(dateTime).format('h:mm a');
     const timezone = moment(dateTime).format('z');
@@ -50,12 +50,12 @@ export default class StackStyle extends React.Component<
   }
 
   public componentDidUpdate(prevProps: StylingProps) {
-    const array:any[] = [];
-      let count = 0;
-      const min = 0;
-      const max = min + 4;
+    const array: any[] = [];
+    let count = 0;
+    const min = 0;
+    const max = min + 4;
     if (prevProps.News !== this.props.News) {
-      
+
       this.props.News.map(Post => {
         count = count + 1;
         if (count > min && count < max) {
@@ -76,12 +76,12 @@ export default class StackStyle extends React.Component<
       return true;
     }
   }
-  public Next(News:any) {
-    const array:any[] = [];
+  public Next(News: any) {
+    const array: any[] = [];
     let count = 0;
     const min = this.state.Next;
     const max = min + 4;
-    News.map((Post:any) => {
+    News.map((Post: any) => {
       count = count + 1;
       if (count > min && count < max) {
         array.push(Post);
@@ -91,12 +91,12 @@ export default class StackStyle extends React.Component<
     this.setState({ RenderedNews: array, Next: newVal, Count: this.state.Count + 1 });
   }
 
-  public Back(News:any) {
-    const array:any[] = [];
+  public Back(News: any) {
+    const array: any[] = [];
     const min = this.state.Next - 6;
     const max = this.state.Next - 2;
     let count = 0;
-    News.map((Post:any) => {
+    News.map((Post: any) => {
       count = count + 1;
       if (count > min && count < max) {
         array.push(Post);
@@ -105,84 +105,69 @@ export default class StackStyle extends React.Component<
     const newVal = this.state.Next - 3;
     this.setState({ RenderedNews: array, Next: newVal, Count: this.state.Count - 1 });
   }
-  
+
   public render(): React.ReactElement<StylingProps> {
     let i = 0;
     const backicon: IIconProps = { iconName: 'ChevronLeftSmall' };
     const nexticon: IIconProps = { iconName: 'ChevronRightSmall' };
     return (
       <div className={styles.StackStyle}>
-      <div className={styles.StackStyleContainer}>
-        <div  className={styles.heading}>
-        <div  className={styles.title}>{this.props.description}</div>
-       </div>
-<table>
-            <tr>
-         <td> <IconButton iconProps={backicon} 
-         onClick={() => this.Back(this.props.News)} disabled={this.state.Next === 3}
-        //  style={{ boxShadow: '0 1px 4px rgb(0 0 0 / 30%), 0 0 40px rgb(0 0 0 / 10%)'}}
-         className={styles.NavigationLeftButtonStyling}
-          ariaLabel={"Back"} /></td>
-            <td>
-            {this.state.RenderedNews.map((Post,key) => {
-              i = i + 1;
-              return (
-                <div
-                  className={styles.NewsContainer}
-                  // style={{ boxShadow: 'rgb(0 0 0 / 13%) 0px 1.6px 3.6px 0px, rgb(0 0 0 / 11%) 0px 0.3px 0.9px 0px', marginRight: `${i === 3 ? '0px' : '7px'}` }}
-                  >
-                  <div className={styles.ImgContainer}>
-                    <img src={Post.Thumbnail} className={styles.Image}/>
-                  </div>
-                  <div className={styles.NewsBody}>
-                    <div className={styles.TitleContainer}>
-                      <a className={styles.TitleStyling} href={Post.Url}>
-                        {Post.Title}</a>
-                    </div>
-                    {/* <div className={styles.DescriptionContainer}>
-                      {Post.Description ? Post.Description.substring(0,182) + '…': '…'}
-                    </div> */}
-                    <div className={styles.footer}>
-                    <div className={styles.AuthorContainer}>
-                    {this.props.AuthorToggle ? ( <></> ) : ( <div style={{fontWeight:"bold"}}> {Post.Author}, <br/> </div> )}{" "}
-                    {this.props.DateToggle ? ( <></> ) : ( <div style={{fontWeight:"bold"}}> {this.formatDateTime(Post.Created)} </div> )}{" "}
-                        
-                    </div>
-                    </div>
-                    
-
-                    {/* <div className={styles.IconContainer}>
-                      <Icon className={iconClass} iconName="Like"></Icon>
-                      <label className={styles.IconLabelStyling}>
-                        {Post.Likes}
-                      </label>
-                      <Icon
-                        style={{ marginLeft: "10px" }}
-                        className={iconClass}
-                        iconName="Comment"
-                      ></Icon>
-                      <label className={styles.IconLabelStyling}>
-                        {Post.Comments}
-                      </label>
-                    </div> */}
-                  </div>
+        <div className={styles.StackStyleContainer}>
+          <div className={styles.heading}>
+            <div className={styles.title}>{this.props.description}</div>
+          </div>
+          <div>
+              <div> <IconButton iconProps={backicon}
+                onClick={() => this.Back(this.props.News)} disabled={this.state.Next === 3}
+                //  style={{ boxShadow: '0 1px 4px rgb(0 0 0 / 30%), 0 0 40px rgb(0 0 0 / 10%)'}}
+                className={styles.NavigationLeftButtonStyling}
+                ariaLabel={"Back"} />
                 </div>
-              );
+              <div>
+                {this.state.RenderedNews.map((Post, key) => {
+                  i = i + 1;
+                  return (
+                    <div className={styles.NewsContainer}>
+                      <div className={styles.ImgContainer}>
+                        <img src={Post.Thumbnail} className={styles.Image} />
+                      </div>
+                      <div className={styles.NewsBody}>
+                        <div className={styles.TitleContainer}>
+                          <a className={styles.TitleStyling} href={Post.Url} target="_blank">
+                            {Post.Title}</a>
+                        </div>
+                        <div className={styles.footer}>
+                          <div className={styles.AuthorContainer}>
+                            {this.props.AuthorToggle ? (<></>) : (<div style={{ fontWeight: "bold" }}> {Post.Author}, <br /> </div>)}{" "}
+                            {this.props.DateToggle ? (<></>) : (<div style={{ fontWeight: "bold" }}> {this.formatDateTime(Post.Created)} </div>)}{" "}
 
-            })}</td>
-            <td><IconButton iconProps={nexticon} 
-            onClick={() => this.Next(this.props.News)} 
-            disabled={this.state.Next >= this.props.News.length}
-            // style={{ boxShadow: '0 1px 4px rgb(0 0 0 / 30%), 0 0 40px rgb(0 0 0 / 10%)' }}
-            className={styles.NavigationRightButtonStyling}
-             ariaLabel={"Next"} /></td>
-            </tr>
-          </table>
-        <br/>
-        <div className={styles.NavigationContainer}>
-          <div className={styles.NavigationPageNumStyling}>{this.state.Count} out of {Math.ceil(this.props.News.length / 3)}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+
+                })}</div>
+              <div><IconButton iconProps={nexticon}
+                onClick={() => this.Next(this.props.News)}
+                disabled={this.state.Next >= this.props.News.length}
+                // style={{ boxShadow: '0 1px 4px rgb(0 0 0 / 30%), 0 0 40px rgb(0 0 0 / 10%)' }}
+                className={styles.NavigationRightButtonStyling}
+                ariaLabel={"Next"} /></div>
+            
+          </div>
+          <br />
+          <div className={styles.NavigationContainer}>
+          
+            <div className={styles.dot}><input
+                type="radio"
+                value={i + 1}
+                checked={this.state.Count === i + 1}
+              /></div>
+            <div className={styles.NavigationPageNumStyling}>{this.state.Count} out of {Math.ceil(this.props.News.length / 3)}</div>
+          </div>
+          
         </div>
-      </div>
       </div>
     );
   }
