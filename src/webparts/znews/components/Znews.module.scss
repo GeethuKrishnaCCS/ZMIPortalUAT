@@ -117,7 +117,17 @@
       margin-right: 1em;
       font-size: 17px;
     }
-
+.dot{
+  background-color: #333;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000;
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer;
+  position: relative;
+}
     .link {
       color: #1d5447;
       text-decoration: underline;
