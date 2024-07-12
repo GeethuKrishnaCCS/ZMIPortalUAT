@@ -129,7 +129,7 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
                   className={styles.customIconButton}
                 />
               </div>
-              <div className={styles.hr}></div>
+              <div className={styles.hr}/>
               <div className={styles.employee}>
                 {this.state.greetings.length > 0 ? (
                   this.state.greetings.slice(this.state.scrollIndex, this.state.scrollIndex + this.props.NoOfItemDisplay).map((item: any, index: any) => (
@@ -157,7 +157,7 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
                   <div>No Anniversaries Today</div>
                 )}
               </div>
-              <div className={styles.hr}></div>
+              <div className={styles.hr}/>
               <div className={styles.downarrow}>
                 <IconButton
                   iconProps={ChevronDown}
