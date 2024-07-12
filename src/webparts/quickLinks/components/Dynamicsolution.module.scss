@@ -1,0 +1,238 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.dynamicsolution {
+  overflow: hidden;
+  color: "[theme:bodyText, default: #323130]";
+  color: var(--bodyText);
+
+  &.teams {
+    font-family: $ms-font-family-fallbacks;
+  }
+
+}
+
+.cardimg {
+  width: 100%;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.carddescription {
+  margin: 0.5rem 5%;
+}
+
+.quickLinkLabel {
+  margin-left: 16px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.editbtn {
+  //float: right;
+  position: relative;
+}
+
+.flex {
+  // display: flex;
+  // justify-content: center;
+  display: flex;
+  margin-top: 3px;
+  margin-left: 8.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .flex {
+    margin-left: 0;
+    /* Reset margin for smaller screens */
+    justify-content: center;
+    /* Center the content */
+  }
+}
+
+.iconmain {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.iconcard {
+  border-radius: 1rem;
+  box-shadow: 0px 2px 8px 1px #999;
+  display: flex;
+  flex-direction: column;
+  margin: 0 2.5rem 2.5rem 0.5rem;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: white;
+  width: 8rem;
+  height: 9rem;
+}
+
+.editicon {
+  position: absolute;
+}
+
+.iconimgdiv {
+  height: 50%;
+  width: 50%;
+}
+
+.iconimg {
+  width: 50%;
+  padding: 0 0 0 10%;
+}
+
+.texticondiv {
+  display: flex;
+  flex-direction: row;
+}
+
+.iconcardtitle {
+  margin: 0.5rem 5%;
+}
+
+.linkicon {
+  float: right;
+  text-decoration: none;
+}
+
+.iconfrwd {
+  float: right;
+}
+
+.imagemain {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+}
+
+.imagecard {
+  background-color: white;
+  height: 11rem;
+  width: 26%;
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 8px 1px #999;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.imagecrdall {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 0.5rem;
+}
+
+.imgdiv {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem 0.5rem 0rem 0rem;
+
+}
+
+.imgcardimag {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imgcrdtxticndiv {
+  padding: 0 0 0 1rem;
+  border-radius: 1rem 1rem 0 0;
+  height: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 89%;
+
+}
+
+.imagcrdtxt {
+  float: right;
+  text-decoration: none;
+}
+
+.imagediticon {
+  position: absolute;
+}
+
+.textcardmain {
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+}
+
+
+
+.textcarddiv {
+  background-color: white;
+  height: 4.3rem;
+  width: 37%;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px 1px #999;
+  display: flex;
+  margin: 1rem;
+  //display: block;
+
+}
+
+.textcarditem {
+  display: flex;
+  padding: 0 0 0 2rem;
+  width: 88%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.textcardeditbtn {
+  position: absolute;
+}
+
+.textcardeditbtnicon {
+  float: right;
+}
+
+.textcardlinkbtn {
+  float: right;
+}
+
+.modalcontents {
+  margin-right: 2rem;
+  width: 100%;
+}
+
+.okbtn {
+  float: right;
+  margin: 0.5rem 0 0.5rem 0;
+
+}
+
+.editmodal {
+  padding: 0 1rem;
+}
+
+.editmodaldelupdbtn {
+  display: flex;
+  float: right;
+  padding: 1rem 0rem 1rem 1rem;
+  gap: 1rem;
+}
+
+/* .links {
+  a {
+    text-decoration: none;
+    color: "[theme:link, default:#03787c]";
+    color: var(--link); // note: CSS Custom Properties support is limited to modern browsers only
+
+    &:hover {
+      text-decoration: underline;
+      color: "[theme:linkHovered, default: #014446]";
+      color: var(--linkHovered); // note: CSS Custom Properties support is limited to modern browsers only
+    }
+  }
+} */
