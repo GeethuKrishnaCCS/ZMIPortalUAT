@@ -216,12 +216,12 @@
     }
 
     .NewsContainer {
-      height: 360px;
-      width: calc(25% - 15px);
+      height: 380px;
+      width: calc(33.5% - 15px);
       float: left;
-      border: 1px solid #b9b5b5;
+      border: 1px solid rgb(236, 246, 255);
       border-radius: 10px;
-      background-color: white;
+      background-color: rgb(236, 246, 255);
       margin-left: 16px;
 
       &:first-child {
@@ -231,11 +231,12 @@
 
     .ImgContainer {
 
-      border-radius: 10px;
-      height: 144px;
-      margin: 1em;
+      // border-radius: 10px;
+      border-radius: 10px 10px 0px 0;
+      height: 150px;
+      // margin: 1em;
       overflow: hidden;
-      border: 1px solid #9c9ea3;
+      // border: 1px solid #9c9ea3;
     }
 
     .Image {
@@ -248,24 +249,28 @@
 
     .NewsBody {
       float: left;
-      height: 308px;
+      height: 220px;
       width: 100%;
     }
 
-    .TitleContainer {
-      font-weight: bold;
+    .EmployeeName {
       font-size: 15px;
-      padding: 8px 12px;
+      padding: 12px 12px 0 12px;
+      font-weight: 700;
+    }
+
+    .TitleContainer {
+      font-size: 15px;
+      font-weight: 500;
+      height: 150px;
       overflow: hidden;
-      // margin-bottom:30px;
-      height: 105px;
-      // overflow-wrap: break-word;
+      padding: 8px 12px;
     }
 
     .TitleStyling {
-      color: #1d5447;
+      // color: #1d5447;
       text-decoration: none;
-      font-family: 'Inter';
+      font-family: 'system-ui';
 
     }
 

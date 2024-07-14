@@ -7,10 +7,12 @@ export interface IWelcomeEmployeeProps {
   hasTeamsContext: boolean;
   userDisplayName: string;
   context: WebPartContext;
+  
 }
 
 export interface IWelcomeEmployeeWebPartProps {
   description: string;
+  listItems:any;
 }
 
 export interface IWelcomeEmployeeState {

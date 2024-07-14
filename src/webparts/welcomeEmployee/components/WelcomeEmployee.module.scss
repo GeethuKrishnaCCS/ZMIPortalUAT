@@ -5,6 +5,7 @@
   padding: 1em;
   color: "[theme:bodyText, default: #323130]";
   color: var(--bodyText);
+
   &.teams {
     font-family: $ms-font-family-fallbacks;
   }
@@ -37,15 +38,18 @@
   height: 100%;
   width: 100%;
 
-  .heading{
-    font-size: xxx-large;
-    font-weight: bold;
-  }
-  
-  .subheading{
-    font-size: x-large;
-    font-weight: 500;
-  }
+
 
 }
 
+.heading {
+  font-size: xxx-large;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.subheading {
+  font-size: x-large;
+  font-weight: 500;
+  margin-bottom: 30px;
+}

@@ -29,8 +29,9 @@ export default class WelcomeEmployee extends React.Component<IWelcomeEmployeePro
   public async getData (){
     const url: string = this.props.context.pageContext.web.serverRelativeUrl;
     const getEmployee = await this._service.getListItems("WelcomeEmployee", url)
-    console.log('getEmployee: ', getEmployee);
+    // console.log('getEmployee: ', getEmployee);
     this.setState({listItems : getEmployee})
+    console.log('listItems: ', this.state.listItems);
 
   }
 
@@ -44,7 +45,7 @@ export default class WelcomeEmployee extends React.Component<IWelcomeEmployeePro
         <div>
           <div className={styles.heading}>{"Welcome to ZMI Holdings"}</div>
           <div className={styles.subheading}>{"Welcome new colleague to the team"}</div>
-          <StackStyle listItems={this.state.listItems} context={this.props.context} /> :
+          <StackStyle listItems={this.state.listItems} context={this.props.context} /> 
         </div>
       </section>
     );
