@@ -270,7 +270,7 @@
     .NavDot{
       display: flex;
       justify-content: center;
-      gap: 24px;
+      gap: 12px;
       width: 100%;
       margin-top: 32px;
 
@@ -279,18 +279,21 @@
         height: 20px;
         border-radius: 100%;
         background: #fff;
-        border: 1px solid rgba(109, 110, 113, 1);
+        border: inset 1px solid rgba(109, 110, 113, 1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         .InnerDot{
            background: #fff; 
-           width: 20px;
-           height: 20px;
+           width: 12px;
+           height: 12px;
            border-radius: 100%;
         }
 
         &.active{
-           border-color: rgba(0, 113, 206, 1);
-           
+          border: inset 1px solid rgba(0, 113, 206, 1);
+
            .InnerDot{
             background: rgba(0, 113, 206, 1);
            }

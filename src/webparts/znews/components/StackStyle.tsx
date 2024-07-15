@@ -110,10 +110,10 @@ export default class StackStyle extends React.Component<
     const dots = [];
 
     for (let i = 0; i < dotCount; i++) {
-      if(i<= this.state.Count){
+      if(i< this.state.Count){
       dots.push(
-        <div key={i} className={styles.Dot}>
-          <div className={`${styles.InnerDot} ${styles.active}`}></div>
+        <div key={i} className={`${styles.Dot} ${styles.active}`}>
+          <div className={styles.InnerDot}></div>
         </div>
       );
     }
@@ -126,7 +126,7 @@ export default class StackStyle extends React.Component<
     }
     }
 
-    return <div>{dots}</div>;
+    return <div className={styles.NavDot}>{dots}</div>;
   
   }
   public render(): React.ReactElement<StylingProps> {
@@ -175,7 +175,7 @@ export default class StackStyle extends React.Component<
                 </div>
           </div>
        
-          <div className={styles.NavDot}>
+          <div>
             {/* <div className={`${styles.Dot} active`}><div className={styles.InnerDot}></div></div> */}
             {this.renderdots()}
             {/* <div className={styles.Dot}><div className={styles.InnerDot}></div></div> */}
