@@ -105,7 +105,30 @@ export default class StackStyle extends React.Component<
     const newVal = this.state.Next - 3;
     this.setState({ RenderedNews: array, Next: newVal, Count: this.state.Count - 1 });
   }
+  public renderdots(){
+    const dotCount = Math.ceil(this.props.News.length / 3);
+    const dots = [];
+
+    for (let i = 0; i < dotCount; i++) {
+      if(i< this.state.Count){
+      dots.push(
+        <div key={i} className={`${styles.Dot} ${styles.active}`}>
+          <div className={styles.InnerDot}></div>
+        </div>
+      );
+    }
+    else{
+      dots.push(
+        <div key={i} className={styles.Dot}>
+          <div className={styles.InnerDot}></div>
+        </div>
+      );
+    }
+    }
+
+    return <div className={styles.NavDot}>{dots}</div>;
   
+  }
   public render(): React.ReactElement<StylingProps> {
     let i = 0;
     const backicon: IIconProps = { iconName: 'ChevronLeftSmall' };
@@ -152,8 +175,10 @@ export default class StackStyle extends React.Component<
                 </div>
           </div>
        
-          <div className={styles.NavDot}>
-            <div className={styles.Dot}><div className={styles.InnerDot}></div></div>
+          <div>
+            {/* <div className={`${styles.Dot} active`}><div className={styles.InnerDot}></div></div> */}
+            {this.renderdots()}
+            {/* <div className={styles.Dot}><div className={styles.InnerDot}></div></div> */}
           </div>  
           <div className={styles.NavigationContainer}>
             <div className={styles.NavigationPageNumStyling}>{this.state.Count} out of {Math.ceil(this.props.News.length / 3)}</div>
