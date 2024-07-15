@@ -2,7 +2,6 @@ import * as React from 'react';
 import styles from './Calender.module.scss';
 import { ICalenderProps, ICalenderState } from '../interfaces/ICalenderProps';
 import { Calendar, DateObject } from "react-multi-date-picker";
-import "react-datepicker/dist/react-datepicker.css";
 import { BaseService } from '../services';
 import * as moment from "moment";
 export default class Calender extends React.Component<ICalenderProps, ICalenderState, {}> {
