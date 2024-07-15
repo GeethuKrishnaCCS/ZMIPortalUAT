@@ -110,7 +110,7 @@ export default class StackStyle extends React.Component<
     const dots = [];
 
     for (let i = 0; i < dotCount; i++) {
-      if(i< this.state.Count){
+      if(i === this.state.Count-1){
       dots.push(
         <div key={i} className={`${styles.Dot} ${styles.active}`}>
           <div className={styles.InnerDot}></div>
