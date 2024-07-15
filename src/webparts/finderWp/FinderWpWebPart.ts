@@ -18,7 +18,7 @@ import { IFinderWpProps, IFinderWpWebPartProps } from './interfaces/IFinderWpPro
 import { IDropdownOption } from '@fluentui/react';
 import { IDocumentLibraryInformation } from "@pnp/sp/sites";
 import { FinderWpService } from './services';
-import { PropertyFieldColorPicker, PropertyFieldColorPickerStyle } from '@pnp/spfx-property-controls/lib/PropertyFieldColorPicker';
+//import { PropertyFieldColorPicker, PropertyFieldColorPickerStyle } from '@pnp/spfx-property-controls/lib/PropertyFieldColorPicker';
 import { PropertyFieldIconPicker } from '@pnp/spfx-property-controls/lib/PropertyFieldIconPicker';
 
 export default class FinderWpWebPart extends BaseClientSideWebPart<IFinderWpWebPartProps> {
@@ -117,24 +117,24 @@ export default class FinderWpWebPart extends BaseClientSideWebPart<IFinderWpWebP
     console.log('Folders: ', folders);
   
     this._folderFields = folders.map((folder: any, index: number) => {
-      const color = this.properties.foldercolor[index] || '#FFFFFF'; 
+      //const color = this.properties.foldercolor[index] || '#FFFFFF'; 
       const icon = this.properties.iconPicker[index] || '';
       return {
         groupName: `Folder: ${folder.Name}`,
         groupFields: [
-          PropertyFieldColorPicker(`foldercolor[${index}]`, {
-            label: `Color for ${folder.Name}`,
-            selectedColor: color,
-            onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
-            properties: this.properties,
-            disabled: false,
-            debounce: 1000,
-            isHidden: false,
-            alphaSliderHidden: false,
-            style: PropertyFieldColorPickerStyle.Full,
-            iconName: 'Precipitation',
-            key: `colorFieldId${index}`
-          }),
+          // PropertyFieldColorPicker(`foldercolor[${index}]`, {
+          //   label: `Color for ${folder.Name}`,
+          //   selectedColor: color,
+          //   onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
+          //   properties: this.properties,
+          //   disabled: false,
+          //   debounce: 1000,
+          //   isHidden: false,
+          //   alphaSliderHidden: false,
+          //   style: PropertyFieldColorPickerStyle.Full,
+          //   iconName: 'Precipitation',
+          //   key: `colorFieldId${index}`
+          // }),
           PropertyFieldIconPicker(`iconPicker[${index}]`, {
             currentIcon: icon,
             key: `iconPickerId${index}`,

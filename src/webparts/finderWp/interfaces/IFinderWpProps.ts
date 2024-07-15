@@ -36,4 +36,5 @@ export interface IFinderWpState {
   searchQuery: any;
   filteredFiles: any;
   filteredFolders: any;
+  breadcrumbDiv:boolean;
 }

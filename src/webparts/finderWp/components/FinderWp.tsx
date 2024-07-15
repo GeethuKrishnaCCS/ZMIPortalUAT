@@ -22,6 +22,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
       searchQuery: '',
       filteredFiles: [],
       filteredFolders: [],
+      breadcrumbDiv: false,
 
     }
     this.getDocFiles = this.getDocFiles.bind(this);
@@ -77,9 +78,21 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
     const index = this.state.breadcrumbItems.findIndex((breadcrumbItem: any) => breadcrumbItem.key === item.key);
     const breadcrumbItems = this.state.breadcrumbItems.slice(0, index + 1);
     const folder = { ServerRelativeUrl: item.key, Name: item.text };
-    await this.handleFolderSelection(folder);
+    if (index === 0) {
+      this.setState({
+        selectedFolder: null,
+        breadcrumbItems: [{ text: this.props.selectedDocument, key: this.props.selectedDocument }],
+      });
+      await this.getDocFiles();
+      await this.getDocFolder();
+    }
+    else {
+      
+      await this.handleFolderSelection(folder);
+      this.setState({ breadcrumbItems });
+    }
 
-    this.setState({ breadcrumbItems });
+
   }
 
   public async handleFolderSelection(folder: any) {
@@ -152,123 +165,127 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
               onChange={(_, newValue) => this.handleSearchQueryChange(newValue)}
               className={styles.searchbox}
             />
-            <div>
-              <Breadcrumb
-                items={this.state.breadcrumbItems}
-                onRenderItem={(item, render) => (
-                  <span className={styles.breadcrumpHeading} onClick={(ev) => this.onBreadcrumbItemClicked(ev, item)}>
-                    {render!(item)}
-                  </span>
-                )}
-              />
-            </div>
+            {this.state.breadcrumbItems.length>1 &&
+              <div className={styles.breadCrumbDiv}>
+                <Breadcrumb
+                  items={this.state.breadcrumbItems}
+                  onRenderItem={(item, render) => (
+                    <span className={styles.breadcrumpHeading} onClick={(ev) => this.onBreadcrumbItemClicked(ev, item)}>
+                      {render!(item)}
+                    </span>
+                  )}
 
-            {this.state.searchQuery ? (
-              hasSearchResults ? (
-                <div>
-                  <h3>Search Results</h3>
-                  <ul>
-                    {this.state.filteredFolders.map((folder: any) => (
-                      <DefaultButton
-                        key={folder.UniqueId}
-                        className={styles.button}
-                        onClick={() => this.handleFolderSelection(folder)}
-                        styles={{ root: { fontSize: this.props.ButtonFontSize } }}
-                      >
-                        {folder.Name}
-                      </DefaultButton>
-                    ))}
-                    {this.state.filteredFiles.map((file: any) => (
-                      <div key={file.Id}>
-                        <IconButton iconProps={KnowledgeArticle} ariaLabel="File icon" />
-                        <a href={file.ServerRelativeUrl} target="_blank">
-                          {file.Name}
-                        </a>
-                      </div>
-                    ))}
-                  </ul>
-                </div>
-              ) : (
-                <div>{"No items"}</div>
-              )
-            ) : (
-              <div>
-                {hasItemsInSelectedFolder ? (
-                  this.state.selectedFolder ? (
-                    <div>
-                      <ul>
-                        {this.state.selectedFolder.subfolders.map((subfolder: any) => (
-                          <DefaultButton
-                            key={subfolder.UniqueId}
-                            className={styles.button}
-                            onClick={() => this.handleFolderSelection(subfolder)}
-                            styles={{ root: { fontSize: this.props.ButtonFontSize } }}
-                          >
-                            {subfolder.Name}
-                          </DefaultButton>
-                        ))}
-                      </ul>
-                      <table>
-                        <tbody>
-                          {this.state.filesInSelectedFolder.map((item: any) => (
-                            <tr key={item.Id}>
-                              <td>
-                                <IconButton iconProps={KnowledgeArticle} ariaLabel="File icon" />
-                              </td>
-                              <td>
-                                <a href={item.ServerRelativeUrl} target="_blank">
-                                  {item.Name}
-                                </a>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  ) : (
-                    <div>
-                      <ul>
-                        {this.state.getDocFolder.map((item: any, index: number) => (
-                          <ActionButton
-                            iconProps={this.props.iconPicker[index] || 'AddFriend'}
-                            key={item.Id}
-                            className={styles.button}
-                            onClick={() => this.handleFolderSelection(item)}
-                            styles={{
-                              root: {
-                                fontSize: this.props.ButtonFontSize,
-                                backgroundColor: this.props.foldercolor[index] || 'transparent',
-                              }
-                            }}
-                          >
-                            {item.Name}
-                          </ActionButton>
-                        ))}
-                      </ul>
-                      <hr />
-                      <table>
-                        <tbody>
-                          {this.state.getDocFiles.map((item: any) => (
-                            <tr key={item.Id}>
-                              <td>
-                                <IconButton iconProps={KnowledgeArticle} ariaLabel="File icon" />
-                              </td>
-                              <td>
-                                <a href={item.ServerRelativeUrl} target="_blank">
-                                  {item.Name}
-                                </a>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  )
-                ) : (
-                  <div>{"No items"}</div>
-                )}
+                />
               </div>
-            )}
+            }
+            <div className={styles.buttonDiv}>
+              {this.state.searchQuery ? (
+                hasSearchResults ? (
+                  <>
+                    <h3>Search Results</h3>
+                    <ul>
+                      {this.state.filteredFolders.map((folder: any) => (
+                        <DefaultButton
+                          key={folder.UniqueId}
+                          className={styles.button}
+                          onClick={() => this.handleFolderSelection(folder)}
+                          styles={{ root: { fontSize: this.props.ButtonFontSize } }}
+                        >
+                          {folder.Name}
+                        </DefaultButton>
+                      ))}
+                      {this.state.filteredFiles.map((file: any) => (
+                        <div key={file.Id}>
+                          <IconButton iconProps={KnowledgeArticle} ariaLabel="File icon" />
+                          <a href={file.ServerRelativeUrl} target="_blank">
+                            {file.Name}
+                          </a>
+                        </div>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  <>{"No items"}</>
+                )
+              ) : (
+                <>
+                  {hasItemsInSelectedFolder ? (
+                    this.state.selectedFolder ? (
+                      <>
+                        <ul>
+                          {this.state.selectedFolder.subfolders.map((subfolder: any) => (
+                            <DefaultButton
+                              key={subfolder.UniqueId}
+                              className={styles.button}
+                              onClick={() => this.handleFolderSelection(subfolder)}
+                              styles={{ root: { fontSize: this.props.ButtonFontSize } }}
+                            >
+                              {subfolder.Name}
+                            </DefaultButton>
+                          ))}
+                        </ul>
+                        <table className={styles.tableDiv}>
+                          <tbody >
+                            {this.state.filesInSelectedFolder.map((item: any) => (
+                              <tr key={item.Id}>
+                                <td>
+                                  <IconButton iconProps={KnowledgeArticle} ariaLabel="File icon" />
+                                </td>
+                                <td>
+                                  <a href={item.ServerRelativeUrl} target="_blank">
+                                    {item.Name}
+                                  </a>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </>
+                    ) : (
+                      <>
+                        <ul>
+                          {this.state.getDocFolder.map((item: any, index: number) => (
+                            <ActionButton
+                              iconProps={this.props.iconPicker[index] || 'AddFriend'}
+                              key={item.Id}
+                              className={styles.button}
+                              onClick={() => this.handleFolderSelection(item)}
+                              styles={{
+                                root: {
+                                  fontSize: this.props.ButtonFontSize,
+                                  backgroundColor: this.props.foldercolor[index] || 'transparent',
+                                }
+                              }}
+                            >
+                              {item.Name}
+                            </ActionButton>
+                          ))}
+                        </ul>
+                        <hr />
+                        <table>
+                          <tbody>
+                            {this.state.getDocFiles.map((item: any) => (
+                              <tr key={item.Id}>
+                                <td>
+                                  <IconButton iconProps={KnowledgeArticle} ariaLabel="File icon" />
+                                </td>
+                                <td>
+                                  <a href={item.ServerRelativeUrl} target="_blank">
+                                    {item.Name}
+                                  </a>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </>
+                    )
+                  ) : (
+                    <>{"No items"}</>
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </section>
