@@ -26,6 +26,22 @@
         }
       ]
     },
+    "welcome-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/welcome/WelcomeWebPart.js",
+          "manifest": "./src/webparts/welcome/WelcomeWebPart.manifest.json"
+        }
+      ]
+    },
+    "welcome-employee-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/welcomeEmployee/WelcomeEmployeeWebPart.js",
+          "manifest": "./src/webparts/welcomeEmployee/WelcomeEmployeeWebPart.manifest.json"
+        }
+      ]
+    },
     "znews-web-part": {
       "components": [
         {
