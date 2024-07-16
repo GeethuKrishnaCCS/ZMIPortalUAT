@@ -4,6 +4,7 @@ export interface ICalenderProps {
   siteUrl: string;
   context: WebPartContext;
   eventListName:string
+  description:string;
 }
 export interface ICalenderState {
   startDate:any;
