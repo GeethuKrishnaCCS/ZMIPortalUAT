@@ -38,9 +38,23 @@ export class FinderWpService extends BaseService {
             .rootFolder
             .folders()
             .then((folders: any[]) => {
-                return folders.filter(folder => folder.Name !== "Forms");
+                const foldersWithIcons = folders.filter(folder => folder.Name !== "Forms").map(folder => {
+                    return this._spfi.web.getFolderByServerRelativePath(folder.ServerRelativeUrl)
+                        .expand("Files")
+                        ()
+                        .then((folderDetails: any) => {
+                            return {
+                                ...folderDetails,
+                                Icon: folderDetails.Icon
+                            };
+                        });
+                });
+                return Promise.all(foldersWithIcons);
             });
+
     }
+
+
 
     public getfilesfromfolder(data: any): Promise<any> {
         return this._spfi.web.getFolderByServerRelativePath(data).files();
@@ -52,7 +66,7 @@ export class FinderWpService extends BaseService {
     public async getfoldersfromfolder(data: any): Promise<any> {
         const folders = await this._spfi.web.getFolderByServerRelativePath(data).folders();
         const filteredFolders = folders.filter((folder: any) => folder.Name !== "Forms");
-    
+
         return Promise.all(filteredFolders.map(async (folder: any) => {
             const subfolderFiles = await this.getfilesfromfolder(folder.ServerRelativeUrl);
             const subfolderSubfolders = await this.getfoldersfromfolder(folder.ServerRelativeUrl);
@@ -74,10 +88,10 @@ export class FinderWpService extends BaseService {
     //     return folders.length > 0 ? folders[0] : null;
     // }
 
-    
-   
 
-    
-    
+
+
+
+
 }
 
