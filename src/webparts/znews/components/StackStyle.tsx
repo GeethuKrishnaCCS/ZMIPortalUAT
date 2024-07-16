@@ -180,9 +180,9 @@ export default class StackStyle extends React.Component<
             {this.renderdots()}
             {/* <div className={styles.Dot}><div className={styles.InnerDot}></div></div> */}
           </div>  
-          <div className={styles.NavigationContainer}>
+          {/* <div className={styles.NavigationContainer}>
             <div className={styles.NavigationPageNumStyling}>{this.state.Count} out of {Math.ceil(this.props.News.length / 3)}</div>
-          </div>
+          </div> */}
       </div>
       </div>
     );
