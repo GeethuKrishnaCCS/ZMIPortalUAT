@@ -237,6 +237,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                               className={styles.button}
                               onClick={() => this.handleFolderSelection(subfolder)}
                               styles={{ root: { fontSize: this.props.ButtonFontSize } }}
+                              iconProps={KnowledgeArticle}
                             >
                               {subfolder.Name}
                             </DefaultButton>
