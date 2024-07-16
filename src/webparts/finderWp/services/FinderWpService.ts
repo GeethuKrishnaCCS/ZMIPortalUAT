@@ -39,13 +39,12 @@ export class FinderWpService extends BaseService {
             .folders()
             .then((folders: any[]) => {
                 const foldersWithIcons = folders.filter(folder => folder.Name !== "Forms").map(folder => {
-                    return this._spfi.web.getFolderByServerRelativePath(folder.ServerRelativeUrl)
+                    return this._spfi.web.getFolderByServerRelativePath(folder.ServerRelativeUrl).select("*")
                         .expand("Files")
                         ()
                         .then((folderDetails: any) => {
                             return {
                                 ...folderDetails,
-                                Icon: folderDetails.Icon
                             };
                         });
                 });

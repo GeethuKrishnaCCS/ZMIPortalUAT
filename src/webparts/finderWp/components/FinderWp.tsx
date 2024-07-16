@@ -46,7 +46,24 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
 
   public async getDocFolder() {
     const getDocFOLDER = await this._service.getDocumentLibraryFolder(this.props.selectedDocument);
-    this.setState({ getDocFolder: getDocFOLDER });
+     // Assuming getDocFOLDER is an array and IconPicker is an array
+  const iconPickerArray = this.props.iconPicker;
+
+  // Ensure that getDocFOLDER and iconPickerArray have the same length or handle the difference
+  //const maxLength = Math.max(getDocFOLDER.length, iconPickerArray.length);
+
+  const updatedFolder = getDocFOLDER.map((folder: any, index: any) => {
+    // If iconPickerArray is shorter, use undefined for missing values
+    const icon = iconPickerArray[index];
+
+    // Append the icon to each folder object
+    return {
+      ...folder,
+      icon
+    };
+  });
+
+  this.setState({ getDocFolder: updatedFolder });
   }
 
   private async handleSearchQueryChange(newValue: string) {
@@ -153,7 +170,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
     const hasItemsInSelectedFolder = this.state.selectedFolder
       ? this.state.selectedFolder.subfolders.length > 0 || this.state.filesInSelectedFolder.length > 0
       : this.state.getDocFolder.length > 0 || this.state.getDocFiles.length > 0;
-
+   
     return (
       <section className={`${styles.finderWp} ${hasTeamsContext ? styles.teams : ''}`}>
         <div className={styles.borderBox}>
@@ -205,7 +222,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                     </ul>
                   </>
                 ) : (
-                  <>{"No items"}</>
+                  <div className={styles.noItems}>{"No items"}</div>
                 )
               ) : (
                 <>
@@ -214,6 +231,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                       <>
                         <ul>
                           {this.state.selectedFolder.subfolders.map((subfolder: any) => (
+                            <div style={{display:"flex"}}>                            
                             <DefaultButton
                               key={subfolder.UniqueId}
                               className={styles.button}
@@ -222,6 +240,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                             >
                               {subfolder.Name}
                             </DefaultButton>
+                            </div>
                           ))}
                         </ul>
                         <table className={styles.tableDiv}>
@@ -281,7 +300,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                       </>
                     )
                   ) : (
-                    <>{"No items"}</>
+                    <div className={styles.noItems}>{"No items"}</div>
                   )}
                 </>
               )}
