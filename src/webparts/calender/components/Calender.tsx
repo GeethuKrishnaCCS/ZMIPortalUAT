@@ -151,6 +151,9 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
   public render(): React.ReactElement<ICalenderProps> {
     return (
       <section className={`${styles.calender} `}>
+        <div  className={styles.heading}>
+              <div  className={styles.title}>{this.props.description}</div>
+          </div>
         <Calendar
           onChange={(dateObjects) => this.dateChange(dateObjects)}
           range
