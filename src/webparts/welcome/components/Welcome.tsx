@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from './Welcome.module.scss';
 import type { IWelcomeProps, IWelcomeState } from '../interfaces/IWelcomeProps';
-import { SearchBox } from '@fluentui/react';
+// import { SearchBox } from '@fluentui/react';
 import { PrimaryButton } from 'office-ui-fabric-react';
 import { WelcomeService } from '../services';
 
@@ -57,12 +57,12 @@ export default class Welcome extends React.Component<IWelcomeProps,IWelcomeState
                 className={styles.welcomebgimage}>
 
                 <div className={styles.oneheading}>{"Welcome,"} {this.state.displayName}{"!"}</div>
-                <div className={styles.searchdiv}>
+                {/* <div className={styles.searchdiv}>
                   <SearchBox
                     className={styles.searchbox}
                     placeholder="Search"
                   />
-                </div>
+                </div> */}
                 <div className={styles.buttondivOne}>
                   <PrimaryButton
                     text='Request Forms'
