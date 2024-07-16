@@ -22,7 +22,8 @@
     "description": { "default": "WelcomeEmployee description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "WelcomeEmployee"
+      "description": "WelcomeEmployee",
+      "WelcomeEmployeelistname" : "WelcomeEmployee"
     }
   }]
 }
