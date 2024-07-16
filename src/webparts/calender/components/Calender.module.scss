@@ -9,23 +9,72 @@
   }
 
   .title {
-    font-family: 'Poppins';
-    font-size: 48px;
+   
+    font-size: 35px;
     font-weight: 500;
     line-height: normal;
     text-align: left;
     color: #000000;
-    margin-bottom: 28px;
+    margin-bottom: 25px;
 
   }
   .border{
-    border: 1px solid #000000;
-    width: 70%;
+    border: 1px solid rgba(102, 102, 102, 1);
     border-collapse: collapse;
-    border-radius: 1em;
-    padding: 1em;
+    border-radius: 12px;
+    padding: 20px 10px 20px 20px;
     max-height: 15em;
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    div.flex{
+      align-items: center;
+      .dateleft{
+        padding-right: 20px;
+        border-right:1px solid rgba(168, 168, 168, 1) ;
+        font-size: 20px;
+        font-weight: lighter;
+        line-height: 30px;
+        color: #000000;
+        min-width: 70px;
+        flex: none;
+      }
+      .meetingdetail{
+        padding: 0 0px 0 20px;
+        flex-grow: 1;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        color: #000000;
+        justify-content: space-between;
+        .eventdsc{
+          font-size: 12px;
+          font-weight: bold;
+          
+        }
+        .eventdatetime{
+          font-size: 12px;
+          font-weight: 500;
+          margin-top: 10px;
+        }
+        .meetinglink{
+          color: white;
+          background: #0071CE;
+          padding: 9px 18px;
+          border-radius: 50px;
+          font-weight: 700;
+          font-size: 12px;
+          a{
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+    
   }
   div.flex {
     display: flex;
@@ -34,6 +83,7 @@
     padding: 30px 20px 30px 5px;
     width: 25%;
     border-right: 1px solid #c9c9c9;
+    
   }
   .rightcnt {
     padding: 30px 20px 20px 9px;
@@ -50,6 +100,43 @@
     background-color:$ms-color-themePrimary;
     border-radius: 1em;
   } 
-  
-  
+  .calendarwrap{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    div.customdatepicker{
+      width: 100%;
+      box-shadow: none;
+      border: 1px solid rgba(102, 102, 102, 1);
+      border-radius: 12px;
+      > div{
+        width: 100%;
+        > div{
+          width: 100%;
+          padding: 20px 15px;
+          > div 
+          {
+            div{
+              span{
+                font-size: 18px;
+              }
+            }
+            > div{
+              width: 100%;
+              >div{
+                width: 100%;
+                > div{
+                  div{
+                    font-size: 18px;
+                  }
+                }
+              }
+          }
+        
+           
+          }
+        }
+      }
+    }
+  }
 }
