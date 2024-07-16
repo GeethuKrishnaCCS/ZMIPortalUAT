@@ -213,9 +213,9 @@ export default class StackStyle extends React.Component<
               </tr>
             </table>
             <br />
-            <div className={styles.NavigationContainer}>
+            {/* <div className={styles.NavigationContainer}>
               <div className={styles.NavigationPageNumStyling}>{this.state.Count} out of {Math.ceil(this.props.listItems.length / 3)}</div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
