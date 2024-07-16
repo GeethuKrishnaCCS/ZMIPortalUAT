@@ -19,19 +19,29 @@ export default class Welcome extends React.Component<IWelcomeProps,IWelcomeState
     }
 
     this.getUser = this.getUser.bind(this);
+    this.getData = this.getData.bind(this);
     this.onClickHomePage = this.onClickHomePage.bind(this);
     
   }
 
   public async componentDidMount() {
     await this.getUser();
-
+    await this.getData();
   }
 
   public async getUser(){
     const getcurrentuser = await this._service.getCurrentUser();
     console.log('getcurrentuser: ', getcurrentuser);
     this.setState({ displayName : getcurrentuser.Title})
+  }
+
+  public async getData (){
+    const url: string = this.props.context.pageContext.web.serverRelativeUrl;
+    const getBannerDetails = await this._service.getListItems("WelcomeBanner", url)
+    console.log('getBannerDetails: ', getBannerDetails);    
+    // this.setState({listItems : getEmployee})
+    // console.log('listItems: ', this.state.listItems);
+
   }
 
   public onClickHomePage() {

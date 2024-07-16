@@ -155,7 +155,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
               <div  className={styles.title}>{this.props.description}</div>
           </div>
         <Calendar
-          onChange={(dateObjects) => this.dateChange(dateObjects)}
+          onChange={(dateObjects: any) => this.dateChange(dateObjects)}
           range
           rangeHover
         />

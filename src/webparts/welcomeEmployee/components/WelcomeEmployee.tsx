@@ -28,7 +28,7 @@ export default class WelcomeEmployee extends React.Component<IWelcomeEmployeePro
 
   public async getData (){
     const url: string = this.props.context.pageContext.web.serverRelativeUrl;
-    const getEmployee = await this._service.getListItems("WelcomeEmployee", url)
+    const getEmployee = await this._service.getListItems(this.props.WelcomeEmployeelistname, url)
     // console.log('getEmployee: ', getEmployee);
     this.setState({listItems : getEmployee})
     console.log('listItems: ', this.state.listItems);
