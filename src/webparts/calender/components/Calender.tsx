@@ -214,6 +214,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
         />
         {this.state.eventdataArray.length > 0 &&
           <div className={styles.border}>
+            <div className={styles.borderbox}>
             {this.state.eventdataArray.map((item: any, key: any) => {
               return (
                 <div className={styles.flex}>
@@ -237,6 +238,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
                 </div>
               )
             })}
+            </div>
           </div>
         }
         {this.state.eventdataArray.length === 0 &&
