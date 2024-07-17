@@ -29,7 +29,7 @@
     "@pnp/logging": "^3.23.0",
     "@pnp/queryable": "^3.23.0",
     "@pnp/sp": "^3.23.0",
-    "@pnp/spfx-controls-react": "3.18.1",
+    "@pnp/spfx-controls-react": "^3.18.1",
     "@pnp/spfx-property-controls": "^3.17.0",
     "moment": "^2.30.1",
     "office-ui-fabric-react": "^7.199.1",
