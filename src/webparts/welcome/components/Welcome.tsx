@@ -6,7 +6,7 @@ import { PrimaryButton } from 'office-ui-fabric-react';
 import { WelcomeService } from '../services';
 
 
-export default class Welcome extends React.Component<IWelcomeProps,IWelcomeState, {}> {
+export default class Welcome extends React.Component<IWelcomeProps, IWelcomeState, {}> {
   private _service: any;
 
   public constructor(props: IWelcomeProps) {
@@ -15,13 +15,14 @@ export default class Welcome extends React.Component<IWelcomeProps,IWelcomeState
 
     this.state = {
       displayName: "",
-    
+      bannerDetails: []
+
     }
 
     this.getUser = this.getUser.bind(this);
     this.getData = this.getData.bind(this);
-    this.onClickHomePage = this.onClickHomePage.bind(this);
-    
+    this.handleButtonClick = this.handleButtonClick.bind(this);
+
   }
 
   public async componentDidMount() {
@@ -29,31 +30,26 @@ export default class Welcome extends React.Component<IWelcomeProps,IWelcomeState
     await this.getData();
   }
 
-  public async getUser(){
+  public async getUser() {
     const getcurrentuser = await this._service.getCurrentUser();
-    console.log('getcurrentuser: ', getcurrentuser);
-    this.setState({ displayName : getcurrentuser.Title})
+    this.setState({ displayName: getcurrentuser.Title })
   }
 
-  public async getData (){
+  public async getData() {
     const url: string = this.props.context.pageContext.web.serverRelativeUrl;
     const getBannerDetails = await this._service.getListItems("WelcomeBanner", url)
-    console.log('getBannerDetails: ', getBannerDetails);    
-    // this.setState({listItems : getEmployee})
-    // console.log('listItems: ', this.state.listItems);
+    console.log('getBannerDetails: ', getBannerDetails);
+    this.setState({ bannerDetails: getBannerDetails });
 
   }
 
-  public onClickHomePage() {
-    const url: string = this.props.context.pageContext.web.serverRelativeUrl;
+  private handleButtonClick(url: string) {
     window.location.href = url;
-  };
- 
+  }
+
   public render(): React.ReactElement<IWelcomeProps> {
     const {
     } = this.props;
-
-
 
     return (
 
@@ -62,56 +58,28 @@ export default class Welcome extends React.Component<IWelcomeProps,IWelcomeState
           <div className={styles.msRow}>
             <div className={styles.msCol} >
               <div
-                // style={{ background: `url(${require("../assets/bgone.jpg")})` }}
                 style={{ backgroundImage: `url(${this.props.welcomeBannerImage})` }}
                 className={styles.welcomebgimage}>
 
-                <div className={styles.oneheading}>{"Welcome,"} {this.state.displayName}{"!"}</div>
+                <div className={styles.welcomeheading}>{"Welcome,"} {this.state.displayName}{"!"}</div>
                 {/* <div className={styles.searchdiv}>
                   <SearchBox
                     className={styles.searchbox}
                     placeholder="Search"
                   />
                 </div> */}
-                <div className={styles.buttondivOne}>
-                  <PrimaryButton
-                    text='Request Forms'
-                    className={styles.buttonstyles}
-                    onClick={this.onClickHomePage}
-                  />
-                  <PrimaryButton
-                    text='Templates'
-                    className={styles.buttonstyles}
-                     onClick={this.onClickHomePage}
-                  />
-                  <PrimaryButton
-                    text='Applications'
-                    className={styles.buttonstyles}
-                     onClick={this.onClickHomePage}
-                  />
-                  <PrimaryButton
-                    text='Employee Handbook'
-                    className={styles.buttonstyles}
-                     onClick={this.onClickHomePage}
-                  />
-                  <PrimaryButton
-                    text='Marketing Collateral'
-                    className={styles.buttonstyles}
-                  />
+
+                <div className={styles.buttoncontainer} >
+                  {this.state.bannerDetails.map((item: any) => (
+                    <PrimaryButton
+                      key={item.ID}
+                      text={item.Title}
+                      className={styles.buttonstyles}
+                      onClick={() => this.handleButtonClick(item.Link.Url)}
+                    />
+                  ))}
                 </div>
-                <div className={styles.buttondivTwo}>
-                  <PrimaryButton
-                    text='Poliicies & Procedures'
-                    className={styles.buttonstyles}
-                     onClick={this.onClickHomePage}
-                  />
-                  
-                  <PrimaryButton
-                    text='SOPs'
-                    className={styles.buttonstyles}
-                     onClick={this.onClickHomePage}
-                  />
-                </div>
+
 
               </div>
             </div>

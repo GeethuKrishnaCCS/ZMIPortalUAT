@@ -5,7 +5,7 @@ import { welcomeEmployeeService } from '../services';
 import StackStyle from './StackStyle';
 
 
-export default class WelcomeEmployee extends React.Component<IWelcomeEmployeeProps,IWelcomeEmployeeState, {}> {
+export default class WelcomeEmployee extends React.Component<IWelcomeEmployeeProps, IWelcomeEmployeeState, {}> {
 
   private _service: any;
   public constructor(props: IWelcomeEmployeeProps) {
@@ -15,7 +15,7 @@ export default class WelcomeEmployee extends React.Component<IWelcomeEmployeePro
     this.state = {
 
       listItems: [],
-    
+
 
     }
     this.getData = this.getData.bind(this);
@@ -26,12 +26,10 @@ export default class WelcomeEmployee extends React.Component<IWelcomeEmployeePro
     await this.getData();
   }
 
-  public async getData (){
+  public async getData() {
     const url: string = this.props.context.pageContext.web.serverRelativeUrl;
     const getEmployee = await this._service.getListItems(this.props.WelcomeEmployeelistname, url)
-    // console.log('getEmployee: ', getEmployee);
-    this.setState({listItems : getEmployee})
-    console.log('listItems: ', this.state.listItems);
+    this.setState({ listItems: getEmployee })
 
   }
 
@@ -45,7 +43,7 @@ export default class WelcomeEmployee extends React.Component<IWelcomeEmployeePro
         <div>
           <div className={styles.heading}>{"Welcome to ZMI Holdings"}</div>
           <div className={styles.subheading}>{"Welcome new colleague to the team"}</div>
-          <StackStyle listItems={this.state.listItems} context={this.props.context} /> 
+          <StackStyle listItems={this.state.listItems} context={this.props.context} />
         </div>
       </section>
     );

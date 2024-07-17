@@ -87,54 +87,6 @@ export default class StackStyle extends React.Component<
   }
 
 
-  // public componentDidMount() {
-  //   console.log(' this.props.listItems: ',  this.props.listItems);
-  //   const array: any[] = [];
-  //   let count = 0;
-  //   const min = 0;
-  //   const max = min + 4;
-  //   this.props.listItems.map(Post => {      
-  //     console.log('Post: ', Post);
-  //     count = count + 1;
-  //     if (count > min && count < max) {
-  //       array.push(Post);
-  //       console.log('array: ', array);
-  //     }
-  //   });
-  //   this.setState({ RenderedNews: array, Next: 3, Count: 1, UpdateCount: 0 });
-  //   console.log('RenderedNews: ', this.state.RenderedNews);
-  // }
-
-  // public componentDidUpdate(prevProps: StylingProps) {
-  //   const array: any[] = [];
-  //   let count = 0;
-  //   const min = 0;
-  //   const max = min + 5;
-  //   if (prevProps.listItems !== this.props.listItems) {
-
-  //     this.props.listItems.map(Post => {
-  //       count = count + 1;
-  //       if (count > min && count < max) {
-  //         array.push(Post);
-  //       }
-  //     });
-  //     this.setState({ RenderedNews: array, Next: 3, Count: 1, UpdateCount: 0 });
-  //     return true;
-  //   }
-  //   else if (this.props.listItems.length > 0 && this.props.listItems.length > this.state.RenderedNews.length && this.state.UpdateCount < 4) {
-  //     this.props.listItems.map(Post => {
-  //       count = count + 1;
-  //       if (count > min && count < max) {
-  //         array.push(Post);
-  //       }
-  //     });
-  //     this.setState({ RenderedNews: array, Next: 3, Count: 1, UpdateCount: this.state.UpdateCount + 1 });
-
-  //     return true;
-  //   }
-  // }
-
-
   public render(): React.ReactElement<StylingProps> {
     const backicon: IIconProps = { iconName: 'ChevronLeftSmall' };
     const nexticon: IIconProps = { iconName: 'ChevronRightSmall' };
@@ -145,88 +97,49 @@ export default class StackStyle extends React.Component<
       <div className={styles.eventNews}>
         <div className={styles.StackStyle}>
           <div className={styles.StackStyleContainer}>
-            {/* <div className={styles.heading}> */}
-            {/* <div className={styles.title}>{this.props.description}</div> */}
-            {/* </div> */}
-            <table>
-              <tr>
-                <td> <IconButton iconProps={backicon}
-                  onClick={() => this.Back(this.props.listItems)} disabled={this.state.Next === 3}
-                  //  style={{ boxShadow: '0 1px 4px rgb(0 0 0 / 30%), 0 0 40px rgb(0 0 0 / 10%)'}}
-                  className={styles.NavigationLeftButtonStyling}
-                  ariaLabel={"Back"} /></td>
-                <td>
+
+            <div className={styles.teamcardwrap}>
+              <IconButton iconProps={backicon}
+                onClick={() => this.Back(this.props.listItems)} disabled={this.state.Next === 3}
+                className={styles.NavigationLeftButtonStyling}
+                ariaLabel={"Back"}
+              />
+              {this.state.RenderedNews.length > 0 ? (
+                <div className={styles.teammembers}>
                   {this.state.RenderedNews.map((Post, key) => {
                     i = i + 1;
+                    const truncatedDescription = Post.Description.length > 180 ? `${Post.Description.slice(0, 180)}...` : Post.Description;
                     return (
-                      <div
-                        className={styles.NewsContainer}
-                      // style={{ boxShadow: 'rgb(0 0 0 / 13%) 0px 1.6px 3.6px 0px, rgb(0 0 0 / 11%) 0px 0.3px 0.9px 0px', marginRight: `${i === 3 ? '0px' : '7px'}` }}
-                      >
+                      <div className={styles.NewsContainer}>
                         <div className={styles.ImgContainer}>
                           <img src={Post.ImageUrl.Url} className={styles.Image} />
                         </div>
                         <div className={styles.NewsBody}>
                           <div className={styles.EmployeeName}>{Post.Name}</div>
-                          <div className={styles.TitleContainer}>
-                            <span className={styles.TitleStyling} >
-                              {Post.Description ? Post.Description.substring(0, 182) + '…' : '…'}
-                            </span>
+                          <div>
+                            <p className={styles.TitleStyling} title={Post.Description}>
+                              {truncatedDescription}
+                            </p>
                           </div>
-                          {/* <div className={styles.DescriptionContainer}>
-                            {Post.Description ? Post.Description.substring(0, 182) + '…' : '…'}
-                          </div> */}
-                          {/* <div className={styles.footer}>
-                          <div className={styles.AuthorContainer}>
-                            {this.props.AuthorToggle ? (<></>) : (<div style={{ fontWeight: "bold" }}> {Post.Author}, <br /> </div>)}{" "}
-                            {this.props.DateToggle ? (<></>) : (<div style={{ fontWeight: "bold" }}> {this.formatDateTime(Post.Created)} </div>)}{" "}
-
-                          </div>
-                        </div> */}
-
-
-                          {/* <div className={styles.IconContainer}>
-                      <Icon className={iconClass} iconName="Like"></Icon>
-                      <label className={styles.IconLabelStyling}>
-                        {Post.Likes}
-                      </label>
-                      <Icon
-                        style={{ marginLeft: "10px" }}
-                        className={iconClass}
-                        iconName="Comment"
-                      ></Icon>
-                      <label className={styles.IconLabelStyling}>
-                        {Post.Comments}
-                      </label>
-                    </div> */}
                         </div>
                       </div>
                     );
-
-                  })}</td>
-                <td><IconButton iconProps={nexticon}
-                  onClick={() => this.Next(this.props.listItems)}
-                  disabled={this.state.Next >= this.props.listItems.length}
-                  // style={{ boxShadow: '0 1px 4px rgb(0 0 0 / 30%), 0 0 40px rgb(0 0 0 / 10%)' }}
-                  className={styles.NavigationRightButtonStyling}
-                  ariaLabel={"Next"} /></td>
-              </tr>
-            </table>
-            <br />
-            {/* <div className={styles.NavigationContainer}>
-              <div className={styles.NavigationPageNumStyling}>{this.state.Count} out of {Math.ceil(this.props.listItems.length / 3)}</div>
-            </div> */}
+                  })}
+                </div>
+              ) : (
+                <div className={styles.NewsContainer}>
+                  <p>No items to display</p>
+                </div>
+              )}
+              <IconButton iconProps={nexticon}
+                onClick={() => this.Next(this.props.listItems)}
+                disabled={this.state.Next >= this.props.listItems.length}
+                className={styles.NavigationRightButtonStyling}
+                ariaLabel={"Next"} />
+            </div>
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
-
 
     );
   }

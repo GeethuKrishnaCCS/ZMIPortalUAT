@@ -56,18 +56,24 @@
 
 .welcomebgimage {
   background-size: cover;
-  border-radius: 10px;
-  height: 500px;
+  // border-radius: 10px;
+  height: 585px;
   width: 100%;
   background-color: rgb(2, 6, 29);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.oneheading {
+.welcomeheading {
   color: #fff;
-  font-size: xxx-large;
-  font-weight: bolder;
-  padding-top: 140px;
+  font-size: 80px;
+  font-weight: bold;
+  // padding-top: 140px;
   text-align: center;
+  line-height: 120px;
+  margin-bottom: 18px;
 }
 
 .searchdiv {
@@ -95,8 +101,47 @@
 }
 
 
-.buttonstyles {
-  background: dodgerblue;
-    border: 1px solid dodgerblue;
-    border-radius: 12pc;
+
+
+.buttoncontainer {
+  max-width: 736px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 0px auto;
+  flex-wrap: wrap;
+
+  .buttonstyles {
+    background: #0071ce;
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    // line-height: 21px;
+    padding: 7px 15px;
+    white-space: nowrap;
+    height: auto;
+    min-width: inherit;
+
+    span {
+      line-height: 21px;
+      font-weight: 500;
+      margin: 0;
+    }
+  }
+
+
+}
+
+
+@media screen and (max-width: 767px) {
+  .welcomeheading {
+
+    font-size: 40px;
+    line-height: 60px;
+
+  }
+
+ 
 }
