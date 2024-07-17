@@ -26,7 +26,7 @@
    .borderbox{
     margin: 5px;
       max-height: 6em;
-      min-height: 4em;
+      min-height: 6em;
       overflow-y: auto;
       display: flex;
     flex-direction: column;
@@ -38,8 +38,8 @@
         padding-right: 20px;
         border-right:1px solid rgba(168, 168, 168, 1) ;
         font-family: var(--fontFamilyCustomFont300,var(--fontFamilyBase));
-        font-size: 20px;
-        line-height: 30px;
+        font-size: 15px;
+        line-height: 20px;
         color: #000000;
         min-width: 70px;
         flex: none;
