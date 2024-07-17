@@ -117,6 +117,7 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
                 iconProps={ChevronUp}
                 ariaLabel="Scroll up"
                 onClick={this.handleScrollUp}
+                disabled={this.state.currentIndex === 0}
                 className={styles.customIconButton}
               />
             </div>
@@ -139,18 +140,7 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
                         item.type === 'Wedding Anniversary' ? `Wedding Anniversary on ${moment(item.DateOfWedding).format('MMM DD')}` : ''}
                     </div>
 
-                 
-                    {/* <Persona
-                      size={PersonaSize.size56}
-                      imageUrl={item.Employee.ImageUrl} 
-                      text={item.Employee.Title}
-                      secondaryText={item.type === 'Birthday' ? `Birthday on ${moment(item.DateOfBirth).format('MMM DD')}` :
-                        item.type === 'Work Anniversary' ? `Work Anniversary on ${moment(item.DateOfJoining).format('MMM DD')}` :
-                          item.type === 'Wedding Anniversary' ? `Wedding Anniversary on ${moment(item.DateOfWedding).format('MMM DD')}` : ''}
-                    /> */}
 
-
-                    
                   </div>
                 ))
               ) : (
@@ -163,6 +153,7 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
                 iconProps={ChevronDown}
                 ariaLabel="Scroll down"
                 onClick={this.handleScrollDown}
+                disabled={this.state.currentIndex >= this.state.greetings.length - this.props.NoOfItemDisplay}
                 className={styles.customIconButton}
               />
             </div>
