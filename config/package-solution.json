@@ -3,10 +3,10 @@
   "solution": {
     "name": "zmi-components-client-side-solution",
     "id": "f9877f63-d774-43c6-9c2d-c57ccb1e573b",
-    "version": "1.0.0.6",
+    "version": "1.0.0.7",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
-    "isDomainIsolated": true,
+    "isDomainIsolated": false,
     "developer": {
       "name": "",
       "websiteUrl": "",
