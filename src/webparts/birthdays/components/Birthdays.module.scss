@@ -2,7 +2,7 @@
 
 .birthdays {
   overflow: hidden;
-  padding: 1em;
+  // padding: 1em;
   color: "[theme:bodyText, default: #323130]";
   color: var(--bodyText);
 
@@ -38,13 +38,13 @@
   background: rgb(236, 246, 255);
   border-radius: 20px;
   // box-shadow: 0 3.2px 7.2px 0 rgba(0, 0, 0, .132), 0 0.6px 1.8px 0 rgba(0, 0, 0, .108);
- 
+
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 588px;
-  
+  // min-height: 588px;
+
 }
 
 
@@ -55,6 +55,7 @@
   font-weight: 500;
   margin-bottom: 40px;
   line-height: 72px;
+  font-family: var(--fontFamilyCustomFont500, var(--fontFamilyBase));
 }
 
 .bdayHeader {
@@ -67,33 +68,37 @@
   margin-bottom: 35px;
 }
 
-.uparrow, .downarrow  {
+.uparrow,
+.downarrow {
   // border: 1px solid green;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  button{
-    span{
-      i{
+  button {
+    span {
+      i {
         font-size: 24px;
         color: #6d6e71;
       }
     }
-    &:hover{
-      span{
-        i{
+
+    &:hover {
+      span {
+        i {
           color: #0071ce;
         }
       }
     }
   }
 }
-.uparrow{
+
+.uparrow {
   border-bottom: 1px solid rgba(0, 0, 0, .1);
 }
-.downarrow{
+
+.downarrow {
   border-top: 1px solid rgba(0, 0, 0, .1);
 }
 
@@ -107,16 +112,17 @@
 }
 
 .personaDiv {
-  
- padding: 10px;
+
+  padding: 10px;
 }
 
 .employee {
   display: flex;
-  flex-direction: column;
-  gap: 22px;
-  padding: 30px  22px;
-  
+    flex-direction: column;
+    height: 336px;
+    overflow: auto;
+    padding: 30px 22px;
+    justify-content: space-between;
 }
 
 .customIconButton:hover {
@@ -127,6 +133,15 @@
   background: none;
 }
 
+.secondarytextstyle{
+  bottom: 20px;
+  margin-left: 68px;
+  position: relative;
+  font-size: 12px;
+  line-height: 16px;
+  color: #666;
+}
+
 
 @media screen and (max-width: 767px) {
   .defaultBirthdayLabel {
@@ -135,7 +150,7 @@
     margin-bottom: 20px;
   }
 
-  .birthdays{
+  .birthdays {
     padding: 0;
   }
 }

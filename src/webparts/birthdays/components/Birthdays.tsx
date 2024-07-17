@@ -5,7 +5,7 @@ import { IBirthdaysProps, IBirthdaysState } from '../interfaces/IBirthdaysProps'
 import { BirthdaysService } from '../services';
 
 // import { Person } from '@microsoft/mgt-react';
-import { IIconProps, IconButton, } from '@fluentui/react';
+import { IIconProps, IconButton } from '@fluentui/react';
 import { Person } from '@microsoft/mgt-react/dist/es6/spfx';
 import * as moment from 'moment';
 // import { avatarType } from '@microsoft/mgt-spfx';
@@ -20,7 +20,6 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
     this._service = new BirthdaysService(this.props.context);
 
     this.state = {
-
       listItems: [],
       today: "",
       // bdayGreetings: [],
@@ -28,8 +27,8 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
       greetings: [],
       currentIndex: "", // Track the current index of displayed items
       itemsPerPage: this.props.NoOfItemDisplay !== "" ? parseInt(this.props.NoOfItemDisplay) : 3,
-
     }
+
     this.getData = this.getData.bind(this);
     this.handleScrollUp = this.handleScrollUp.bind(this);
     this.handleScrollDown = this.handleScrollDown.bind(this);
@@ -129,15 +128,29 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
 
                     <Person
                       personQuery={item.Employee.Title}
-                      view="oneline"
+                      view="twolines"
                       personCardInteraction='hover'
                       avatarType='photo'
                       avatarSize='large'
+                      line2Property='hiiii'
                     />
-                    <div>{item.type === 'Birthday' ? `Birthday on ${moment(item.DateOfBirth).format('MMM DD')}` :
+                    <div className={styles.secondarytextstyle}>{item.type === 'Birthday' ? `Birthday on ${moment(item.DateOfBirth).format('MMM DD')}` :
                       item.type === 'Work Anniversary' ? `Work Anniversary on ${moment(item.DateOfJoining).format('MMM DD')}` :
                         item.type === 'Wedding Anniversary' ? `Wedding Anniversary on ${moment(item.DateOfWedding).format('MMM DD')}` : ''}
                     </div>
+
+                 
+                    {/* <Persona
+                      size={PersonaSize.size56}
+                      imageUrl={item.Employee.ImageUrl} 
+                      text={item.Employee.Title}
+                      secondaryText={item.type === 'Birthday' ? `Birthday on ${moment(item.DateOfBirth).format('MMM DD')}` :
+                        item.type === 'Work Anniversary' ? `Work Anniversary on ${moment(item.DateOfJoining).format('MMM DD')}` :
+                          item.type === 'Wedding Anniversary' ? `Wedding Anniversary on ${moment(item.DateOfWedding).format('MMM DD')}` : ''}
+                    /> */}
+
+
+                    
                   </div>
                 ))
               ) : (
