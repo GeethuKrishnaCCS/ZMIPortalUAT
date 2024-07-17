@@ -68,7 +68,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
           else if(month === 2 ){monthtype = "nd"}
           else if(month === 3 ){monthtype = "rd"}
           else{monthtype = "th"}
-          recurrencedays = "("+dayOfMonth +daytype +" day of "+ month +monthtype +" month"+")"
+          recurrencedays = "("+dayOfMonth +daytype +" day of "+ month +monthtype +" month)"
         }
         else if(recurrencetype === "weekly"){
           recurrencedaysArray = [];

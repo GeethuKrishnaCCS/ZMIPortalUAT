@@ -106,7 +106,8 @@
     }
 
     .title {
-      font-family: var(--fontFamilyCustomFont500,var(--fontFamilyBase));
+      font-family: var(--fontFamilyCustomFont600,var(--fontFamilyBase));
+      font-weight: 600;
       font-size: 48px;
       line-height: 72px;
       text-align: left;
