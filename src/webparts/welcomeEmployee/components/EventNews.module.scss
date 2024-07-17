@@ -217,12 +217,11 @@
 
     .NewsContainer {
       // height: 380px;
-      width: calc(33.5% - 15px);
-      float: left;
-      border: 1px solid rgb(236, 246, 255);
+      width: 33.33%;
+      // border: 1px solid rgb(236, 246, 255);
       border-radius: 10px;
       background-color: rgb(236, 246, 255);
-      margin-left: 16px;
+      // margin-left: 16px;
 
       &:first-child {
         margin-left: 0px;
@@ -261,6 +260,7 @@
       font-weight: 700;
       line-height: 24px;
       margin-bottom: 16px;
+      font-family: var(--fontFamilyCustomFont500,var(--fontFamilyBase));
     }
 
     // .TitleContainer {
@@ -277,6 +277,7 @@
       font-weight: 500;
       line-height: 22.5px;
       // display: block;
+      font-family: var(--fontFamilyCustomFont500,var(--fontFamilyBase));
 
     }
 
@@ -332,7 +333,7 @@
         position: absolute;
         width: 48px;
         height: 48px;
-        top: 203px;
+        top: 201px;
         // margin-top: -24px;
         background: rgba(20, 20, 20, 0.65);
 
@@ -353,7 +354,7 @@
         position: absolute;
         width: 48px;
         height: 48px;
-        top: 203px;
+        top: 201px;
         // margin-top: -24px;
         background: rgba(20, 20, 20, 0.65);
 
