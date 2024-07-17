@@ -58,9 +58,9 @@
 .doclibraryHeading {
   color: black;
   margin-left: 5%;
-  font-family: var(--fontFamilyCustomFont1500, var(--FontFamilyBase));
+  font-family: var(--fontFamilyCustomFont600, var(--FontFamilyBase));
   font-size: 50px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: normal;
   text-align: left;
   margin-bottom: 28px;
@@ -69,7 +69,7 @@
 .breadcrumpHeading {
   font-size: medium;
   color: #5b915b;
-  font-family: var(--fontFamilyCustomFont1500, var(--FontFamilyBase));
+  font-family: var(--fontFamilyCustomFont600, var(--FontFamilyBase));
 }
 
 .breadCrumbDiv {
@@ -82,7 +82,7 @@
   height: 40px;
   width: 93%;
   margin-left: 5%;
-  font-family: var(--fontFamilyCustomFont1500, var(--FontFamilyBase));
+  font-family: var(--fontFamilyCustomFont600, var(--FontFamilyBase));
 }
 
 .tableContainer {
@@ -90,7 +90,7 @@
   /* Set your desired max height here */
   overflow-y: auto;
   margin-left: 5%;
-  font-family: var(--fontFamilyCustomFont1500, var(--FontFamilyBase));
+  font-family: var(--fontFamilyCustomFont600, var(--FontFamilyBase));
 }
 
 .tableDiv {
@@ -99,7 +99,7 @@
 }
 
 .searchItemDiv {
-  font-family: var(--fontFamilyCustomFont1500, var(--FontFamilyBase));
+  font-family: var(--fontFamilyCustomFont600, var(--FontFamilyBase));
   margin-left: 5%;
 }
 
