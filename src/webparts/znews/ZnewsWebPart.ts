@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import { type IPropertyPaneConfiguration, PropertyPaneToggle, PropertyPaneTextField } from '@microsoft/sp-property-pane';
+import {type IPropertyPaneConfiguration, PropertyPaneToggle, PropertyPaneTextField} from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'ZnewsWebPartStrings';
 import Znews from './components/Znews';
 import { IZnewsProps } from './components/IZnewsProps';
-import { PropertyFieldSitePicker } from '@pnp/spfx-property-controls';
+import { IPropertyFieldSite, PropertyFieldSitePicker } from '@pnp/spfx-property-controls';
 export default class ZnewsWebPart extends BaseClientSideWebPart<IZnewsProps> {
 
   public render(): void {
@@ -32,9 +32,8 @@ export default class ZnewsWebPart extends BaseClientSideWebPart<IZnewsProps> {
     propertyPath: string,
     oldValue: unknown,
     newValue: any
-  ): Promise<void> {
-    console.log(propertyPath, oldValue, newValue)
-    /* if (propertyPath === "sites") {
+  ):Promise<void> {
+    if (propertyPath === "sites") {
        const value: IPropertyFieldSite[] = newValue as IPropertyFieldSite[];
        if (value  && !value.length) {
          this.properties.Site = [];
@@ -45,7 +44,7 @@ export default class ZnewsWebPart extends BaseClientSideWebPart<IZnewsProps> {
         this.context.propertyPane.refresh();
         return;
       }
-    } */
+    }
   }
   public async getSelectedListFields() {
     if (this.properties.Site) {
@@ -53,7 +52,7 @@ export default class ZnewsWebPart extends BaseClientSideWebPart<IZnewsProps> {
     }
   }
   public onChangeProperty = (changeType: string, oldValue: any, newValue: any[]): void => {
-    this.getSelectedListFields();
+        this.getSelectedListFields();
   }
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
@@ -91,13 +90,13 @@ export default class ZnewsWebPart extends BaseClientSideWebPart<IZnewsProps> {
                 }),
                 PropertyFieldSitePicker('sites', {
                   label: 'Select sites',
-                  context: this.context as any,
                   initialSites: this.properties.sites,
+                  context: this.context as any,
                   deferredValidationTime: 200,
                   multiSelect: true,
                   onPropertyChange: this.onPropertyPaneFieldChanged,
                   properties: this.properties,
-                  key: 'sitesFieldId',
+                  key: 'sitesFieldId'
                 })
               ]
             }
