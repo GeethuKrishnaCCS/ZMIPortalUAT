@@ -19,6 +19,7 @@ export class BaseService {
     }
     public async getevents(context: any, start: string, end: string): Promise<any> {
         const filterQuery = `start/dateTime ge '${start}' and start/dateTime le '${end}'`; // Use the correct field name in your query
+        
         const client = await context.msGraphClientFactory.getClient("3");
         const response = await client
             .api('me/events')
