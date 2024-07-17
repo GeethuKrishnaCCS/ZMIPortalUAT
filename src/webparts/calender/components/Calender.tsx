@@ -41,7 +41,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
         const endDate = moment(new Date(eventdata[i].end.dateTime)).format("DD/MMM/YYYY");
         const starttime = moment(new Date(eventdata[i].start.dateTime)).format("hh:mm A");
         const endtime = moment(new Date(eventdata[i].end.dateTime)).format("hh:mm A");
-        if(recurrence!=null){
+        if(recurrence!== null){
           rstartDate = moment(new Date(recurrence.range.startDate)).format("MMM-DD");
           rendDate = moment(new Date(recurrence.range.endDate)).format("MMM-DD");
           recurrencetype = recurrence.pattern.type;
@@ -81,8 +81,8 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
         }   
       }     
         const eventdatavalue: any = {
-          startDate:recurrence!=null?rstartDate: startDate,
-          endDate: recurrence!=null?rendDate:endDate,
+          startDate:recurrence!== null?rstartDate: startDate,
+          endDate: recurrence!== null?rendDate:endDate,
           subject: eventdata[i].subject,
           startTime: starttime,
           endTime: endtime,
@@ -134,7 +134,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
         const starttime = moment(new Date(eventdata[i].start.dateTime)).format("hh:mm A");
         const endtime = moment(new Date(eventdata[i].end.dateTime)).format("hh:mm A");
         const recurrence = eventdata[i].recurrence;
-        if(recurrence!=null){
+        if(recurrence!== null){
           rstartDate = moment(new Date(recurrence.range.startDate)).format("MMM-DD");
           rendDate = moment(new Date(recurrence.range.endDate)).format("MMM-DD");
           recurrencetype = recurrence.pattern.type;
@@ -161,7 +161,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
           else if(month === 2 ){monthtype = "nd"}
           else if(month === 3 ){monthtype = "rd"}
           else{monthtype = "th"}
-          recurrencedays = "("+dayOfMonth +daytype +" day of "+ month +monthtype +" month"+")"
+          recurrencedays = "("+dayOfMonth +daytype +" day of "+ month +monthtype +" month)"
         }
         else if(recurrencetype === "weekly"){
           recurrencedaysArray = [];
@@ -174,8 +174,8 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
         }   
       }     
         const eventdatavalue: any = {
-          startDate:recurrence!=null?rstartDate: startDate,
-          endDate: recurrence!=null?rendDate:endDate,
+          startDate:recurrence!== null?rstartDate: startDate,
+          endDate: recurrence!== null?rendDate:endDate,
           subject: eventdata[i].subject,
           startTime: starttime,
           endTime: endtime,
@@ -218,7 +218,8 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
             {this.state.eventdataArray.map((item: any, key: any) => {
               return (
                 <div className={styles.flex}>
-                  <div className={styles.dateleft}>{item.startDate}-<br></br>{item.endDate}</div>
+                  {item.recurrence !== null && <div className={styles.dateleft}>{item.startDate}-<br></br>{item.endDate}</div>}
+                  {item.recurrence === null && <div className={styles.dateleft}>{item.startDate}</div>}
                   <div className={styles.meetingdetail}>
                     <div>
                     {item.recurrence !== null && <div className={styles.eventdsc}>Recurring Events</div>}
