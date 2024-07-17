@@ -14,12 +14,12 @@ export interface IWelcomeProps {
 export interface IWelcomeWebPartProps {
   description: string;
   welcomeBannerImage: string;
-
+ 
 }
 
 
 export interface IWelcomeState {
   displayName: string;
- 
+  bannerDetails: any;
 
 }

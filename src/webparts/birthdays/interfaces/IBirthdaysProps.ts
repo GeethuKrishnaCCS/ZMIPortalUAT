@@ -28,7 +28,22 @@ export interface IBirthdaysState {
   // bdayGreetings: any;
   // workGreetings: any;
   greetings: any;
-  scrollIndex: any;
+  currentIndex: any; // Track the current index of displayed items
+  itemsPerPage: any;
+
 }
+
+
+// export interface IBirthdaysState {
+//   listItems: any[];
+//   today: string;
+//   greetings: any[];
+//   scrollIndex: number;
+//   RenderedGreetings: any[]; // Add this line
+//   Next: number; // Add this line
+//   Count: number; // Add this line
+//   UpdateCount: number;
+//   Reload: boolean;
+// }
 
 

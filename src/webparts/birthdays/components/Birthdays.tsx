@@ -26,10 +26,13 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
       // bdayGreetings: [],
       // workGreetings: [],
       greetings: [],
-      scrollIndex: 0,
+      currentIndex: "", // Track the current index of displayed items
+      itemsPerPage: this.props.NoOfItemDisplay !== "" ? parseInt(this.props.NoOfItemDisplay) : 3,
 
     }
     this.getData = this.getData.bind(this);
+    this.handleScrollUp = this.handleScrollUp.bind(this);
+    this.handleScrollDown = this.handleScrollDown.bind(this);
 
   }
 
@@ -37,20 +40,12 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
     await this.getData();
   }
 
-  public async componentDidUpdate(prevProps: IBirthdaysProps) {
-    if (prevProps.NoOfItemDisplay !== this.props.NoOfItemDisplay) {
-      // Adjust the scroll index if the number of items to display changes
-      this.setState((prevState) => ({
-        scrollIndex: Math.min(prevState.scrollIndex, Math.max(prevState.greetings.length - this.props.NoOfItemDisplay, 0)),
-      }));
-    }
-  }
 
 
   public async getData() {
     const url: string = this.props.context.pageContext.web.serverRelativeUrl;
     const listItem = await this._service.getItemSelectExpand(url, this.props.listName, "*, Employee/ID, Employee/Title", "Employee");
-    console.log('listItem: ', listItem);
+    // console.log('listItem: ', listItem);
     this.setState({ listItems: listItem });
 
     const greetings: any[] = [];
@@ -86,90 +81,81 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
       greetings: greetings,
       today: todayDate,
     }, () => {
-      console.log('this.state.greetings: ', this.state.greetings);
-
-      // this.state.greetings.forEach((greeting: any) => {
-      //   console.log('Email: ', greeting.employeeInfo.Email);
-      // });
     });
   }
 
-  public handleScrollUp = () => {
-    this.setState((prevState) => ({
-      scrollIndex: Math.max(prevState.scrollIndex - 1, 0),
-    }));
-  };
 
-  public handleScrollDown = () => {
-    this.setState((prevState) => ({
-      scrollIndex: Math.min(prevState.scrollIndex + 1, Math.max(prevState.greetings.length - this.props.NoOfItemDisplay, 0)),
-    }));
-  };
+  private handleScrollUp() {
+    const newIndex = Math.max(this.state.currentIndex - this.state.itemsPerPage, 0);
+    this.setState({ currentIndex: newIndex });
+    console.log('upcurrentIndex: ', this.state.currentIndex);
+  }
+
+
+  private handleScrollDown() {
+    const newIndex = Math.min(this.state.currentIndex + this.state.itemsPerPage, this.state.greetings.length - 1);
+    this.setState({ currentIndex: newIndex });
+    console.log('downcurrentIndex: ', this.state.currentIndex);
+  }
+
 
   public render(): React.ReactElement<IBirthdaysProps> {
-    const {
-
-      hasTeamsContext
-    } = this.props;
+    const { hasTeamsContext } = this.props;
     const ChevronUp: IIconProps = { iconName: 'ChevronUp' };
     const ChevronDown: IIconProps = { iconName: 'ChevronDown' };
 
+    const { greetings, currentIndex, itemsPerPage } = this.state;
+    const displayedItems = greetings.slice(currentIndex, currentIndex + itemsPerPage);
+
     return (
       <section className={`${styles.birthdays} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <div>
-            <div className={styles.defaultBirthdayLabel}>{"Anniversaries"}</div>
-            <div className={styles.box}>
-              <div className={styles.uparrow}>
-                <IconButton
-                  iconProps={ChevronUp}
-                  ariaLabel="Scroll up"
-                  onClick={this.handleScrollUp}
-                  disabled={this.state.scrollIndex === 0}
-                  className={styles.customIconButton}
-                />
-              </div>
-              <div className={styles.hr}></div>
-              <div className={styles.employee}>
-                {this.state.greetings.length > 0 ? (
-                  this.state.greetings.slice(this.state.scrollIndex, this.state.scrollIndex + this.props.NoOfItemDisplay).map((item: any, index: any) => (
-                    <div key={index} className={styles.personaDiv}>
 
-                      <Person
-                        personQuery={item.Employee.Title}
-                        view="oneline"
-                        // view="twolines"
-                        personCardInteraction='hover'
-                        avatarType='photo'
+        <div>
+          <div className={styles.defaultBirthdayLabel}>{"Anniversaries"}</div>
+          <div className={styles.box}>
+            <div className={styles.uparrow}>
+              <IconButton
+                iconProps={ChevronUp}
+                ariaLabel="Scroll up"
+                onClick={this.handleScrollUp}
+                className={styles.customIconButton}
+              />
+            </div>
 
-                      //   line2Property ={item.type === 'Birthday' ? `Birthday on ${moment(item.DateOfBirth).format('MMM DD')}` : 
-                      // item.type === 'Work Anniversary' ? `Work Anniversary on ${moment(item.DateOfJoining).format('MMM DD')}` :
-                      // item.type === 'Wedding Anniversary' ? `Wedding Anniversary on ${moment(item.DateOfWedding).format('MMM DD')}` : ''}
-                      />
-                      <div>{item.type === 'Birthday' ? `Birthday on ${moment(item.DateOfBirth).format('MMM DD')}` :
-                        item.type === 'Work Anniversary' ? `Work Anniversary on ${moment(item.DateOfJoining).format('MMM DD')}` :
-                          item.type === 'Wedding Anniversary' ? `Wedding Anniversary on ${moment(item.DateOfWedding).format('MMM DD')}` : ''}
-                      </div>
+            <div className={styles.employee}>
+              {displayedItems.length > 0 ? (
+                displayedItems.map((item: any, index: any) => (
+                  <div key={index} >
 
+                    <Person
+                      personQuery={item.Employee.Title}
+                      view="oneline"
+                      personCardInteraction='hover'
+                      avatarType='photo'
+                      avatarSize='large'
+                    />
+                    <div>{item.type === 'Birthday' ? `Birthday on ${moment(item.DateOfBirth).format('MMM DD')}` :
+                      item.type === 'Work Anniversary' ? `Work Anniversary on ${moment(item.DateOfJoining).format('MMM DD')}` :
+                        item.type === 'Wedding Anniversary' ? `Wedding Anniversary on ${moment(item.DateOfWedding).format('MMM DD')}` : ''}
                     </div>
-                  ))
-                ) : (
-                  <div>No Anniversaries Today</div>
-                )}
-              </div>
-              <div className={styles.hr}></div>
-              <div className={styles.downarrow}>
-                <IconButton
-                  iconProps={ChevronDown}
-                  ariaLabel="Scroll down"
-                  onClick={this.handleScrollDown}
-                  disabled={this.state.scrollIndex >= this.state.greetings.length - this.props.NoOfItemDisplay}
-                  className={styles.customIconButton}
-                />
-              </div>
+                  </div>
+                ))
+              ) : (
+                <div>No Anniversaries Today</div>
+              )}
+            </div>
+
+            <div className={styles.downarrow}>
+              <IconButton
+                iconProps={ChevronDown}
+                ariaLabel="Scroll down"
+                onClick={this.handleScrollDown}
+                className={styles.customIconButton}
+              />
             </div>
           </div>
         </div>
+
       </section>
     );
   }
