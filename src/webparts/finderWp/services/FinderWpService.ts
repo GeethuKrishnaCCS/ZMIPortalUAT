@@ -39,12 +39,13 @@ export class FinderWpService extends BaseService {
             .folders()
             .then((folders: any[]) => {
                 const foldersWithIcons = folders.filter(folder => folder.Name !== "Forms").map(folder => {
-                    return this._spfi.web.getFolderByServerRelativePath(folder.ServerRelativeUrl).select("*")
+                    return this._spfi.web.getFolderByServerRelativePath(folder.ServerRelativeUrl)
                         .expand("Files")
                         ()
                         .then((folderDetails: any) => {
                             return {
                                 ...folderDetails,
+                                Icon: folderDetails.Icon
                             };
                         });
                 });
@@ -56,8 +57,19 @@ export class FinderWpService extends BaseService {
 
 
     public getfilesfromfolder(data: any): Promise<any> {
-        return this._spfi.web.getFolderByServerRelativePath(data).files();
+        return this._spfi.web.getFolderByServerRelativePath(data).select().files();
     }
+    // public async getfilesfromfolder(data: any): Promise<any> {
+    //     try {
+    //         const files = await this._spfi.web.getFolderByServerRelativePath(data).select("*,File_x0020_Type").files();
+    //         return files;
+    //     } catch (error) {
+    //         console.error("Error fetching document library files: ", error);
+    //         throw error;
+    //     }
+    // }
+
+
     // public getfoldersfromfolder(data: any): Promise<any> {
     //     return this._spfi.web.getFolderByServerRelativePath(data).folders();
     // }

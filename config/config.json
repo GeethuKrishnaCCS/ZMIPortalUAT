@@ -59,6 +59,7 @@
     "WelcomeWebPartStrings": "lib/webparts/welcome/loc/{locale}.js",
     "WelcomeEmployeeWebPartStrings": "lib/webparts/welcomeEmployee/loc/{locale}.js",
     "CalenderWebPartStrings": "lib/webparts/calender/loc/{locale}.js",
-    "ZnewsWebPartStrings": "lib/webparts/znews/loc/{locale}.js"
+    "ZnewsWebPartStrings": "lib/webparts/znews/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
   }
 }
