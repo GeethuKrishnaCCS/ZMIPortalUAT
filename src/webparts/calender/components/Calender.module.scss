@@ -29,6 +29,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      background-color: #ecf6ff;
   }
   .border{
     border: 1px solid rgba(102, 102, 102, 1);
@@ -36,6 +37,10 @@
     border-radius: 12px;
     max-height: 8em;
       min-height: 8em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ecf6ff;
    .borderbox{
     margin: 5px;
     max-height: 6em;
@@ -133,11 +138,19 @@
       border: 1px solid rgba(102, 102, 102, 1);
       border-radius: 12px;
       box-sizing: border-box;
+      button{
+        i{
+          border-color: #000000;
+        }
+      }
       > div{
         width: 100%;
+        color: #000000;
         > div{
           width: 100%;
           padding: 20px 15px;
+          background-color: #ecf6ff;
+          border-radius: 1em;
           > div 
           {
             div{
@@ -155,7 +168,7 @@
                   div{
                     font-size: 18px;
                     font-family: var(--fontFamilyCustomFont600,var(--fontFamilyBase));
-                    
+                    color: #000000;
                   }
                 }
               }
@@ -167,4 +180,18 @@
       }
     }
   }
+ 
 }
+div.customdatepicker > div > div > div:first-child div > div{
+  text-align: left;
+  font-weight:700;
+  
+span{
+  font-size: 24px !important;
+  line-height: 36px;
+}
+}
+div.customdatepicker > div > div > div:nth-child(2) div >div:first-child{
+  font-weight: 700 !important;
+}
+
