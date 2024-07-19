@@ -174,7 +174,6 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
       <section className={`${styles.finderWp} ${hasTeamsContext ? styles.teams : ''}`}>
         <div>
           <div className={styles.doclibraryHeading}>{this.props.selectedDocument}</div>
-          <br></br>
           <SearchBox
             placeholder="Search Forms & Templates"
             onChange={(_, newValue) => this.handleSearchQueryChange(newValue)}
@@ -198,7 +197,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
               hasSearchResults ? (
                 <>
                   <h3 className={styles.searchItemDiv}>Search Results</h3>
-                  <ul>
+                  <div className={styles.buttongrid}>
                     {this.state.filteredFolders.map((folder: any) => (
                       <DefaultButton
                         key={folder.UniqueId}
@@ -217,7 +216,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                         </a>
                       </div>
                     ))}
-                  </ul>
+                  </div>
                 </>
               ) : (
                 <div className={styles.noItems}>{"No items"}</div>
@@ -227,7 +226,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                 {hasItemsInSelectedFolder ? (
                   this.state.selectedFolder ? (
                     <>
-                      <ul>
+                      <div className={styles.buttongrid}>
                         {this.state.selectedFolder.subfolders.map((subfolder: any) => (
                           <div style={{ display: "flex" }}>
                             <DefaultButton
@@ -241,7 +240,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                             </DefaultButton>
                           </div>
                         ))}
-                      </ul>
+                      </div>
                       <div className={styles.tableContainer}>
                         <table className={styles.tableDiv}>
                           <tbody>
@@ -263,7 +262,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                     </>
                   ) : (
                     <>
-                      <ul>
+                      <div className={styles.buttongrid}>
                         {this.state.getDocFolder.map((item: any, index: number) => (
                           <ActionButton
                             iconProps={{ iconName: item.icon }}
@@ -280,7 +279,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                             {item.Name}
                           </ActionButton>
                         ))}
-                      </ul>
+                      </div>
                       {/* <table>
                           <tbody>
                             {this.state.getDocFiles.map((item: any) => (
