@@ -49,17 +49,19 @@ export default class ZmiFooter extends React.Component<IZmiFooterProps,IZmiFoote
       <div className={styles.msRow}>
        <div className={styles.msCol} >
        <div className={styles.footerbg}>
-        <table>
-          <tr>
-            <td><a href={this.state.logolink} target="_blank"><img className={styles.companylogo} src={this.state.logoUrl} /></a></td>
-            {this.state.footerdata.map((item: any) => (
-          <td className={styles.itemstyle}><a href={item.Link} target="_blank">{item.Title}</a></td>
-        ))}
-<td><a href={this.state.linkedinLogolink} target="_blank"><img className={styles.linkedinLogo} src={this.state.linkedinLogoUrl} /></a></td>
+        <div className={styles.footercntnt}>
+          <div className={styles.companylogo}><a href={this.state.logolink} target="_blank"><img  src={this.state.logoUrl} /></a></div>
+            <div className={styles.itemstyle}>{this.state.footerdata.map((item: any) => (
+          <a href={item.Link} target="_blank">{item.Title}</a>
+        ))}</div>
+        <div className={styles.footerright}>
+        <div className={styles.linkedinLogo}><a href={this.state.linkedinLogolink} target="_blank"><img  src={this.state.linkedinLogoUrl} /></a></div>
+        <div className={styles.editftr}>Edit</div>
+        </div>
+
+          
+        </div>
         
-          </tr>
-        </table>
-        <div></div>
         
         
         {/* <div>CREATE FORM</div>
