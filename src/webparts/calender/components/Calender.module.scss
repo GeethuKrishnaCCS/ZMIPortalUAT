@@ -3,9 +3,8 @@
 .calender {
   .heading {
     display: flex;
-    margin-bottom: 25px;
-    justify-content: space-between;
-    align-items: center;
+    margin-bottom: 10px;
+ 
   }
 
   .title {
@@ -15,7 +14,7 @@
     line-height: 72px;
     text-align: left;
     color: #000000;
-    margin-bottom: 28px;
+    margin-bottom: 0px;
 
   }
   .noeventborder{
@@ -162,6 +161,7 @@
             }
             > div{
               width: 100%;
+              padding: 0;
               >div{
                 width: 100%;
                 > div{
@@ -191,7 +191,14 @@ span{
   line-height: 36px;
 }
 }
-div.customdatepicker > div > div > div:nth-child(2) div >div:first-child{
+div.customdatepicker > div > div > div:nth-child(2) div > div:first-child div:first-child >div{
   font-weight: 700 !important;
+}
+div.customdatepicker > div > div > div:nth-child(2) div > div > div > div{
+ height: 49px;
+ width: 49px;
+}
+div.customdatepicker > div > div > div:first-child{
+  padding-bottom: 20px;
 }
 
