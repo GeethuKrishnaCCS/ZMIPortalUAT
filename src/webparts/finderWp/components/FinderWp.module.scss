@@ -2,9 +2,10 @@
 
 .finderWp {
   overflow: hidden;
- // padding: 1em;
+  // padding: 1em;
   color: "[theme:bodyText, default: #323130]";
   color: var(--bodyText);
+
   &.teams {
     font-family: $ms-font-family-fallbacks;
   }
@@ -35,43 +36,78 @@
   /* padding: 10px; */
   height: 100px;
   width: 31%;
-  font-weight: bold;  
+  font-weight: bold;
 }
-.buttonDiv{
+
+.buttonDiv {
   width: 100%;
+  ul{
+    padding-left: 0px;
+    button{
+      background-color: #ecf6ff;
+    }
+  }
 }
+
 .button:hover {
-  background-color: #0071CE; /* Change this to the desired hover color */  
+  background-color: #0071CE;
+  /* Change this to the desired hover color */
   color: white;
 }
-.borderBox{
- // border: 1px solid rgba(194, 187, 187, 0.774);
+
+.borderBox {
+  // border: 1px solid rgba(194, 187, 187, 0.774);
   padding: 20px;
- // box-shadow: 0 2.6px 5.6px 0 #8a8a8a, 0 0.3px 0.9px 0 #8a8a8a;
+  // box-shadow: 0 2.6px 5.6px 0 #8a8a8a, 0 0.3px 0.9px 0 #8a8a8a;
 }
 
-.doclibraryHeading{
-  font-size: xx-large;
-  font-weight: bold;
-  color:black;
-  margin-left: 5%;
+.doclibraryHeading {
+  color: black;
+  font-family: var(--fontFamilyCustomFont500, var(--FontFamilyBase));
+  font-size: 50px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: left;
+  margin-bottom: 28px;
 }
 
-.breadcrumpHeading{
+.breadcrumpHeading {
   font-size: medium;
-    color: #5b915b;
-
+  color: #5b915b;
+  font-family: var(--fontFamilyCustomFont600, var(--FontFamilyBase));
 }
-.breadCrumbDiv{
+
+.breadCrumbDiv {
   width: 100%;
   margin-left: 5%;
 }
-.searchbox{
- border-radius: 25px;
- height: 40px;
- width: 93%;
- margin-left: 5%;
+
+.searchbox {
+  border-radius: 25px;
+  height: 40px;
+  width: 93%;
+  font-family: var(--fontFamilyCustomFont600, var(--FontFamilyBase));
 }
-.tableDiv{
+
+.tableContainer {
+  max-height: 300px;
+  /* Set your desired max height here */
+  overflow-y: auto;
+  // margin-left: 5%;
+  font-family: var(--fontFamilyCustomFont600, var(--FontFamilyBase));
+}
+
+.tableDiv {
+  width: 100%;
+  /* Ensure the table takes the full width of the container */
+}
+
+.searchItemDiv {
+  font-family: var(--fontFamilyCustomFont600, var(--FontFamilyBase));
   margin-left: 5%;
+}
+
+.noItems {
+  margin: 6%;
+  padding-left: 40%;
 }

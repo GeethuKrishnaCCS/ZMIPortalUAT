@@ -106,10 +106,10 @@
     }
 
     .title {
-      font-family: 'Poppins';
-      font-size: 48px;
+      font-family: var(--fontFamilyCustomFont500,var(--fontFamilyBase));
       font-weight: 500;
-      line-height: normal;
+      font-size: 48px;
+      line-height: 72px;
       text-align: left;
       color: #000000;
       margin-bottom: 28px;
@@ -147,17 +147,16 @@
     }
     .NewsCard{
       width: 100%;
+      display: flex;
     }
 
     .NewsContainer {
       width: calc(33.333% - 10.666px);
-      float: left;
-      background-color: white;
+      background-color: #ecf6ff;
       margin-left: 16px;
       border-radius: 20px;
       overflow: hidden;
-
-
+      
       &:first-child {
         margin-left: 0px;
       }
@@ -178,19 +177,17 @@
     .NewsBody {
       float: left;
       width: 100%;
+      
     }
 
     .TitleContainer {
-      height: 53px;
       padding: 20px 20px 32px;
-      overflow: hidden;
-      font-family: 'Poppins';
+      font-family: var(--fontFamilyCustomFont600,var(--fontFamilyBase));
+      font-weight: 600;
       font-style: normal;
-      font-weight: 700;
       font-size: 18px;
       line-height: 27px;
       color: #101C4E;
-      background: #ECF6FF;
     }
 
     .TitleStyling {

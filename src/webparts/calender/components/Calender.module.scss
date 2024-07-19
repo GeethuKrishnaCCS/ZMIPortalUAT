@@ -3,30 +3,107 @@
 .calender {
   .heading {
     display: flex;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
     justify-content: space-between;
     align-items: center;
   }
 
   .title {
-    font-family: 'Poppins';
-    font-size: 48px;
+    font-family: var(--fontFamilyCustomFont500,var(--fontFamilyBase));
     font-weight: 500;
-    line-height: normal;
+    font-size: 48px;
+    line-height: 72px;
     text-align: left;
     color: #000000;
     margin-bottom: 28px;
 
   }
-  .border{
-    border: 1px solid #000000;
-    width: 70%;
+  .noeventborder{
+    border: 1px solid rgba(102, 102, 102, 1);
     border-collapse: collapse;
-    border-radius: 1em;
-    padding: 1em;
-    max-height: 15em;
-    overflow-y: scroll;
+    border-radius: 12px;
+    max-height: 6em;
+      min-height: 6em;
+      font-family: var(--fontFamilyCustomFont500,var(--fontFamilyBase));
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ecf6ff;
   }
+  .border{
+    border: 1px solid rgba(102, 102, 102, 1);
+    border-collapse: collapse;
+    border-radius: 12px;
+    max-height: 8em;
+      min-height: 8em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ecf6ff;
+   .borderbox{
+    margin: 5px;
+    max-height: 6em;
+    min-height: 6em;
+      overflow-y: auto;
+      display: flex;
+    flex-direction: column;
+    }
+    div.flex{
+      align-items: center;
+      padding: 7.5px ;
+      .dateleft{
+        padding-right: 20px;
+        border-right:1px solid rgba(168, 168, 168, 1) ;
+        font-family: var(--fontFamilyCustomFont300,var(--fontFamilyBase));
+        font-size: 15px;
+        line-height: 20px;
+        color: #000000;
+        min-width: 70px;
+        flex: none;
+      }
+      .meetingdetail{
+        padding: 0 0px 0 20px;
+        flex-grow: 1;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        color: #000000;
+        justify-content: space-between;
+        .eventdsc{
+          font-family: var(--fontFamilyCustomFont600,var(--fontFamilyBase));
+          font-size: 12px;
+          line-height: 18px;
+          font-weight: 600;
+        }
+        .eventdatetime{
+          font-family: var(--fontFamilyCustomFont600,var(--fontFamilyBase));
+          font-weight: 600;
+          font-size: 12px;
+          margin-top: 8px;
+          line-height: 18px;
+        }
+        .meetinglink{
+          color: white;
+          background: #0071CE;
+          padding: 9px 18px;
+          border-radius: 50px;
+          font-weight: 700;
+          font-size: 12px;
+          a{
+            color: white;
+            text-decoration: none;
+            font-family: var(--fontFamilyCustomFont600,var(--fontFamilyBase));
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 18px;
+          }
+        }
+      }
+    }
+    
+  }
+
   div.flex {
     display: flex;
   }
@@ -34,6 +111,7 @@
     padding: 30px 20px 30px 5px;
     width: 25%;
     border-right: 1px solid #c9c9c9;
+    
   }
   .rightcnt {
     padding: 30px 20px 20px 9px;
@@ -50,6 +128,70 @@
     background-color:$ms-color-themePrimary;
     border-radius: 1em;
   } 
-  
-  
+  .calendarwrap{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    div.customdatepicker{
+      width: 100%;
+      box-shadow: none;
+      border: 1px solid rgba(102, 102, 102, 1);
+      border-radius: 12px;
+      box-sizing: border-box;
+      button{
+        i{
+          border-color: #000000;
+        }
+      }
+      > div{
+        width: 100%;
+        color: #000000;
+        > div{
+          width: 100%;
+          padding: 20px 15px;
+          background-color: #ecf6ff;
+          border-radius: 1em;
+          > div 
+          {
+            div{
+              span{
+                font-size: 18px;
+                font-family: var(--fontFamilyCustomFont500,var(--fontFamilyBase));
+               
+              }
+            }
+            > div{
+              width: 100%;
+              >div{
+                width: 100%;
+                > div{
+                  div{
+                    font-size: 18px;
+                    font-family: var(--fontFamilyCustomFont600,var(--fontFamilyBase));
+                    color: #000000;
+                  }
+                }
+              }
+          }
+        
+           
+          }
+        }
+      }
+    }
+  }
+ 
 }
+div.customdatepicker > div > div > div:first-child div > div{
+  text-align: left;
+  font-weight:700;
+  
+span{
+  font-size: 24px !important;
+  line-height: 36px;
+}
+}
+div.customdatepicker > div > div > div:nth-child(2) div >div:first-child{
+  font-weight: 700 !important;
+}
+
