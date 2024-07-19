@@ -39,49 +39,51 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
     await this.getData();
   }
 
-
-
   public async getData() {
-    const url: string = this.props.context.pageContext.web.serverRelativeUrl;
-    const listItem = await this._service.getItemSelectExpand(url, this.props.listName, "*, Employee/ID, Employee/Title", "Employee");
-    // console.log('listItem: ', listItem);
-    this.setState({ listItems: listItem });
-
-    const greetings: any[] = [];
-    const currentDate = new Date();
-    const todayDate = currentDate.toLocaleDateString('en-GB');
-
-    const greetingsPromises = listItem.map(async (item: any) => {
-      const dateOfBirth = new Date(item.DateOfBirth);
-      const formattedDate = dateOfBirth.toLocaleDateString('en-GB');
-
-      const dateOfJoining = new Date(item.DateOfJoining);
-      const formattedDOJ = dateOfJoining.toLocaleDateString('en-GB');
-
-      const dateOfWedding = new Date(item.DateOfWedding);
-      const formattedDOW = dateOfWedding.toLocaleDateString('en-GB');
-
-      const employeeInfo = await this._service.getUser(item.Employee.ID);
-
-      if (formattedDate === todayDate && this.props.BdayToggleValue) {
-        greetings.push({ ...item, type: 'Birthday', employeeInfo });
-      }
-      if (formattedDOJ === todayDate && this.props.WorkToggleValue) {
-        greetings.push({ ...item, type: 'Work Anniversary', employeeInfo });
-      }
-      if (formattedDOW === todayDate && this.props.WeddingToggleValue) {
-        greetings.push({ ...item, type: 'Wedding Anniversary', employeeInfo });
-      }
-    });
-
-    await Promise.all(greetingsPromises);
-
-    this.setState({
-      greetings: greetings,
-      today: todayDate,
-    }, () => {
-    });
+    try {
+      const url: string = this.props.context.pageContext.web.serverRelativeUrl;
+      const listItem = await this._service.getItemSelectExpand(url, this.props.listName, "*, Employee/ID, Employee/Title", "Employee");
+  
+      const greetings: any[] = [];
+      const currentDate = new Date();
+      const todayDate = moment(currentDate).format('MMM DD, YYYY');
+  
+      const greetingsPromises = listItem.map(async (item: any) => {
+        try {
+          const dateOfBirth = moment(item.DateOfBirth).format('MMM DD, YYYY');
+          const dateOfJoining = moment(item.DateOfJoining).format('MMM DD, YYYY');
+          const dateOfWedding = moment(item.DateOfWedding).format('MMM DD, YYYY');
+  
+          const employeeInfo = await this._service.getUser(item.Employee.ID);
+          console.log('employeeInfo: ', employeeInfo);
+  
+          if (dateOfBirth === todayDate && this.props.BdayToggleValue) {
+            greetings.push({ ...item, type: 'Birthday', employeeInfo });
+          }
+          if (dateOfJoining === todayDate && this.props.WorkToggleValue) {
+            greetings.push({ ...item, type: 'Work Anniversary', employeeInfo });
+          }
+          if (dateOfWedding === todayDate && this.props.WeddingToggleValue) {
+            greetings.push({ ...item, type: 'Wedding Anniversary', employeeInfo });
+          }
+        } catch (itemError) {
+          console.error('Error processing item:', item, itemError);
+        }
+      });
+  
+      await Promise.all(greetingsPromises);
+  
+      this.setState({
+        greetings: greetings,
+        today: todayDate,
+      }, () => {
+        console.log('greetings: ', this.state.greetings);
+      });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   }
+  
 
 
   private handleScrollUp() {
@@ -129,11 +131,13 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
 
                     <Person
                       personQuery={item.Employee.Title}
-                      view="twolines"
+                      view="oneline"
+                      // view="twolines"
                       personCardInteraction='hover'
                       avatarType='photo'
                       avatarSize='large'
-                      line2Property='hiiii'
+                    // showPresence = {true}
+                    // showsecondarytext = {true}
                     />
                     <div className={styles.secondarytextstyle}>{item.type === 'Birthday' ? `Birthday on ${moment(item.DateOfBirth).format('MMM DD')}` :
                       item.type === 'Work Anniversary' ? `Work Anniversary on ${moment(item.DateOfJoining).format('MMM DD')}` :

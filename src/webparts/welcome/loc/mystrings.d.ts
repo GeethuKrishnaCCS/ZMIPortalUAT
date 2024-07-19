@@ -13,6 +13,7 @@ declare interface IWelcomeWebPartStrings {
   UnknownEnvironment: string;
 
   welcomeBannerImage: string;
+  welcomeBannerList: string;
 }
 
 declare module 'WelcomeWebPartStrings' {

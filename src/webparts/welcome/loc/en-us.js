@@ -13,6 +13,7 @@ define([], function() {
     "AppOutlookEnvironment": "The app is running in Outlook",
     "UnknownEnvironment": "The app is running in an unknown environment",
 
-    "welcomeBannerImage": "Welcome Banner Image"
+    "welcomeBannerImage": "Welcome Banner Image",
+    "welcomeBannerList": "List - WelcomeBanner"
   }
 });

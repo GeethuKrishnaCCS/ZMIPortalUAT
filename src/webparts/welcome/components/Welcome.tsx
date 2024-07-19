@@ -37,7 +37,7 @@ export default class Welcome extends React.Component<IWelcomeProps, IWelcomeStat
 
   public async getData() {
     const url: string = this.props.context.pageContext.web.serverRelativeUrl;
-    const getBannerDetails = await this._service.getListItems("WelcomeBanner", url)
+    const getBannerDetails = await this._service.getListItems(this.props.welcomeBannerList, url)
     console.log('getBannerDetails: ', getBannerDetails);
     this.setState({ bannerDetails: getBannerDetails });
 
