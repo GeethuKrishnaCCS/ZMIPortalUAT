@@ -49,6 +49,14 @@
           "manifest": "./src/webparts/znews/ZnewsWebPart.manifest.json"
         }
       ]
+    },
+    "zmi-footer-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/zmiFooter/ZmiFooterWebPart.js",
+          "manifest": "./src/webparts/zmiFooter/ZmiFooterWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -60,6 +68,7 @@
     "WelcomeEmployeeWebPartStrings": "lib/webparts/welcomeEmployee/loc/{locale}.js",
     "CalenderWebPartStrings": "lib/webparts/calender/loc/{locale}.js",
     "ZnewsWebPartStrings": "lib/webparts/znews/loc/{locale}.js",
-    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
+    "ZmiFooterWebPartStrings": "lib/webparts/zmiFooter/loc/{locale}.js"
   }
 }

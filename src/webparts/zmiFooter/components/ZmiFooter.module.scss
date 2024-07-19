@@ -1,0 +1,42 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.zmiFooter {
+  .msGrid {
+    @include ms-Grid;
+  }
+  .msRow {
+    @include ms-Grid-row;
+    margin: 0px;
+  }
+  
+  .msCol {
+    @include ms-Grid-col;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    width: 100%
+  }
+  .footerbg {
+    background-size: cover;
+   display: flex;
+    height: 128px;
+    width: 100%;
+    background-color:#101C4E;
+    display: flex;
+    
+  }
+  .itemstyle{
+    a{
+    color: #FFFFFF;
+    padding: 1em;
+    }
+  }
+  .companylogo{
+    width:20%
+  }
+  .linkedinLogo{
+    width:50%
+  }
+}
+
+
+
