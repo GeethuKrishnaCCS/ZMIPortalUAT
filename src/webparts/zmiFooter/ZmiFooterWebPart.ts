@@ -21,6 +21,7 @@ export default class ZmiFooterWebPart extends BaseClientSideWebPart<IZmiFooterPr
         description: this.properties.description,
         siteUrl: this.context.pageContext.web.serverRelativeUrl,
         context: this.context,
+        adminList:this.properties.adminList,
         settingsList:this.properties.settingsList
       }
     );
@@ -102,6 +103,9 @@ export default class ZmiFooterWebPart extends BaseClientSideWebPart<IZmiFooterPr
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
+                }),
+                PropertyPaneTextField('adminList', {
+                  label: "adminList"
                 }),
                 PropertyPaneTextField('settingsList', {
                   label: "settingsList"
