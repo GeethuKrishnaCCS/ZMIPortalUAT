@@ -18,4 +18,9 @@ export interface IZmiFooterState {
   openEditModal:boolean;
   footerdataitem:any[];
   openEditItemModal:boolean;
+  title:string;
+  itemLink:string;
+  itemId:any;
+  openAddModal:boolean;
+  itemLogo:any;
 }

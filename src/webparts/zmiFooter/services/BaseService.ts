@@ -15,6 +15,11 @@ export class BaseService {
     }
     public getAdminListItems(url: string, listname: string): Promise<any> {
         return this._sp.web.getList(url + "/Lists/" + listname).items.select('Admin/Title,Admin/ID,Admin/EMail').expand('Admin')();
+    }
+    public createNewItem(url: string, listname: string, data: any): Promise<any> {
+        return this._sp.web.getList(url + "/Lists/" + listname).items.add(data);
     }    
-   
+    public updateItem(url: string, listname: string, data: any, id: number): Promise<any> {
+        return this._sp.web.getList(url + "/Lists/" + listname).items.getById(id).update(data);
+    }
 }
