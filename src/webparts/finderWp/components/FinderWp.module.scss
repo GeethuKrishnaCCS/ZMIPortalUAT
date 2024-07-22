@@ -41,43 +41,71 @@
 
 .buttonDiv {
   width: 100%;
+}
 
-  .buttongrid {
-    padding-left: 0px;
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: auto auto auto;
-    gap: 10px;
+.buttongrid {
+  padding-left: 0px;
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* Three columns by default */
+  gap: 10px;
 
-    button {
-      background-color: #ecf6ff;
-      border: 1px solid #6d6e71;
-      padding: 20px;
-      height: 114px;
-      border-radius: 20px;
-      width: auto;
-      margin: 0;
-      font-size: 16px;
-      font-weight: 500;
-      color: black;
-      transition: all ease-in-out .25s;
+  button {
+    background-color: #ecf6ff;
+    border: 1px solid #6d6e71;
+    padding: 20px;
+    height: 114px;
+    border-radius: 20px;
+    width: auto;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+    transition: all ease-in-out .25s;
 
-      &:hover {
-        background: #0071CE;
-        border-color: #0071CE;
-        color: white;
-
-        i {
-          color: white;
-        }
-      }
+    &:hover {
+      background: #0071CE;
+      border-color: #0071CE;
+      color: white;
 
       i {
-        font-size: 25px;
-        margin: 0px 20px 0 0;
-        color: #0071CE;
+        color: white;
       }
     }
+
+    i {
+      font-size: 25px;
+      margin: 0px 20px 0 0;
+      color: #0071CE;
+    }
+  }
+}
+
+/* Medium screens (tablets) */
+@media (max-width: 992px) {
+  .buttongrid {
+    grid-template-columns: repeat(2, 1fr);
+    /* Two columns for medium screens */
+  }
+}
+
+/* Small screens (phones) */
+@media (max-width: 576px) {
+  .buttongrid {
+    grid-template-columns: 1fr;
+    /* One column for small screens */
+  }
+
+  .buttongrid button {
+    padding: 15px;
+    font-size: 14px;
+    height: auto;
+  }
+
+  .buttongrid button i {
+    font-size: 20px;
+    margin: 0px 15px 0 0;
   }
 }
 
