@@ -113,7 +113,7 @@
 
 .breadCrumbDiv {
   width: 100%;
-  margin-left: 5%;
+  // margin-left: 5%;
 }
 
 .searchbox {
@@ -138,18 +138,20 @@
 
 .tableDiv {
   width: 100%;
-  margin-left: 5%;
+  //margin-left: 5%;
   /* Ensure the table takes the full width of the container */
 }
 
 .searchItemDiv {
   font-family: var(--fontFamilyCustomFont600, var(--FontFamilyBase));
-  margin-left: 5%;
+  // margin-left: 5%;
 }
 
 .noItems {
-  margin: 6%;
-  padding-left: 40%;
+  text-align: center;
+  font-family: var(--fontFamilyCustomFont500, var(--FontFamilyBase));
+  font-size: 18px;
+  padding: 20px 0;
 }
 
 .tableIconColumn {
@@ -157,5 +159,13 @@
 }
 
 .breadCrumbStyle {
-  cursor: pointer;
+  ol {
+    li {
+      span {
+        div {
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }

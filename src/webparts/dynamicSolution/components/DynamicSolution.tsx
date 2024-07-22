@@ -674,20 +674,11 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
 
                   <div onClick={() => this.onButtonClick(cards.link)} key={key} className={styles.iconcard} style={{ width: this.state.Width !== "" ? this.state.Width : "8rem", height: this.state.Height !== "" ? this.state.Height : "11rem", display: display }} >
 
-                    <div>
+                    <div className={styles.iconImgDiv}>
                       <img className={styles.iconimg} src={cards.CardIcon.Url !== null ? cards.CardIcon.Url : "Image"} alt='' />
                     </div>
                     <div className={styles.texticondiv} >
                       <h5 className={styles.iconcardtitle} >{cards.Title}</h5>
-                      {/* <a href={cards.link} target="_blank" className={styles.linkicon} >
-                       <IconButton title={cards.Title} className={styles.iconfrwd}
-                        //iconProps={key === isHovered ? LinkDblFrwd : newIconForIconQL}
-                        iconProps={{ iconName: 'None' }} // Set iconName to 'None' to hide default Fluent UI icon
-                        styles={{ root: { padding: 0 } }} // Optional: Remove default padding                     
-                        ariaLabel="NavigateForward" onMouseEnter={() => this.handleHover(key)} onMouseLeave={this.handleHoverOut} >
-                        <img src={this.props.siteUrl + "/SiteAssets/New ICon.png"} alt="Custom icon" style={{ width: 20, height: 20 }} />
-                      </IconButton>
-                      </a> */}
                     </div>
                     {this.state.editAvlble &&
                       <div className={styles.editicon} ><IconButton iconProps={Settings} style={{ float: "right" }} ariaLabel="DRMIcon"
