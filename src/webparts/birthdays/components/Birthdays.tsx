@@ -28,7 +28,7 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
       // bdayGreetings: [],
       // workGreetings: [],
       greetings: [],
-      currentIndex: "", // Track the current index of displayed items
+      currentIndex: "", 
       itemsPerPage: this.props.NoOfItemDisplay !== "" ? parseInt(this.props.NoOfItemDisplay) : 3,
     }
 
@@ -148,8 +148,9 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
                         person-details={JSON.stringify(this.personDetail1(item.Employee.Title, item.Employee.EMail))}
                         show-name
                         // show-personImage
-                        avatarType={this.personDetail1(item.Employee.Title, item.Employee.EMail).personImage ? "photo" : "initials"}
-                        personImage={this.personDetail1(item.Employee.Title, item.Employee.EMail).personImage}
+                       // avatarType={this.personDetail1(item.Employee.Title, item.Employee.EMail).personImage ? "initials" : "photo"}
+                       avatarType='initials'
+                        // personImage={this.personDetail1(item.Employee.Title, item.Employee.EMail).personImage}
                         avatarSize='large'
                       >
                         <template data-type="line3">
@@ -163,8 +164,10 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
                     </div>
 
                     <Person
-                    // personQuery={item.Employee.Title}
-                    // view="oneline"
+                    
+                    //  personQuery={item.Employee.Title}
+                    //  view="oneline"
+                    // avatarType='initials'
                     />
                   </div>
                 ))
