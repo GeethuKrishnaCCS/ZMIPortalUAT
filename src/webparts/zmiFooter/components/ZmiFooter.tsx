@@ -18,12 +18,12 @@ export default class ZmiFooter extends React.Component<IZmiFooterProps, IZmiFoot
       linkedinLogolink: "",
       openEditModal: false,
       footerdataitem: [],
-      openEditItemModal:false,
-      title:"",
-      itemLink:"",
-      itemId:null,
-      openAddModal:false,
-      itemLogo:null
+      openEditItemModal: false,
+      title: "",
+      itemLink: "",
+      itemId: null,
+      openAddModal: false,
+      itemLogo: null
     }
     this._Service = new BaseService(this.props.context);
     this.checkuserAdmin = this.checkuserAdmin.bind(this);
@@ -33,10 +33,10 @@ export default class ZmiFooter extends React.Component<IZmiFooterProps, IZmiFoot
     this.editFooterItem = this.editFooterItem.bind(this);
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onLinkChange = this.onLinkChange.bind(this);
-this.onUpdateItem = this.onUpdateItem.bind(this);
-this.addnewitemModal = this.addnewitemModal.bind(this);
-this.addnewitemModalClose = this.addnewitemModalClose.bind(this);
-this.onSubmitItem = this.onSubmitItem.bind(this);
+    this.onUpdateItem = this.onUpdateItem.bind(this);
+    this.addnewitemModal = this.addnewitemModal.bind(this);
+    this.addnewitemModalClose = this.addnewitemModalClose.bind(this);
+    this.onSubmitItem = this.onSubmitItem.bind(this);
 
 
   }
@@ -108,41 +108,45 @@ this.onSubmitItem = this.onSubmitItem.bind(this);
   public editFooterModalClose() {
     this.setState({
       openEditModal: false,
-      openEditItemModal:false,
-      openAddModal:false
+      openEditItemModal: false,
+      openAddModal: false
     });
   }
-  public editFooterItemModalClose(){
+  public editFooterItemModalClose() {
     this.setState({
-      openEditItemModal: false,openEditModal: true
+      openEditItemModal: false, openEditModal: true
     });
   }
   public editFooterItem(Id: any) {
     const itemDetails = this.state.footerdataitem.filter((item: any) => item.Id === Id);
     if (itemDetails.length > 0) {
-      this.setState({ title: itemDetails[0].Title, 
+      this.setState({
+        title: itemDetails[0].Title,
         itemLink: itemDetails[0].Link,
-         itemId:  itemDetails[0].Id,
-        itemLogo: itemDetails[0].Logo});
+        itemId: itemDetails[0].Id,
+        itemLogo: itemDetails[0].Logo
+      });
     }
     this.setState({
-      openEditItemModal: true,openEditModal:false
+      openEditItemModal: true, openEditModal: false
     });
-    
+
   }
-  public addnewitemModal(){
+  public addnewitemModal() {
     this.setState({
-      openAddModal: true,openEditModal:false,openEditItemModal:false
+      title: "",
+      itemLink: "", openAddModal: true, openEditModal: false, openEditItemModal: false
     });
   }
-  public addnewitemModalClose(){
+  public addnewitemModalClose() {
     this.setState({
-      openAddModal: false,openEditModal:true,openEditItemModal:false
+      title: "",
+      itemLink: "",openAddModal: false, openEditModal: true, openEditItemModal: false
     });
   }
-  
-   //Title Change
-   private onTitleChange = (ev: React.FormEvent<HTMLInputElement>, Title: string): void => {
+
+  //Title Change
+  private onTitleChange = (ev: React.FormEvent<HTMLInputElement>, Title: string): void => {
     this.setState({
       title: Title,
     });
@@ -153,27 +157,27 @@ this.onSubmitItem = this.onSubmitItem.bind(this);
       itemLink: itemLink,
     });
   }
-  public async onUpdateItem(){
+  public async onUpdateItem() {
     const datafooter = {
       Title: this.state.title,
       Link: this.state.itemLink
-   }
-   const updatelist = await this._Service.updateItem(this.props.siteUrl, this.props.settingsList, datafooter, this.state.itemId)
-        if(updatelist){
-          this.setState({openEditItemModal:false,openEditModal:true});
-        }
+    }
+    const updatelist = await this._Service.updateItem(this.props.siteUrl, this.props.settingsList, datafooter, this.state.itemId)
+    if (updatelist) {
+      this.setState({ openEditItemModal: false, openEditModal: false,openAddModal: false });
+    }
   }
-  public async onSubmitItem(){
-    if(this.state.title !== "" || this.state.itemLink !== ""){
-    const datafooter = {
-      Title: this.state.title,
-      Link: this.state.itemLink
-   }
-   const updatelist = await this._Service.createNewItem(this.props.siteUrl, this.props.settingsList, datafooter)
-        if(updatelist){
-          this.setState({openAddModal:false,openEditModal:true});
-        }
+  public async onSubmitItem() {
+    if (this.state.title !== "" || this.state.itemLink !== "") {
+      const datafooter = {
+        Title: this.state.title,
+        Link: this.state.itemLink
       }
+      const updatelist = await this._Service.createNewItem(this.props.siteUrl, this.props.settingsList, datafooter)
+      if (updatelist) {
+        this.setState({ openAddModal: false, openEditModal: false,openEditItemModal:false });
+      }
+    }
   }
   public render(): React.ReactElement<IZmiFooterProps> {
     const theme = getTheme();
@@ -248,121 +252,115 @@ this.onSubmitItem = this.onSubmitItem.bind(this);
                   </div>
                 </div>
                 {/* Edit Footer */}
-                <div style={{ padding: "18px" }} >
-                  <Modal
-                    isOpen={this.state.openEditModal}
-                    isModeless={false}
-                    containerClassName={contentStyles.container}>
-                    <div style={{ padding: "18px" }}>
-                      <div style={{ display: "flex" }}>
-                        <span style={{ textAlign: "center", display: "flex", justifyContent: "center", flexGrow: "1", fontSize: "20px", fontFamily: 'sans-serif', fontWeight: "400" }}><b>Edit Footer</b></span>
-                        <IconButton
-                          iconProps={CancelIcon}
-                          ariaLabel="Close popup modal"
-                          onClick={this.editFooterModalClose}
-                          styles={iconButtonStyles} />
-                      </div>
-                      <div>
-                        <table>
-                          {this.state.footerdataitem.map((item: any) => (
-                            <tr>
-                              <td>{item.Title}</td>
-                              <td> <IconButton
-                                styles={iconButtonStyles}
-                                iconProps={MoreIcon}
-                                ariaLabel="More options"
-                                onClick={() => this.editFooterItem(item.Id)}
-                              /></td>
-                            </tr>
-                          ))}
-                        </table>
-                        <div style={{display:"flex", alignItems:"center",justifyContent:"center",position:"relative"}}>
-                          <hr style={{position:"absolute",width:"100%"}}/><IconButton
+                <Modal
+                  isOpen={this.state.openEditModal}
+                  isModeless={false}
+                  containerClassName={contentStyles.container}>
+                  <div style={{ padding: "18px" }}>
+                    <div style={{ display: "flex" }}>
+                      <span style={{ textAlign: "center", display: "flex", justifyContent: "center", flexGrow: "1", fontSize: "20px", fontFamily: 'sans-serif', fontWeight: "400" }}><b>Edit Footer</b></span>
+                      <IconButton
+                        iconProps={CancelIcon}
+                        ariaLabel="Close popup modal"
+                        onClick={this.editFooterModalClose}
+                        styles={iconButtonStyles} />
+                    </div>
+                    <div>
+                      <table>
+                        {this.state.footerdataitem.map((item: any) => (
+                          <tr>
+                            <td>{item.Title}</td>
+                            <td> <IconButton
+                              styles={iconButtonStyles}
+                              iconProps={MoreIcon}
+                              ariaLabel="More options"
+                              onClick={() => this.editFooterItem(item.Id)}
+                            /></td>
+                          </tr>
+                        ))}
+                      </table>
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+                        <hr style={{ position: "absolute", width: "100%" }} /><IconButton
                           iconProps={AddIcon}
                           ariaLabel="Add NewItem modal"
                           onClick={this.addnewitemModal}
                           styles={AddiconButtonStyles} /></div>
-                      </div>
                     </div>
+                  </div>
 
-                  </Modal>
-                </div>
+                </Modal>
                 {/* Edit Item Footer */}
-                <div style={{ padding: "18px" }} >
-                  <Modal
-                    isOpen={this.state.openEditItemModal}
-                    isModeless={false}
-                    containerClassName={contentStyles.container}>
-                    <div style={{ padding: "18px" }}>
-                      <div style={{ display: "flex" }}>
-                        <span style={{ textAlign: "center", display: "flex", justifyContent: "center", flexGrow: "1", width: "450px", fontSize: "20px", fontFamily: 'sans-serif', fontWeight: "400" }}><b>Edit Footer Item</b></span>
-                        <IconButton
-                          iconProps={CancelIcon}
-                          ariaLabel="Close popup modal"
-                          onClick={this.editFooterItemModalClose}
-                          styles={iconButtonStyles} />
-                      </div>
-                      <div>
-                        <table style={{width:"100%"}}>
-                        {this.state.itemLogo === null &&<tr>
-                              <td><TextField
-                              label='Title'
-                    onChange={this.onTitleChange}
-                    value={this.state.title}/>
-                  </td>
-                  </tr>}
-                  <tr>
-                  <td><TextField
-                  label='Link'
-                    onChange={this.onLinkChange}
-                    value={this.state.itemLink} />
-                  </td>
-                            </tr>
-                            </table>
-                            <PrimaryButton style={{ float: "right", marginTop: "7px", marginBottom: "9px" }} id="b2" onClick={this.onUpdateItem} >Save</PrimaryButton >
-                      </div>
+                <Modal
+                  isOpen={this.state.openEditItemModal}
+                  isModeless={false}
+                  containerClassName={contentStyles.container}>
+                  <div style={{ padding: "18px" }}>
+                    <div style={{ display: "flex" }}>
+                      <span style={{ textAlign: "center", display: "flex", justifyContent: "center", flexGrow: "1", width: "450px", fontSize: "20px", fontFamily: 'sans-serif', fontWeight: "400" }}><b>Edit Footer Item</b></span>
+                      <IconButton
+                        iconProps={CancelIcon}
+                        ariaLabel="Close popup modal"
+                        onClick={this.editFooterItemModalClose}
+                        styles={iconButtonStyles} />
                     </div>
+                    <div>
+                      <table style={{ width: "100%" }}>
+                        {this.state.itemLogo === null && <tr>
+                          <td><TextField
+                            label='Title'
+                            onChange={this.onTitleChange}
+                            value={this.state.title} />
+                          </td>
+                        </tr>}
+                        <tr>
+                          <td><TextField
+                            label='Link'
+                            onChange={this.onLinkChange}
+                            value={this.state.itemLink} />
+                          </td>
+                        </tr>
+                      </table>
+                      <PrimaryButton style={{ float: "right", marginTop: "7px", marginBottom: "9px" }} id="b2" onClick={this.onUpdateItem} >Save</PrimaryButton >
+                    </div>
+                  </div>
 
-                  </Modal>
-                </div>
+                </Modal>
                 {/* Add Item Footer */}
-                <div style={{ padding: "18px" }} >
-                  <Modal
-                    isOpen={this.state.openAddModal}
-                    isModeless={false}
-                    containerClassName={contentStyles.container}>
-                    <div style={{ padding: "18px" }}>
-                      <div style={{ display: "flex" }}>
-                        <span style={{ textAlign: "center", display: "flex", justifyContent: "center", flexGrow: "1", width: "450px", fontSize: "20px", fontFamily: 'sans-serif', fontWeight: "400" }}><b>Add Footer Item</b></span>
-                        <IconButton
-                          iconProps={CancelIcon}
-                          ariaLabel="Close popup modal"
-                          onClick={this.addnewitemModalClose}
-                          styles={iconButtonStyles} />
-                      </div>
-                      <div>
-                        <table style={{width:"100%"}}>
-                            <tr>
-                              <td><TextField
-                              label='Title'
-                    onChange={this.onTitleChange}
-                    value={this.state.title}/>
-                  </td>
-                  </tr>
-                  <tr>
-                  <td><TextField
-                    label='Link'
-                    onChange={this.onLinkChange}
-                    value={this.state.itemLink} />
-                  </td>
-                            </tr>
-                            </table>
-                            <PrimaryButton style={{ float: "right", marginTop: "7px", marginBottom: "9px" }} id="b2" onClick={this.onSubmitItem} >Submit</PrimaryButton >
-                      </div>
+                <Modal
+                  isOpen={this.state.openAddModal}
+                  isModeless={false}
+                  containerClassName={contentStyles.container}>
+                  <div style={{ padding: "18px" }}>
+                    <div style={{ display: "flex" }}>
+                      <span style={{ textAlign: "center", display: "flex", justifyContent: "center", flexGrow: "1", width: "450px", fontSize: "20px", fontFamily: 'sans-serif', fontWeight: "400" }}><b>Add Footer Item</b></span>
+                      <IconButton
+                        iconProps={CancelIcon}
+                        ariaLabel="Close popup modal"
+                        onClick={this.addnewitemModalClose}
+                        styles={iconButtonStyles} />
                     </div>
+                    <div>
+                      <table style={{ width: "100%" }}>
+                        <tr>
+                          <td><TextField
+                            label='Title'
+                            onChange={this.onTitleChange}
+                            value={this.state.title} />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><TextField
+                            label='Link'
+                            onChange={this.onLinkChange}
+                            value={this.state.itemLink} />
+                          </td>
+                        </tr>
+                      </table>
+                      <PrimaryButton style={{ float: "right", marginTop: "7px", marginBottom: "9px" }} id="b2" onClick={this.onSubmitItem} >Submit</PrimaryButton >
+                    </div>
+                  </div>
 
-                  </Modal>
-                </div>
+                </Modal>
               </div>
             </div>
           </div>
