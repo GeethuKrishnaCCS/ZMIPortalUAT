@@ -183,6 +183,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
             <div className={styles.breadCrumbDiv}>
               <Breadcrumb
                 items={this.state.breadcrumbItems}
+                className={styles.breadCrumbStyle}
                 onRenderItem={(item, render) => (
                   <span className={styles.breadcrumpHeading} onClick={(ev) => this.onBreadcrumbItemClicked(ev, item)}>
                     {render!(item)}
@@ -246,7 +247,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                           <tbody>
                             {this.state.filesInSelectedFolder.map((item: any) => (
                               <tr key={item.Id}>
-                                <td>
+                                <td className={styles.tableIconColumn}>
                                   <FileTypeIcon type={IconType.image} path={item.LinkingUri !== null ? item.LinkingUri : window.location.hash + item.ServerRelativeUrl} />
                                 </td>
                                 <td>

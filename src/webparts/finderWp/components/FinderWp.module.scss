@@ -41,17 +41,19 @@
 
 .buttonDiv {
   width: 100%;
-  .buttongrid{
+
+  .buttongrid {
     padding-left: 0px;
     margin-top: 40px;
-    display:grid ;
+    display: grid;
     grid-template-columns: auto auto auto;
     gap: 10px;
-    button{
+
+    button {
       background-color: #ecf6ff;
       border: 1px solid #6d6e71;
       padding: 20px;
-      height:114px;
+      height: 114px;
       border-radius: 20px;
       width: auto;
       margin: 0;
@@ -59,18 +61,21 @@
       font-weight: 500;
       color: black;
       transition: all ease-in-out .25s;
-      &:hover{
-        background:#0071CE ;
+
+      &:hover {
+        background: #0071CE;
         border-color: #0071CE;
         color: white;
-        i{
+
+        i {
           color: white;
         }
       }
-      i{
+
+      i {
         font-size: 25px;
         margin: 0px 20px 0 0;
-        color:#0071CE ;
+        color: #0071CE;
       }
     }
   }
@@ -96,8 +101,8 @@
   line-height: 72px;
   text-align: left;
   margin-bottom: 10px;
-  
-  
+
+
 }
 
 .breadcrumpHeading {
@@ -114,11 +119,12 @@
 .searchbox {
   border-radius: 100px;
   height: 60px;
- border: 1px solid #6d6e71;
- background: transparent;
+  border: 1px solid #6d6e71;
+  background: transparent;
   font-family: var(--fontFamilyCustomFont600, var(--FontFamilyBase));
-  &::placeholder{
-    color:#6d6e71 ;
+
+  &::placeholder {
+    color: #6d6e71;
   }
 }
 
@@ -132,6 +138,7 @@
 
 .tableDiv {
   width: 100%;
+  margin-left: 5%;
   /* Ensure the table takes the full width of the container */
 }
 
@@ -143,4 +150,12 @@
 .noItems {
   margin: 6%;
   padding-left: 40%;
+}
+
+.tableIconColumn {
+  width: 3%
+}
+
+.breadCrumbStyle {
+  cursor: pointer;
 }

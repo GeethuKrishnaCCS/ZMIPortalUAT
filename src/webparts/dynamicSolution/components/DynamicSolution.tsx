@@ -673,12 +673,8 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
                 return (
 
                   <div onClick={() => this.onButtonClick(cards.link)} key={key} className={styles.iconcard} style={{ width: this.state.Width !== "" ? this.state.Width : "8rem", height: this.state.Height !== "" ? this.state.Height : "11rem", display: display }} >
-                    {this.state.editAvlble &&
-                      <div className={styles.editicon} ><IconButton iconProps={Settings} style={{ float: "right" }} ariaLabel="DRMIcon"
-                        onClick={() => this.showModal(cards, key)} /></div>
-                    }
-                    <div>
 
+                    <div>
                       <img className={styles.iconimg} src={cards.CardIcon.Url !== null ? cards.CardIcon.Url : "Image"} alt='' />
                     </div>
                     <div className={styles.texticondiv} >
@@ -693,6 +689,10 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
                       </IconButton>
                       </a> */}
                     </div>
+                    {this.state.editAvlble &&
+                      <div className={styles.editicon} ><IconButton iconProps={Settings} style={{ float: "right" }} ariaLabel="DRMIcon"
+                        onClick={() => this.showModal(cards, key)} /></div>
+                    }
                   </div>
                 )
               }
