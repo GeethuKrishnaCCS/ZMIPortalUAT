@@ -41,10 +41,37 @@
 
 .buttonDiv {
   width: 100%;
-  ul{
+  .buttongrid{
     padding-left: 0px;
+    margin-top: 40px;
+    display:grid ;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
     button{
       background-color: #ecf6ff;
+      border: 1px solid #6d6e71;
+      padding: 20px;
+      height:114px;
+      border-radius: 20px;
+      width: auto;
+      margin: 0;
+      font-size: 16px;
+      font-weight: 500;
+      color: black;
+      transition: all ease-in-out .25s;
+      &:hover{
+        background:#0071CE ;
+        border-color: #0071CE;
+        color: white;
+        i{
+          color: white;
+        }
+      }
+      i{
+        font-size: 25px;
+        margin: 0px 20px 0 0;
+        color:#0071CE ;
+      }
     }
   }
 }
@@ -64,11 +91,13 @@
 .doclibraryHeading {
   color: black;
   font-family: var(--fontFamilyCustomFont500, var(--FontFamilyBase));
-  font-size: 50px;
+  font-size: 48px;
   font-weight: 500;
-  line-height: normal;
+  line-height: 72px;
   text-align: left;
-  margin-bottom: 28px;
+  margin-bottom: 10px;
+  
+  
 }
 
 .breadcrumpHeading {
@@ -83,10 +112,14 @@
 }
 
 .searchbox {
-  border-radius: 25px;
-  height: 40px;
-  width: 93%;
+  border-radius: 100px;
+  height: 60px;
+ border: 1px solid #6d6e71;
+ background: transparent;
   font-family: var(--fontFamilyCustomFont600, var(--FontFamilyBase));
+  &::placeholder{
+    color:#6d6e71 ;
+  }
 }
 
 .tableContainer {
