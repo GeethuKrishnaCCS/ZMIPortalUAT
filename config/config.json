@@ -49,6 +49,14 @@
           "manifest": "./src/webparts/znews/ZnewsWebPart.manifest.json"
         }
       ]
+    },
+    "dynamic-solution-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/dynamicSolution/DynamicSolutionWebPart.js",
+          "manifest": "./src/webparts/dynamicSolution/DynamicSolutionWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -60,6 +68,7 @@
     "WelcomeEmployeeWebPartStrings": "lib/webparts/welcomeEmployee/loc/{locale}.js",
     "CalenderWebPartStrings": "lib/webparts/calender/loc/{locale}.js",
     "ZnewsWebPartStrings": "lib/webparts/znews/loc/{locale}.js",
-    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
+    "DynamicSolutionWebPartStrings": "lib/webparts/dynamicSolution/loc/{locale}.js"
   }
 }
