@@ -189,7 +189,6 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                     {render!(item)}
                   </span>
                 )}
-
               />
             </div>
           }
