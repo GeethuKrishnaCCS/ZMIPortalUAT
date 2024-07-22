@@ -44,7 +44,7 @@ export default class Welcome extends React.Component<IWelcomeProps, IWelcomeStat
   }
 
   private handleButtonClick(url: string) {
-    window.location.href = url;
+    window.open(url, '_blank');
   }
 
   public render(): React.ReactElement<IWelcomeProps> {
