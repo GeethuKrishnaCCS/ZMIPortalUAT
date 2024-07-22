@@ -1,15 +1,16 @@
 import * as React from 'react';
-import styles from './Dynamicsolution.module.scss';
 import { IDynamicsolutionProps, IDynamicsolutionPropsState } from '../interfaces/IDynamicsolutionProps';
 import "@pnp/sp/webs";
 import "@pnp/sp/site-users/web";
 import { BaseService } from '../services/BaseService';
-import { Dropdown, FontWeights, IDropdownOption, IDropdownStyles, IIconProps, IconButton, Label, Modal, PrimaryButton, TextField, getTheme, mergeStyleSets } from 'office-ui-fabric-react';
+import { Dialog, DialogType, Dropdown, FontWeights, IDropdownOption, IDropdownStyles, IIconProps, IconButton, Label, Modal, PrimaryButton, TextField, getTheme, mergeStyleSets } from 'office-ui-fabric-react';
 import { MultiSelect } from 'react-multi-select-component';
 import { MSGraphClientV3 } from '@microsoft/sp-http';
-import { Panel } from '@fluentui/react';
+import { DefaultButton, DialogFooter, Panel } from '@fluentui/react';
 import { Accordion, AccordionHeader, AccordionItem, AccordionPanel, } from '@fluentui/react-components';
 import { RocketRegular } from "@fluentui/react-icons";
+import styles from './DynamicSolution.module.scss';
+import * as _ from 'lodash';
 
 
 export default class Dynamicsolution extends React.Component<IDynamicsolutionProps, IDynamicsolutionPropsState, {}> {
@@ -27,6 +28,7 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
       editImgCrdAvlble: false,
       editTxtCrdAvlble: false,
       text: "",
+      order: null,
       link: "",
       ID: 0,
       file: {},
@@ -47,7 +49,10 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
       selectedgroupsInQuickLinks: [],
       AudienceTargetString: "",
       AudienceTargetStringForQLI: "",
-      access: ""
+      access: "",
+      linkClickable: true,
+      errorMsgForOrder: "",
+      confirmDeleteDialog: true
     };
     this._onNoOfCardChange = this._onNoOfCardChange.bind(this);
     this._IconTextChange = this._IconTextChange.bind(this);
@@ -198,8 +203,9 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
     const url: string = this.props.context.pageContext.web.serverRelativeUrl;
     this.BaseService.getListItemsWithFilter(url, this.props.QuicklinkitemListname, "WebpartInstanceId eq '" + this.props.context.instanceId + "'")
       .then(async (card: any) => {
+        const orderedItems = _.orderBy(card, 'QuickLinkOrder', ['asc']);
         if (card.length > 0) {
-          this.checkingcurrentUserDept(card, "QuickLinkItems");
+          this.checkingcurrentUserDept(orderedItems, "QuickLinkItems");
         }
       })
 
@@ -249,6 +255,9 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
   public _IconTextChange = (ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, icontxt: string): void => {
     this.setState({ text: icontxt });
   }
+  public _IconOrderChange = (ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, iconOrder: string): void => {
+    this.setState({ order: Number(iconOrder) });
+  }
   // on change to change the Destination link
   public _IconLinkChange = (ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, iconlink: string): void => {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
@@ -265,7 +274,8 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
       editbtnvisible: false,
       iseditModalOpen: true,
       editCloase: true,
-      editAvlble: true
+      editAvlble: true,
+      linkClickable: false
     })
   }
   //on click of close  button ,close  the modal 
@@ -276,7 +286,8 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
       editAvlble: false,
       iseditModalOpen: false,
       editImgCrdAvlble: false,
-      editTxtCrdAvlble: false
+      editTxtCrdAvlble: false,
+      linkClickable: true
     })
   }
   //onclick of each item's edit button , curresponding data  willl be bind the corresponding field
@@ -289,6 +300,7 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
       ID: cards.ID,
       file: cards.file,
       selectedgroupsInQuickLinks: cards.AudienceTargets !== undefined ? cards.AudienceTargets : [],
+      order: cards.QuickLinkOrder
     });
   }
   //After changing the data Icon carddata update
@@ -305,7 +317,8 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
               },
               Title: this.state.text,
               link: this.state.link,
-              AudienceTarget: item.AudienceTargetStrings !== undefined ? item.AudienceTargetStrings : this.state.AudienceTargetStringForQLI
+              AudienceTarget: item.AudienceTargetStrings !== undefined ? item.AudienceTargetStrings : this.state.AudienceTargetStringForQLI,
+              QuickLinkOrder: this.state.order
             }
           }
           else if (this.state.QuicklinktypeID === "Icon") {
@@ -317,7 +330,8 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
               },
               Title: this.state.text,
               link: this.state.link,
-              AudienceTarget: item.AudienceTargetStrings !== undefined ? item.AudienceTargetStrings : this.state.AudienceTargetStringForQLI
+              AudienceTarget: item.AudienceTargetStrings !== undefined ? item.AudienceTargetStrings : this.state.AudienceTargetStringForQLI,
+              QuickLinkOrder: this.state.order
             }
           }
           else {
@@ -325,7 +339,8 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
             updateItem = {
               Title: this.state.text,
               link: this.state.link,
-              AudienceTarget: item.AudienceTargetStrings !== undefined ? item.AudienceTargetStrings : this.state.AudienceTargetStringForQLI
+              AudienceTarget: item.AudienceTargetStrings !== undefined ? item.AudienceTargetStrings : this.state.AudienceTargetStringForQLI,
+              QuickLinkOrder: this.state.order
             }
           }
           this.BaseService.itemUpdate(this.props.siteUrl, this.props.QuicklinkitemListname, Number(this.state.ID), updateItem)
@@ -349,7 +364,8 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
                 },
                 Title: this.state.text,
                 link: this.state.link,
-                AudienceTarget: this.state.AudienceTargetString
+                AudienceTarget: this.state.AudienceTargetString,
+                QuickLinkOrder: this.state.order
               }
             }
             else if (this.state.QuicklinktypeID === "Icon") {
@@ -361,7 +377,8 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
                 },
                 Title: this.state.text,
                 link: this.state.link,
-                AudienceTarget: this.state.AudienceTargetString
+                AudienceTarget: this.state.AudienceTargetString,
+                QuickLinkOrder: this.state.order
               }
             }
             else {
@@ -369,7 +386,8 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
               updateItem = {
                 Title: this.state.text,
                 link: this.state.link,
-                AudienceTarget: this.state.AudienceTargetString
+                AudienceTarget: this.state.AudienceTargetString,
+                QuickLinkOrder: this.state.order
 
               }
             }
@@ -377,6 +395,7 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
             this.BaseService.itemUpdate(this.props.siteUrl, this.props.QuicklinkitemListname, Number(this.state.ID), updateItem)
               .then((updateditems: any) => {
                 this.getQuickLinkItems();
+
               });
           }
         })
@@ -513,7 +532,45 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
     this.setState({ isHovered: null });
   };
   private onButtonClick = (url) => {
-    window.open(url);
+    if (this.state.linkClickable === true) {
+      window.open(url);
+    }
+
+  }
+  private dialogStyles = { main: { maxWidth: 500 } };
+  private dialogContentProps = {
+    type: DialogType.normal,
+    closeButtonAriaLabel: 'none',
+    title: 'Do you want to delete?',
+  };
+  private modalProps = {
+    isBlocking: true,
+  };
+  //For dialog box of cancel
+  private _dialogCloseButton = () => {
+    this.setState({
+      isModalOpen: false,
+      confirmDeleteDialog: false,
+    });
+
+  }
+  private _onDeleteModalOpen = () => {
+    this.setState({
+      isModalOpen: false,
+      confirmDeleteDialog: false,
+    });
+  }
+  private _confirmYesDeleteItem = () => {
+    this.setState({
+      confirmDeleteDialog: true,
+    })
+    this._OnDelete();
+
+  }
+  private _confirmNoDeleteItem = () => {
+    this.setState({
+      confirmDeleteDialog: true,
+    })
   }
   public render(): React.ReactElement<IDynamicsolutionProps> {
     const Settings: IIconProps = { iconName: 'ContentSettings' };
@@ -526,7 +583,7 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
     // const newIconForIconQL: IIconProps = { iconName: 'SkypeCircleArrow' };
 
     const dropdownStyles: Partial<IDropdownStyles> = {
-      dropdown: { width: 300 },
+      dropdown: { width: 244 },
     };
     const { iseditModalOpen, isValidLink, isHovered } = this.state;
     const options: IDropdownOption[] = [
@@ -753,6 +810,7 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
                 </div>}
               <TextField label="Text" value={this.state.text} onChange={this._IconTextChange} />
               <TextField label="Link" errorMessage={!isValidLink ? 'Please enter a valid link' : ''} type='url' value={this.state.link} onChange={this._IconLinkChange} />
+              <TextField label="Order" value={this.state.order} errorMessage={(this.state.order > this.state.NoOfcards ? "Please Enter order number less than total card number" : "")} type='number' onChange={this._IconOrderChange} />
               <div >
                 <Label>Audience Target</Label>
                 <MultiSelect options={this.state.groups} value={this.state.selectedgroupsInQuickLinks}
@@ -760,11 +818,26 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
                   labelledBy="Audience Target" hasSelectAll={true} />
               </div>
               <div className={styles.editmodaldelupdbtn} >
-                <PrimaryButton text="Delete" onClick={() => this._OnDelete()} />
+                <PrimaryButton text="Delete" onClick={() => this._onDeleteModalOpen()} />
                 <PrimaryButton text="Update" onClick={() => this._OnUpdate()} />
               </div>
             </div>}
         </Modal>
+        {/* Delete Dialog Box */}
+
+        <div>
+          <Dialog
+            hidden={this.state.confirmDeleteDialog}
+            dialogContentProps={this.dialogContentProps}
+            onDismiss={this._dialogCloseButton}
+            styles={this.dialogStyles}
+            modalProps={this.modalProps}>
+            <DialogFooter>
+              <PrimaryButton onClick={() => this._confirmYesDeleteItem()} text="Yes" />
+              <DefaultButton onClick={() => this._confirmNoDeleteItem()} text="No" />
+            </DialogFooter>
+          </Dialog>
+        </div>
       </section>
     );
   }

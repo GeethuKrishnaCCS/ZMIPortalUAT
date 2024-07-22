@@ -31,7 +31,7 @@ export class BaseService {
         return this._sp.web.getList(siteUrl + "/Lists/" + listname).items.getById(id).update(metadata);
     }
     public async itemDelete(siteUrl: string, listname: string, id: number): Promise<any> {
-        return this._sp.web.getList(siteUrl + "/Lists/" + listname).items.getById(id).delete();
+        return this._sp.web.getList(siteUrl + "/Lists/" + listname).items.getById(id).recycle();
     }
     public addData(data: any, listname: string, url: string): Promise<any> {
         return this._sp.web.getList(url + "/Lists/" + listname).items.add(data);

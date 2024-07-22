@@ -30,6 +30,7 @@ export interface IDynamicsolutionPropsState {
   editImgCrdAvlble: boolean;
   editTxtCrdAvlble: boolean;
   text: string;
+  order: any;
   link: string;
   ID: number;
   file: any;
@@ -51,5 +52,7 @@ export interface IDynamicsolutionPropsState {
   AudienceTargetString: any;
   access: any;
   AudienceTargetStringForQLI: any;
-
+  linkClickable: boolean;
+  errorMsgForOrder: string;
+  confirmDeleteDialog: boolean;
 }
