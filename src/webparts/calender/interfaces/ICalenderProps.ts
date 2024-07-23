@@ -11,5 +11,7 @@ export interface ICalenderState {
   endDate:any;
   eventdataArray:any[];
   nodataFound:string;
-  recurrenceDates:Date[]
+  recurrenceDates:Date[];
+  currentIndex: any; // Track the current index of displayed items
+  itemsPerPage: any;
 }

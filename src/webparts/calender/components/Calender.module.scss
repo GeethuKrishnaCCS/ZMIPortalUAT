@@ -15,6 +15,11 @@
     text-align: left;
     color: #000000;
     margin-bottom: 0px;
+    @media screen and (max-width: 768px) {
+
+      font-size: 30px;
+      line-height: 31px;
+    }
 
   }
   .noeventborder{
@@ -40,17 +45,21 @@
       align-items: center;
       justify-content: center;
       background-color: #ecf6ff;
+      flex-direction: column;
    .borderbox{
-    margin: 5px;
-    max-height: 10em;
-    min-height: 7em;
-      overflow-y: auto;
-      display: flex;
+    display: flex;
     flex-direction: column;
+    
+    justify-content: space-between;
     }
     div.flex{
       align-items: center;
-      padding: 7.5px ;
+      padding: 20px ;
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+        gap: 5px;
+
+      }
       .dateleft{
         padding-right: 20px;
         border-right:1px solid rgba(168, 168, 168, 1) ;
@@ -60,6 +69,14 @@
         color: #000000;
         min-width: 70px;
         flex: none;
+        @media screen and (max-width: 768px) {
+          border-right: 0px;
+          border-bottom: 1px solid rgba(168, 168, 168, .5) ;
+          width: 100%;
+          padding-bottom: 3px;
+          text-align: center;
+          padding-right: 0;
+        }
       }
       .meetingdetail{
         padding: 0 0px 0 20px;
@@ -69,6 +86,9 @@
         align-items: center;
         color: #000000;
         justify-content: space-between;
+        @media screen and (max-width: 768px) {
+          padding: 0 0px 0 0px;
+        }
         .eventdsc{
           font-family: var(--fontFamilyCustomFont600,var(--fontFamilyBase));
           font-size: 12px;
@@ -105,6 +125,28 @@
 
   div.flex {
     display: flex;
+  }
+  .uparrow {
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .downarrow {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .customIconButton:hover {
+    background-color: transparent;
+  }
+  
+  .customIconButton:disabled {
+    background: none;
   }
   .fadebg {
     padding: 30px 20px 30px 5px;
@@ -202,3 +244,69 @@ div.customdatepicker > div > div > div:first-child{
   padding-bottom: 20px;
 }
 
+@media screen and (max-width: 768px) {
+  div.customdatepicker > div > div > div:nth-child(2) div > div > div > div{
+    height: 37px !important;
+    width: 37px !important;
+   }
+  
+
+  div.customdatepicker_1bbd6659>div>div>div:first-child div>div span{
+    font-size: 20px !important;
+  }
+  .calendarwrap{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    div.customdatepicker{
+      width: 100%;
+      box-shadow: none;
+      border: 1px solid rgba(102, 102, 102, 1);
+      border-radius: 12px;
+      box-sizing: border-box;
+      button{
+        i{
+          border-color: #000000;
+        }
+      }
+      > div{
+       
+        > div{
+     
+          > div 
+          {
+            div{
+              span{
+                font-size: 16px !important;
+               
+               
+              }
+            }
+            > div{
+              
+              >div{
+          
+                > div{
+                  div{
+                    font-size: 16px !important;
+                    
+                  }
+                }
+              }
+          }
+        
+           
+          }
+        }
+      }
+    }
+  }
+  div.customdatepicker > div > div > div:first-child div > div{
+   
+    
+  span{
+    font-size: 20px !important;
+    line-height: 26px !important;
+  }
+  }
+}
