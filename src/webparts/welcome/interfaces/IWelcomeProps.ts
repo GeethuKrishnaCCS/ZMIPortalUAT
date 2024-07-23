@@ -8,13 +8,14 @@ export interface IWelcomeProps {
   userDisplayName: string;
   context: WebPartContext;
   welcomeBannerImage: string;
+  welcomeBannerList: string;
  
 }
 
 export interface IWelcomeWebPartProps {
   description: string;
   welcomeBannerImage: string;
- 
+  welcomeBannerList: string;
 }
 
 

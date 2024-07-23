@@ -2,7 +2,9 @@ import * as React from "react";
 import { StylingState, StylingProps } from "./StylingPropsState";
 import { mergeStyles } from "office-ui-fabric-react/lib/Styling";
 import styles from "./EventNews.module.scss";
-import { IIconProps, IconButton } from "@fluentui/react";
+import { IIconProps, IconButton, } from "@fluentui/react";
+import { TooltipHost, TooltipDelay, DirectionalHint, ITooltipHostStyles } from '@fluentui/react';
+
 export const iconClass = mergeStyles({
   fontSize: 15,
   height: 15,
@@ -91,6 +93,9 @@ export default class StackStyle extends React.Component<
     const backicon: IIconProps = { iconName: 'ChevronLeftSmall' };
     const nexticon: IIconProps = { iconName: 'ChevronRightSmall' };
 
+
+    const hostStyles: Partial<ITooltipHostStyles> = { root: { display: 'inline-block' } };
+
     let i = 0;
     return (
 
@@ -116,11 +121,16 @@ export default class StackStyle extends React.Component<
                         </div>
                         <div className={styles.NewsBody}>
                           <div className={styles.EmployeeName}>{Post.Name}</div>
-                          <div>
-                            <p className={styles.TitleStyling} title={Post.Description}>
-                              {truncatedDescription}
-                            </p>
-                          </div>
+
+                          <TooltipHost
+                            content={Post.Description}
+                            delay={TooltipDelay.zero}
+                            directionalHint={DirectionalHint.bottomCenter}
+                            styles={hostStyles}
+                          >
+                            <div className={styles.TitleStyling}>{truncatedDescription}</div>
+                          </TooltipHost>
+
                         </div>
                       </div>
                     );
@@ -144,3 +154,4 @@ export default class StackStyle extends React.Component<
     );
   }
 }
+

@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@fluentui/react": "^8.106.4",
+    "@microsoft/mgt": "^4.2.3",
     "@microsoft/mgt-components": "^4.2.3",
     "@microsoft/mgt-element": "^4.2.3",
     "@microsoft/mgt-react": "^4.2.3",

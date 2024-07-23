@@ -123,16 +123,16 @@ export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWe
                   label: strings.PropertyPaneListName
                 }),
                 PropertyPaneToggle('BdayToggleValue', {
-                  label: strings.BdayToggleValue,  // Set your toggle label here
-                  checked: this.properties.BdayToggleValue  // Set initial value
+                  label: strings.BdayToggleValue,  
+                  checked: this.properties.BdayToggleValue  
                 }),
                 PropertyPaneToggle('WorkToggleValue', {
-                  label: strings.WorkToggleValue,  // Set your toggle label here
-                  checked: this.properties.WorkToggleValue  // Set initial value
+                  label: strings.WorkToggleValue,  
+                  checked: this.properties.WorkToggleValue  
                 }),
                 PropertyPaneToggle('WeddingToggleValue', {
-                  label: strings.WeddingToggleValue,  // Set your toggle label here
-                  checked: this.properties.WeddingToggleValue  // Set initial value
+                  label: strings.WeddingToggleValue, 
+                  checked: this.properties.WeddingToggleValue  
                 }),
                 PropertyPaneTextField('NoOfItemDisplay', {
                   label: strings.PropertyPaneNoOfItemDisplay
