@@ -197,6 +197,12 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
             }
             recurrencedays = recurrencedaysArray.join(', ');
           }
+          else if (recurrencetype === "daily") {
+            recurrencedaysArray = [];
+            recurrenceday = "(Everyday)";
+            recurrencedaysArray.push(recurrenceday);
+            recurrencedays = recurrencedaysArray;
+          }
         }
         const eventdatavalue: any = {
           startDate: recurrence !== null ? rstartDate : startDate,
@@ -292,7 +298,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
                   </div>
                 ))
               ) : (
-                <div>No Anniversaries Today</div>
+                <div>No Events Found</div>
               )}
             </div>
 
