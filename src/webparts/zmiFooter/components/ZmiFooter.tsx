@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './ZmiFooter.module.scss';
 import { IZmiFooterProps, IZmiFooterState } from '../interfaces/IZmiFooterProps';
 import { BaseService } from '../services';
-import { DefaultButton, IIconProps, IconButton, Modal, PrimaryButton, TextField, getTheme, mergeStyleSets, mergeStyles } from '@fluentui/react';
+import { DefaultButton, FontWeights, IIconProps, IconButton, Modal, PrimaryButton, TextField, getTheme, mergeStyleSets, mergeStyles } from '@fluentui/react';
 
 export default class ZmiFooter extends React.Component<IZmiFooterProps, IZmiFooterState, {}> {
   private _Service: BaseService;
@@ -199,10 +199,43 @@ export default class ZmiFooter extends React.Component<IZmiFooterProps, IZmiFoot
     });
     const contentStyles = mergeStyleSets({
       container: {
+
         display: 'flex',
         flexFlow: 'column nowrap',
         alignItems: 'stretch',
-      }
+        borderRadius: '1rem',
+        padding: '0.5rem'
+
+
+      },
+      header: [
+        theme.fonts.xLargePlus,
+        {
+          flex: '1 1 auto',
+          borderTop: `4px solid ${theme.palette.themePrimary}`,
+          color: theme.palette.neutralPrimary,
+          display: 'flex',
+          alignItems: 'center',
+          fontWeight: FontWeights.semibold,
+          padding: '12px 12px 14px 24px',
+        },
+      ],
+      heading: {
+        color: theme.palette.neutralPrimary,
+        fontWeight: FontWeights.semibold,
+        fontSize: 'inherit',
+        margin: '0',
+      },
+      body: {
+        flex: '4 4 auto',
+        padding: '0 24px 24px 24px',
+        overflowY: 'hidden',
+        selectors: {
+          p: { margin: '14px 0' },
+          'p:first-child': { marginTop: 0 },
+          'p:last-child': { marginBottom: 0 },
+        },
+      },
     });
     const CancelIcon: IIconProps = { iconName: 'Cancel' };
     const MoreIcon: IIconProps = { iconName: 'More' }
