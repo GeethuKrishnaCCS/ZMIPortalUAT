@@ -28,7 +28,7 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
       // bdayGreetings: [],
       // workGreetings: [],
       greetings: [],
-      currentIndex: "", 
+      currentIndex: "",
       itemsPerPage: this.props.NoOfItemDisplay !== "" ? parseInt(this.props.NoOfItemDisplay) : 3,
     }
 
@@ -146,10 +146,11 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
                       <mgt-person
                         view="threelines"
                         person-details={JSON.stringify(this.personDetail1(item.Employee.Title, item.Employee.EMail))}
+                        styles={{ fontSize: "14px", fontFamily: 'var(--fontFamilyCustomFont500, var(--fontFamilyBase))' }}
                         show-name
                         // show-personImage
-                       // avatarType={this.personDetail1(item.Employee.Title, item.Employee.EMail).personImage ? "initials" : "photo"}
-                       avatarType='initials'
+                        // avatarType={this.personDetail1(item.Employee.Title, item.Employee.EMail).personImage ? "initials" : "photo"}
+                        avatarType='initials'
                         // personImage={this.personDetail1(item.Employee.Title, item.Employee.EMail).personImage}
                         avatarSize='large'
                       >
@@ -164,7 +165,7 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
                     </div>
 
                     <Person
-                    
+
                     //  personQuery={item.Employee.Title}
                     //  view="oneline"
                     // avatarType='initials'
