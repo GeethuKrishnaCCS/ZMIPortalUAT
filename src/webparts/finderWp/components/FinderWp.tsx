@@ -4,7 +4,7 @@ import { IFinderWpProps, IFinderWpState } from '../interfaces/IFinderWpProps';
 import { FinderWpService } from '../services';
 // import { escape } from '@microsoft/sp-lodash-subset';
 import { debounce } from 'lodash';
-import { DefaultButton, IIconProps, IconButton, SearchBox, Breadcrumb, IBreadcrumbItem, ActionButton } from '@fluentui/react';
+import { DefaultButton, IIconProps, SearchBox, Breadcrumb, IBreadcrumbItem, ActionButton } from '@fluentui/react';
 import { FileTypeIcon, IconType, } from "@pnp/spfx-controls-react/lib/FileTypeIcon";
 export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpState, {}> {
   private _service: any;
@@ -183,12 +183,12 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
             <div className={styles.breadCrumbDiv}>
               <Breadcrumb
                 items={this.state.breadcrumbItems}
+                className={styles.breadCrumbStyle}
                 onRenderItem={(item, render) => (
                   <span className={styles.breadcrumpHeading} onClick={(ev) => this.onBreadcrumbItemClicked(ev, item)}>
                     {render!(item)}
                   </span>
                 )}
-
               />
             </div>
           }
@@ -204,18 +204,36 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                         className={styles.button}
                         onClick={() => this.handleFolderSelection(folder)}
                         styles={{ root: { fontSize: this.props.ButtonFontSize } }}
+                        iconProps={KnowledgeArticle}
                       >
                         {folder.Name}
                       </DefaultButton>
                     ))}
-                    {this.state.filteredFiles.map((file: any) => (
-                      <div key={file.Id}>
-                        <IconButton iconProps={KnowledgeArticle} ariaLabel="File icon" />
-                        <a href={file.ServerRelativeUrl} target="_blank">
-                          {file.Name}
-                        </a>
-                      </div>
-                    ))}
+                    <><div className={styles.tableContainer}>
+                      <table className={styles.tableDiv}>
+                        <tbody>
+                          {this.state.filteredFiles.map((item: any) => (
+                            <tr key={item.Id}>
+                              <td className={styles.tableIconColumn}>
+                                <FileTypeIcon type={IconType.image} path={item.LinkingUri !== null ? item.LinkingUri : window.location.hash + item.ServerRelativeUrl} />
+                              </td>
+                              <td>
+                                <a href={item.LinkingUri !== null ? item.LinkingUri : window.location.hash + item.ServerRelativeUrl} target="_blank">
+                                  {item.Name}
+                                </a>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                      {/* <div key={file.Id}>
+                          <IconButton iconProps={KnowledgeArticle} ariaLabel="File icon" />
+                          <a href={file.ServerRelativeUrl} target="_blank">
+                            {file.Name}
+                          </a>
+                        </div> */}
+                    </>
                   </div>
                 </>
               ) : (
@@ -246,7 +264,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                           <tbody>
                             {this.state.filesInSelectedFolder.map((item: any) => (
                               <tr key={item.Id}>
-                                <td>
+                                <td className={styles.tableIconColumn}>
                                   <FileTypeIcon type={IconType.image} path={item.LinkingUri !== null ? item.LinkingUri : window.location.hash + item.ServerRelativeUrl} />
                                 </td>
                                 <td>
