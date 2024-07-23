@@ -187,15 +187,16 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
   public getAdmin() {
     this.BaseService.getAdmin(this.props.AdminlistName, this.props.siteUrl)
       .then((adminItems: any) => {
-        for (let i in adminItems) {
-          if (this.state.currentuser === adminItems[i].Admin.EMail) {
-            this.setState({
-              editbtnvisible: true,
-              access: true
-            });
-            this.checkingcurrentUserDept("", "Admin")
-          }
+        const isAdmin = adminItems.some(item => item.Admin.EMail === this.props.context.pageContext.user.email);
+        //for (let i in adminItems) {
+        if (isAdmin === true) {
+          this.setState({
+            editbtnvisible: true,
+            access: true
+          });
+          this.checkingcurrentUserDept("", "Admin")
         }
+        // }
       });
   }
   //get all quicklink items from list 
