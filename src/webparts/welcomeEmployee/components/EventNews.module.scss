@@ -226,6 +226,7 @@
       &:first-child {
         margin-left: 0px;
       }
+      
     }
 
     .ImgContainer {
@@ -251,7 +252,12 @@
       // height: 220px;
       // width: 100%;
       padding: 16px 20px;
+      height: 235px;
 
+
+      @media screen and (max-width: 767px) {
+        height: auto;
+      }
       // .description {
       //   position: relative;
 
@@ -308,6 +314,14 @@
       // display: block;
       font-family: var(--fontFamilyCustomFont500, var(--fontFamilyBase));
 
+    }
+
+    .hostStyles{
+      font-size: 15px;
+      font-weight: 500;
+      background: #ecf6ff;
+      padding: 15px;
+      line-height: 22.5px;
     }
 
     
@@ -406,6 +420,11 @@
         display: flex;
         gap: 18px;
 
+        @media screen and (max-width: 767px) {
+          flex-direction: column;
+          gap: 10px;
+        }
+
         // .NewsContainer{
         //   width: 100%;
         //   margin: 0;
@@ -428,11 +447,6 @@
         width: 100%;
         margin-left: 0;
         margin-top: 1em;
-      }
-
-
-      .teammembers {
-        display: block !important;
       }
     }
 
