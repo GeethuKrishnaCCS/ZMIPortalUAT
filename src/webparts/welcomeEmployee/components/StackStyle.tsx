@@ -3,7 +3,7 @@ import { StylingState, StylingProps } from "./StylingPropsState";
 import { mergeStyles } from "office-ui-fabric-react/lib/Styling";
 import styles from "./EventNews.module.scss";
 import { IIconProps, IconButton, } from "@fluentui/react";
-import { TooltipHost, TooltipDelay, DirectionalHint, ITooltipHostStyles } from '@fluentui/react';
+import { TooltipHost, TooltipDelay, DirectionalHint } from '@fluentui/react';
 
 export const iconClass = mergeStyles({
   fontSize: 15,
@@ -94,7 +94,16 @@ export default class StackStyle extends React.Component<
     const nexticon: IIconProps = { iconName: 'ChevronRightSmall' };
 
 
-    const hostStyles: Partial<ITooltipHostStyles> = { root: { display: 'inline-block' } };
+    // const hostStyles: Partial<ITooltipHostStyles> = {
+    //   root: {
+    //     display: 'inline-block',
+    //     fontSize : '15px',
+    //     background : '#ecf6ff',
+    //     padding: '15px',
+    //     lineHeight: '22.5px',
+    //     fontWeight: '500'
+    //   }
+    // };
 
     let i = 0;
     return (
@@ -126,7 +135,25 @@ export default class StackStyle extends React.Component<
                             content={Post.Description}
                             delay={TooltipDelay.zero}
                             directionalHint={DirectionalHint.bottomCenter}
-                            styles={hostStyles}
+                            // styles={hostStyles}
+                            // className={styles.hostStyles}
+
+                            tooltipProps={{
+                              calloutProps: {
+                                styles: {
+                                  beak: {
+                                  background: '#ecf6ff', fontSize: '15px', padding: '15px', lineHeight: '22.5px', fontWeight: '500'},                                  
+                                  beakCurtain: { background: '#ecf6ff', fontSize: '15px', padding: '15px', lineHeight: '22.5px', fontWeight: '500' },
+                                  calloutMain: { background: '#ecf6ff', fontSize: '15px', padding: '15px', lineHeight: '22.5px', fontWeight: '500' }
+                                },
+                              },
+                              styles: {
+                               
+                                content: { fontSize: '15px', lineHeight: '22.5px', fontWeight: '500', fontFamily: 'var(--fontFamilyCustomFont500, var(--fontFamilyBase))'},
+                              },
+                            }}
+
+
                           >
                             <div className={styles.TitleStyling}>{truncatedDescription}</div>
                           </TooltipHost>
