@@ -5,6 +5,7 @@ import { Calendar, DateObject } from "react-multi-date-picker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BaseService } from '../services';
 import * as moment from "moment";
+import { IIconProps, IconButton } from '@fluentui/react';
 export default class Calender extends React.Component<ICalenderProps, ICalenderState, {}> {
   private _Service: BaseService;
   public constructor(props: ICalenderProps) {
@@ -14,11 +15,15 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
       endDate: new Date(),
       eventdataArray: [],
       nodataFound: "",
-      recurrenceDates: []
+      recurrenceDates: [],
+      currentIndex: "", // Track the current index of displayed items
+      itemsPerPage: 1,
     }
     this._Service = new BaseService(this.props.context);
     //this.dateChange =this.dateChange.bind(this);
     this.searchEvents = this.searchEvents.bind(this);
+    this.handleScrollUp = this.handleScrollUp.bind(this);
+    this.handleScrollDown = this.handleScrollDown.bind(this);
   }
   public async componentDidMount(): Promise<void> {
     const eventdataArray: any[] = [];
@@ -215,9 +220,24 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
     console.log(eventdataArray)
     this.setState({ eventdataArray: eventdataArray });
   }
+  private handleScrollUp() {
+    const newIndex = Math.max(this.state.currentIndex - this.state.itemsPerPage, 0);
+    this.setState({ currentIndex: newIndex });
+    console.log('upcurrentIndex: ', this.state.currentIndex);
+  }
 
+
+  private handleScrollDown() {
+    const newIndex = Math.min(this.state.currentIndex + this.state.itemsPerPage, this.state.eventdataArray.length - 1);
+    this.setState({ currentIndex: newIndex });
+    console.log('downcurrentIndex: ', this.state.currentIndex);
+  }
   public render(): React.ReactElement<ICalenderProps> {
-    
+    const ChevronUp: IIconProps = { iconName: 'ChevronUp' };
+    const ChevronDown: IIconProps = { iconName: 'ChevronDown' };
+
+    const { eventdataArray, currentIndex, itemsPerPage } = this.state;
+    const displayedItems = eventdataArray.slice(currentIndex, currentIndex + itemsPerPage);
     return (
       <section className={`${styles.calender} `}>
         <div className={styles.heading}>
@@ -232,8 +252,60 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
             headerOrder={["MONTH_YEAR", "LEFT_BUTTON", "RIGHT_BUTTON"]}
           />
           {this.state.eventdataArray.length > 0 &&
-            <div className={styles.border}>
-              <div className={styles.borderbox}>
+          <div className={styles.border}>
+            <div className={styles.uparrow}>
+              <IconButton
+                iconProps={ChevronUp}
+                ariaLabel="Scroll up"
+                onClick={this.handleScrollUp}
+                disabled={this.state.currentIndex === 0}
+                className={styles.customIconButton}
+              />
+            </div>
+            <div className={styles.borderbox}>
+              {displayedItems.length > 0 ? (
+                displayedItems.map((item: any, index: any) => (
+                  <div key={index} >
+<div className={styles.flex}>
+                      {item.recurrence !== null && <div className={styles.dateleft}>{item.startDate}-<br></br>{item.endDate}</div>}
+                      {item.recurrence === null && <div className={styles.dateleft}>{item.startDate}</div>}
+                      <div className={styles.meetingdetail}>
+                        <div>
+                          {item.recurrence !== null && <div className={styles.eventdsc}>Recurring Events</div>}
+                          {item.recurrence === null && <div className={styles.eventdsc}>{item.subject}</div>}
+                          {item.recurrence !== null && <div className={styles.eventdsc}>{item.eventdays}</div>}
+                          <div className={styles.eventdatetime}>{item.startTime}-{item.endTime}</div>
+                        </div>
+                        <div>
+                          {item.isOnlineMeeting !== false && <div className={styles.meetinglink}><a href={item.onlineMeetingUrl} target="_blank">
+                            Meeting
+                          </a></div>}
+                        </div>
+
+
+
+                      </div>
+                    </div>
+                   
+
+
+                  </div>
+                ))
+              ) : (
+                <div>No Anniversaries Today</div>
+              )}
+            </div>
+
+            <div className={styles.downarrow}>
+              <IconButton
+                iconProps={ChevronDown}
+                ariaLabel="Scroll down"
+                onClick={this.handleScrollDown}
+                disabled={this.state.currentIndex >= this.state.eventdataArray.length - 1}
+                className={styles.customIconButton}
+              />
+            </div>
+              {/* <div className={styles.borderbox}>
                 {this.state.eventdataArray.map((item: any, key: any) => {
                   return (
                     <div className={styles.flex}>
@@ -258,7 +330,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
                     </div>
                   )
                 })}
-              </div>
+              </div> */}
             </div>
           }
           {this.state.eventdataArray.length === 0 &&
