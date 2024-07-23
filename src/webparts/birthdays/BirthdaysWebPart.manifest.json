@@ -23,7 +23,8 @@
     "officeFabricIconFontName": "Page",
     "properties": {
       "description": "Birthdays",
-      "listName": "EmployeeDetailList"
+      "listName": "EmployeeDetailList",
+      "BdayToggleValue" : true
     }
   }]
 }

@@ -23,7 +23,9 @@
     "description": { "default": "welcome description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "welcome"
+      "description": "welcome",
+      "welcomeBannerList" : "WelcomeBanner",
+      "welcomeBannerImage" : "https://ccsdev01.sharepoint.com/sites/ZMIMarketing/WelcomeBannerImage/backgrd.png"
     }
   }]
 }

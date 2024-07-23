@@ -583,7 +583,7 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
     // const newIconForIconQL: IIconProps = { iconName: 'SkypeCircleArrow' };
 
     const dropdownStyles: Partial<IDropdownStyles> = {
-      dropdown: { width: 244 },
+      dropdown: { width: 280 },
     };
     const { iseditModalOpen, isValidLink, isHovered } = this.state;
     const options: IDropdownOption[] = [

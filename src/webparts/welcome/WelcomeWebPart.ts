@@ -29,7 +29,8 @@ export default class WelcomeWebPart extends BaseClientSideWebPart<IWelcomeWebPar
         userDisplayName: this.context.pageContext.user.displayName,
         context: this.context,
 
-        welcomeBannerImage: this.properties.welcomeBannerImage
+        welcomeBannerImage: this.properties.welcomeBannerImage,
+        welcomeBannerList: this.properties.welcomeBannerList,
       }
     );
 
@@ -110,6 +111,9 @@ export default class WelcomeWebPart extends BaseClientSideWebPart<IWelcomeWebPar
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
+                }),
+                PropertyPaneTextField('welcomeBannerList', {
+                  label: strings.welcomeBannerList
                 }),
                 PropertyPaneTextField('welcomeBannerImage', {
                   label: strings.welcomeBannerImage

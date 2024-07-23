@@ -251,6 +251,35 @@
       // height: 220px;
       // width: 100%;
       padding: 16px 20px;
+
+      // .description {
+      //   position: relative;
+
+      //   span.onhoverdescription {
+      //     z-index: 10;
+      //     position: absolute;
+      //     top: 40px;
+      //     background: white;
+      //     width: 500px;
+      //     padding: 20px;
+      //     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      //     border-radius: 10px;
+      //     font-size: 15px;
+      //     color: black;
+      //     font-family: var(--fontFamilyCustomFont400, var(--fontFamilyBase));
+      //     opacity: 0;
+      //     transition: all ease-in-out .2s;
+      //   }
+      //   &:hover {
+      //     span.onhoverdescription {
+      //       opacity: 1;
+      //     }
+
+      //   }
+
+      // }
+
+
     }
 
     .EmployeeName {
@@ -260,7 +289,7 @@
       font-weight: 700;
       line-height: 24px;
       margin-bottom: 16px;
-      font-family: var(--fontFamilyCustomFont500,var(--fontFamilyBase));
+      font-family: var(--fontFamilyCustomFont500, var(--fontFamilyBase));
     }
 
     // .TitleContainer {
@@ -277,9 +306,11 @@
       font-weight: 500;
       line-height: 22.5px;
       // display: block;
-      font-family: var(--fontFamilyCustomFont500,var(--fontFamilyBase));
+      font-family: var(--fontFamilyCustomFont500, var(--fontFamilyBase));
 
     }
+
+    
 
     .DescriptionContainer {
       height: 85px;
