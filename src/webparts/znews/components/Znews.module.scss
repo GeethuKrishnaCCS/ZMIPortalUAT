@@ -107,12 +107,18 @@
 
     .title {
       font-family: var(--fontFamilyCustomFont500,var(--fontFamilyBase));
+      font-size: 48px;
       font-weight: 500;
       font-size: 48px;
       line-height: 72px;
       text-align: left;
       color: #000000;
       margin-bottom: 28px;
+      @media screen and (max-width: 768px) {
+        font-size: 30px;
+        line-height: 31px;
+        margin-bottom: 0px;
+      }
 
     }
 
@@ -182,12 +188,18 @@
 
     .TitleContainer {
       padding: 20px 20px 32px;
+      overflow: hidden;
       font-family: var(--fontFamilyCustomFont600,var(--fontFamilyBase));
-      font-weight: 600;
       font-style: normal;
+      font-weight: 600;
       font-size: 18px;
       line-height: 27px;
       color: #101C4E;
+      background: #ECF6FF;
+      @media screen and (max-width: 768px) {
+        font-size: 16px;
+        line-height: 22px;
+      }
     }
 
     .TitleStyling {
@@ -298,21 +310,20 @@
       }
     }
   }
-
+ 
   @media screen and (max-width: 767px) {
     .StackStyle {
-      .heading {
-        align-items: center;
-      }
-
-      // .TitleContainer {
-      //   height: 0;
-      // }
-      .NewsContainer {
-        width: 100%;
-        margin-left: 0;
-        margin-top: 1em;
-      }
+    .heading {
+      align-items: center;
     }
+    // .TitleContainer {
+    //   height: 0;
+    // }
+    .NewsContainer {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 1em;
+    }
+  }
   }
 }
