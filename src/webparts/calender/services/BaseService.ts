@@ -28,19 +28,21 @@ export class BaseService {
             .orderby('start/dateTime')
             .version('v1.0')
             .get();
-        console.log(response.value);
-        return response.value;
-// const client = await context.msGraphClientFactory.getClient("3");
-// const response = await client
-//                     .api('me/events')
-//                     .filter(filterQuery) // Apply the filter query here
-//                     .select(['start','end','subject'])
-//                     .orderby('start/dateTime')
-//                     .version('v1.0')
-//                     .get();
-
-//         console.log(response.value);
-//           return response.value          
+            let data = response.value;
+ 
+    // Check if there's a next link for pagination
+    let nextLink = response['@odata.nextLink'];
+    // Fetch the next page of results if nextLink exists
+    while (nextLink) {
+      const nextResponse = await client.api(nextLink).get();
+      data = data.concat(nextResponse.value); // Append new data to the existing data
+      nextLink = nextResponse['@odata.nextLink']; // Update the nextLink for the next iteration
+    }
+ 
+    console.log(data.value);
+        return data;
+  
+        
     }
    
 
