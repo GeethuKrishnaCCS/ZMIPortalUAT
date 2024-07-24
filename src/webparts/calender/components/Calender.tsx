@@ -41,26 +41,28 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
     if (eventdata.length > 0) {
 
       for (let i = 0; i < eventdata.length; i++) {
+        const eventid = eventdata[i].id;
         const isostartdatetimestring = eventdata[i].start.dateTime + "Z";
         const isostartDateTime = new Date(isostartdatetimestring);
         const localstartDateTime = isostartDateTime.toLocaleDateString() + " " + isostartDateTime.toLocaleTimeString();
         const isoenddatetimestring = eventdata[i].end.dateTime + "Z";
         const isoendDateTime = new Date(isoenddatetimestring);
         const localendDateTime = isoendDateTime.toLocaleDateString() + " " + isoendDateTime.toLocaleTimeString();
-        
         const recurrence = eventdata[i].recurrence
         const startDate = moment(new Date(localstartDateTime)).format("MMM-DD");
         const endDate = moment(new Date(localendDateTime)).format("MMM-DD");
         const starttime = moment(new Date(localstartDateTime)).format("hh:mm A");
         const endtime = moment(new Date(localendDateTime)).format("hh:mm A");
         if (recurrence !== null) {
-          const isorstartdatetimestring = recurrence.range.startDate + "Z";
+        const eventinstancedata = await this._Service.getEventInstances(this.props.context, recurrence.range.startDate + "T00:00:00", recurrence.range.endDate+ "T00:00:00",eventid)
+        console.log(eventinstancedata);
+        for(let r = 0; r < eventinstancedata.length; i++){
+        const isorstartdatetimestring = eventinstancedata[r].start.dateTime + "Z";
         const isorstartDateTime = new Date(isorstartdatetimestring);
         const localrstartDateTime = isorstartDateTime.toLocaleDateString() + " " + isorstartDateTime.toLocaleTimeString();
-        const isorenddatetimestring = recurrence.range.endDate + "Z";
+        const isorenddatetimestring = eventinstancedata[r].end.dateTime + "Z";
         const isorendDateTime = new Date(isorenddatetimestring);
         const localrendDateTime = isorendDateTime.toLocaleDateString() + " " + isorendDateTime.toLocaleTimeString();
-        
           rstartDate = moment(new Date(localrstartDateTime)).format("MMM-DD");
           rendDate = moment(new Date(localrendDateTime)).format("MMM-DD");
           recurrencetype = recurrence.pattern.type;
@@ -98,6 +100,13 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
             }
             recurrencedays = recurrencedaysArray.join(', ');
           }
+          else if (recurrencetype === "daily") {
+            recurrencedaysArray = [];
+            recurrenceday = "(Everyday)";
+            recurrencedaysArray.push(recurrenceday);
+            recurrencedays = recurrencedaysArray;
+          }
+        }
         }
         const eventdatavalue: any = {
           startDate: recurrence !== null ? rstartDate : startDate,
@@ -148,6 +157,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
     if (eventdata.length > 0) {
       console.log(eventdata)
       for (let i = 0; i < eventdata.length; i++) {
+        const eventid = eventdata[i].id;
         const isostartdatetimestring = eventdata[i].start.dateTime + "Z";
         const isostartDateTime = new Date(isostartdatetimestring);
         const localstartDateTime = isostartDateTime.toLocaleDateString() + " " + isostartDateTime.toLocaleTimeString();
@@ -160,8 +170,17 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
         const endtime = moment(new Date(localendDateTime)).format("hh:mm A");
         const recurrence = eventdata[i].recurrence;
         if (recurrence !== null) {
-          rstartDate = moment(new Date(recurrence.range.startDate)).format("MMM-DD");
-          rendDate = moment(new Date(recurrence.range.endDate)).format("MMM-DD");
+          const eventinstancedata = await this._Service.getEventInstances(this.props.context, recurrence.range.startDate + "T00:00:00", recurrence.range.endDate+ "T00:00:00",eventid)
+        console.log(eventinstancedata);
+        for(let r = 0; r < eventinstancedata.length; i++){
+        const isorstartdatetimestring = eventinstancedata[r].start.dateTime + "Z";
+        const isorstartDateTime = new Date(isorstartdatetimestring);
+        const localrstartDateTime = isorstartDateTime.toLocaleDateString() + " " + isorstartDateTime.toLocaleTimeString();
+        const isorenddatetimestring = eventinstancedata[r].end.dateTime + "Z";
+        const isorendDateTime = new Date(isorenddatetimestring);
+        const localrendDateTime = isorendDateTime.toLocaleDateString() + " " + isorendDateTime.toLocaleTimeString();
+          rstartDate = moment(new Date(localrstartDateTime)).format("MMM-DD");
+          rendDate = moment(new Date(localrendDateTime)).format("MMM-DD");
           recurrencetype = recurrence.pattern.type;
           if (recurrencetype === "relativeMonthly") {
             recurrencedaysArray = [];
@@ -203,6 +222,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
             recurrencedaysArray.push(recurrenceday);
             recurrencedays = recurrencedaysArray;
           }
+        }
         }
         const eventdatavalue: any = {
           startDate: recurrence !== null ? rstartDate : startDate,
