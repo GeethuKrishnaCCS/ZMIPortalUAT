@@ -172,9 +172,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
     const hasItemsInSelectedFolder = this.state.selectedFolder
       ? this.state.selectedFolder.subfolders.length > 0 || this.state.filesInSelectedFolder.length > 0
       : this.state.getDocFolder.length > 0 || this.state.getDocFiles.length > 0;
-    const noItems = (this.state.selectedFolder
-      ? this.state.selectedFolder.subfolders.length === 0 || this.state.filesInSelectedFolder.length === 0
-      : this.state.getDocFiles.length === 0) || (this.state.filteredFiles.length === 0 || this.state.filteredFolders.length === 0);
+
     return (
       <section className={`${styles.finderWp} ${hasTeamsContext ? styles.teams : ''}`}>
         <div>
@@ -304,9 +302,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                   </table>
                 </div>}
               </div>}
-            {(!noItems) &&
-              <div className={styles.noItems}>No Items</div>
-            }
+
 
             {/* END - Child item structure */}
 
