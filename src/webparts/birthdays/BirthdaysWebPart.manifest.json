@@ -24,7 +24,8 @@
     "properties": {
       "description": "Birthdays",
       "listName": "EmployeeDetailList",
-      "BdayToggleValue" : true
+      "BdayToggleValue" : true,
+      "NoOfItemDisplay" : "4"
     }
   }]
 }
