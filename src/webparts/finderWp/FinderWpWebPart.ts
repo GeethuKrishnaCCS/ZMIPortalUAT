@@ -96,26 +96,26 @@ export default class FinderWpWebPart extends BaseClientSideWebPart<IFinderWpWebP
 
   protected onPropertyPaneFieldChanged(propertyPath: string, oldValue: any, newValue: any): void {
     super.onPropertyPaneFieldChanged(propertyPath, oldValue, newValue);
-    
+
     if (propertyPath.startsWith('foldercolor')) {
       const index = parseInt(propertyPath.match(/\d+/)[0], 10);
       this.properties.foldercolor[index] = newValue;
-    }  
+    }
     if (propertyPath.startsWith('iconPicker')) {
       const index = parseInt(propertyPath.match(/\d+/)[0], 10);
       this.properties.iconPicker[index] = newValue;
-    }  
+    }
     if (propertyPath === 'selectedDocument' && newValue) {
       this.onDropdownChange(newValue);
-    }  
+    }
     this.render();
   }
-  
+
 
   private async onDropdownChange(selectedLibrary: string): Promise<void> {
     const folders = await this._service.getDocumentLibraryFolder(selectedLibrary);
     console.log('Folders: ', folders);
-  
+
     this._folderFields = folders.map((folder: any, index: number) => {
       //const color = this.properties.foldercolor[index] || '#FFFFFF'; 
       const icon = this.properties.iconPicker[index] || '';
@@ -138,8 +138,8 @@ export default class FinderWpWebPart extends BaseClientSideWebPart<IFinderWpWebP
           PropertyFieldIconPicker(`iconPicker[${index}]`, {
             currentIcon: icon,
             key: `iconPickerId${index}`,
-            onSave: (selectedIcon: string) => { 
-              this.properties.iconPicker[index] = selectedIcon; 
+            onSave: (selectedIcon: string) => {
+              this.properties.iconPicker[index] = selectedIcon;
               // this.context.propertyPane.refresh(); 
               // this.render(); 
             },
@@ -152,10 +152,10 @@ export default class FinderWpWebPart extends BaseClientSideWebPart<IFinderWpWebP
         ]
       };
     });
-  
+
     this.context.propertyPane.refresh();
   }
- 
+
 
   // private addColor(): void {
   //   this.properties.foldercolor = [...this.properties.foldercolor, '#FFFFFF'];

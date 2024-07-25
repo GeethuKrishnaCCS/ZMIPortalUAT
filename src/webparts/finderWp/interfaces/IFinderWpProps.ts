@@ -27,6 +27,19 @@ export interface IFinderWpWebPartProps {
   foldercolor: string[];
 }
 
+export interface IFinderWpStateOLD {
+  getDocFolder: any;
+  getDocFiles: any;
+  filesInSelectedFolder: any;
+  selectedFolder: any;
+  breadcrumbItems: any;
+  searchQuery: any;
+  filteredFiles: any;
+  filteredFolders: any;
+  breadcrumbDiv: boolean;
+  NoItemsDiv: string;
+}
+
 export interface IFinderWpState {
   getDocFolder: any;
   getDocFiles: any;
@@ -36,5 +49,6 @@ export interface IFinderWpState {
   searchQuery: any;
   filteredFiles: any;
   filteredFolders: any;
-  breadcrumbDiv:boolean;
+  breadcrumbDiv: boolean;
+  statusMessage: string;
 }
