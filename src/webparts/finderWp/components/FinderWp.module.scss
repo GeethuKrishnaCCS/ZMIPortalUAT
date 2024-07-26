@@ -39,7 +39,7 @@
   font-weight: bold;
 }
 
-.buttonDiv {
+.contentDiv {
   width: 100%;
 }
 
@@ -64,20 +64,20 @@
     color: black;
     transition: all ease-in-out .25s;
 
+    i {
+      font-size: 25px;
+      margin: 0px 20px 0 0;
+      color: #0071CE;
+    }
+
     &:hover {
       background: #0071CE;
       border-color: #0071CE;
       color: white;
 
       i {
-        color: white;
+        color: white !important;
       }
-    }
-
-    i {
-      font-size: 25px;
-      margin: 0px 20px 0 0;
-      color: #0071CE;
     }
   }
 }
@@ -185,6 +185,8 @@
 .tableIconColumn {
   width: 3%
 }
+
+
 
 .breadCrumbStyle {
   ol {
