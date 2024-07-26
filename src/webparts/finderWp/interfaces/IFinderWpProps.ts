@@ -41,12 +41,12 @@ export interface IFinderWpStateOLD {
 }
 
 export interface IFinderWpState {
-  getDocFolder: any;
+  parentFolders: any[];
   getDocFiles: any;
   filesInSelectedFolder: any;
   selectedFolder: any;
   breadcrumbItems: any;
-  searchQuery: any;
+  searchKey: any;
   filteredFiles: any;
   filteredFolders: any;
   breadcrumbDiv: boolean;

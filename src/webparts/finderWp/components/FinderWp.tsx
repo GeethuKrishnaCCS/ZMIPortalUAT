@@ -6,7 +6,7 @@ import { FinderWpService } from '../services';
 import { debounce } from 'lodash';
 import { SearchBox, Breadcrumb, IBreadcrumbItem, ActionButton, DefaultButton, IIconProps } from '@fluentui/react';
 import { FileTypeIcon, IconType, } from "@pnp/spfx-controls-react/lib/FileTypeIcon";
-export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpState, {}> {
+export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpState> {
   private _service: any;
 
   public constructor(props: IFinderWpProps) {
@@ -14,60 +14,58 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
     this._service = new FinderWpService(this.props.context);
 
     this.state = {
-      getDocFolder: [],
+      parentFolders: [],
       getDocFiles: [],
       filesInSelectedFolder: [],
       selectedFolder: null,
       breadcrumbItems: [{ text: this.props.selectedDocument, key: this.props.selectedDocument }],
-      searchQuery: '',
+      searchKey: "",
       filteredFiles: [],
       filteredFolders: [],
       breadcrumbDiv: false,
       statusMessage: "Loading..."
     }
-    this.getDocFolder = this.getDocFolder.bind(this);
-    this.handleFolderSelection = debounce(this.handleFolderSelection.bind(this), 300);
+    this.getParentFolders = this.getParentFolders.bind(this);
+    this.onFolderSelected = debounce(this.onFolderSelected.bind(this), 300);
     this.onBreadcrumbItemClicked = debounce(this.onBreadcrumbItemClicked.bind(this), 300);
     this.handleSearchQueryChange = debounce(this.handleSearchQueryChange.bind(this), 300);
     this.filterFilesAndFolders = this.filterFilesAndFolders.bind(this);
 
   }
 
-  public async componentDidMount() {
-    await this.getDocFolder();
+  public componentDidMount() {
+    this.getParentFolders();
   }
 
-  public async getDocFolder() {
-    const getDocFOLDER = await this._service.getDocumentLibraryFolder(this.props.selectedDocument);
-    // Assuming getDocFOLDER is an array and IconPicker is an array
-    const iconPickerArray = this.props.iconPicker;
-    // Ensure that getDocFOLDER and iconPickerArray have the same length or handle the difference
-    const updatedFolder = getDocFOLDER.map((folder: any, index: any) => {
-      // If iconPickerArray is shorter, use undefined for missing values
-      const icon = iconPickerArray[index];
-      // Append the icon to each folder object
-      return {
-        ...folder,
-        icon
-      };
-    });
-    if (getDocFOLDER !== null || getDocFOLDER.length > 0) {
-      if (updatedFolder.length > 0) {
-        this.setState({ getDocFolder: updatedFolder, statusMessage: "" });
-      }
-      else {
-        this.setState({ statusMessage: "No items found." });
+  public async getParentFolders() {
+    const parentFolders = await this._service.getDocumentLibraryFolder(this.props.selectedDocument);
+    if (parentFolders !== null && parentFolders !== undefined) {
+      if (parentFolders.length > 0) {
+        const foldersWithIcon = parentFolders.map((folder: any, index: any) => {
+          const icon = this.props.iconPicker[index];
+          return {
+            ...folder,
+            icon
+          };
+        });
+        if (foldersWithIcon.length > 0) {
+          this.setState({ parentFolders: foldersWithIcon, statusMessage: "" });
+        }
+        else {
+          this.setState({ statusMessage: "No items found." });
+        }
+
       }
     }
   }
 
   private async handleSearchQueryChange(newValue: string) {
-    this.setState({ searchQuery: newValue },);
+    this.setState({ searchKey: newValue },);
     await this.filterFilesAndFolders();
   }
 
   private async filterFilesAndFolders(): Promise<void> {
-    const { searchQuery, selectedFolder } = this.state;
+    const { searchKey, selectedFolder } = this.state;
     const filteredFiles: any[] = [];
     const filteredFolders: any[] = [];
 
@@ -78,13 +76,17 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
       ? await this._service.getfoldersfromfolder(selectedFolder.ServerRelativeUrl)
       : await this._service.getDocumentLibraryFolder(this.props.selectedDocument);
 
-    const filteredFolderFiles = folderFiles.filter((file: any) => file.Name.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredFolderFiles = folderFiles.filter((file: any) => file.Name.toLowerCase().includes(searchKey.toLowerCase()));
     filteredFiles.push(...filteredFolderFiles);
 
-    const filteredSubfolders = subfolders.filter((subfolder: any) => subfolder.Name.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredSubfolders = subfolders.filter((subfolder: any) => subfolder.Name.toLowerCase().includes(searchKey.toLowerCase()));
     filteredFolders.push(...filteredSubfolders);
-
-    this.setState({ filteredFiles, filteredFolders });
+    if (filteredFolderFiles.length !== 0 || filteredSubfolders.length !== 0) {
+      this.setState({ filteredFiles, filteredFolders });
+    }
+    else {
+      this.setState({ filteredFolders: [] })
+    }
   }
 
   public async onBreadcrumbItemClicked(ev: React.MouseEvent<HTMLElement>, item: IBreadcrumbItem) {
@@ -97,29 +99,19 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
         breadcrumbItems: [{ text: this.props.selectedDocument, key: this.props.selectedDocument }],
       });
       //await this.getDocFiles();
-      await this.getDocFolder();
+      await this.getParentFolders();
     }
     else {
 
-      await this.handleFolderSelection(folder);
+      await this.onFolderSelected(folder);
       this.setState({ breadcrumbItems });
     }
 
 
   }
 
-  public async handleFolderSelection(folder: any) {
+  public async onFolderSelected(folder: any) {
     let files, subfolders = [];
-
-    // if (folder.Name === this.props.selectedDocument) {
-    //   await this.getDocFiles();
-    //   await this.getDocFolder();
-
-    // } else {
-    //   files = await this._service.getfilesfromfolder(folder.ServerRelativeUrl);
-    //   subfolders = await this._service.getfoldersfromfolder(folder.ServerRelativeUrl);
-    // }
-
 
     if (folder.ServerRelativeUrl) {
       files = await this._service.getfilesfromfolder(folder.ServerRelativeUrl);
@@ -156,7 +148,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
     this.setState({
       selectedFolder: { ...folder, subfolders },
       breadcrumbItems,
-      searchQuery: '',
+      searchKey: "",
       filteredFiles: [],
       filteredFolders: []
     });
@@ -171,7 +163,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
     const hasSearchResults = this.state.filteredFiles.length > 0 || this.state.filteredFolders.length > 0;
     const hasItemsInSelectedFolder = this.state.selectedFolder
       ? this.state.selectedFolder.subfolders.length > 0 || this.state.filesInSelectedFolder.length > 0
-      : this.state.getDocFolder.length > 0 || this.state.getDocFiles.length > 0;
+      : this.state.parentFolders.length > 0 || this.state.getDocFiles.length > 0;
 
     return (
       <section className={`${styles.finderWp} ${hasTeamsContext ? styles.teams : ''}`}>
@@ -200,45 +192,50 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
             }
           </div>
           <div className={styles.contentDiv}>
-            {this.state.statusMessage !== "" && <p>{this.state.statusMessage}</p>}
-            {/* Parent folder structure */}
-            {(!this.state.selectedFolder && this.state.getDocFolder.length > 0) && <div className={styles.buttongrid}>
-              {this.state.getDocFolder.map((item: any, index: number) => (
-                <ActionButton
-                  iconProps={{ iconName: item.icon }}
-                  key={item.Id}
-                  className={styles.button}
-                  onClick={() => this.handleFolderSelection(item)}
-                  styles={{
-                    root: {
-                      fontSize: this.props.ButtonFontSize,
-                      backgroundColor: this.props.foldercolor[index] || 'transparent',
-                    }
-                  }}
-                >
-                  {item.Name}
-                </ActionButton>
-              ))}
-            </div>}
+            {this.state.statusMessage !== "" && <p className={styles.noItems}>{this.state.statusMessage}</p>}
+            {/* START - Parent folder structure */}
+            {(this.state.searchKey === "" && !this.state.selectedFolder && this.state.parentFolders.length > 0) &&
+              <div className={styles.buttongrid}>
+                {this.state.parentFolders.map((item: any, index: number) => (
+                  <ActionButton
+                    iconProps={{ iconName: item.icon }}
+                    key={item.Id}
+                    className={styles.button}
+                    onClick={() => this.onFolderSelected(item)}
+                    styles={{
+                      root: {
+                        fontSize: this.props.ButtonFontSize,
+                        backgroundColor: this.props.foldercolor[index] || 'transparent',
+                      }
+                    }}
+                  >
+                    {item.Name}
+                  </ActionButton>
+                ))}
+              </div>}
+            {/* END - Parent folder structure */}
 
             {/* START - Child item structure */}
-
-            {(this.state.searchQuery && hasSearchResults) &&
+            {/* START - Search results grid */}
+            {(this.state.searchKey !== "" && hasSearchResults) &&
               <div>
-                <h3 className={styles.searchItemDiv}>Search Results</h3>
+                <h3 className={styles.searchItemDiv}>{"Search Results"}</h3>
                 <div className={styles.buttongrid}>
+                  {/* Folder results */}
                   {this.state.filteredFolders.map((folder: any) => (
                     <DefaultButton
                       key={folder.UniqueId}
                       className={styles.button}
-                      onClick={() => this.handleFolderSelection(folder)}
+                      onClick={() => this.onFolderSelected(folder)}
                       styles={{ root: { fontSize: this.props.ButtonFontSize } }}
                       iconProps={KnowledgeArticle}
                     >
                       {folder.Name}
                     </DefaultButton>
                   ))}
-                  <><div className={styles.tableContainer}>
+                  <br></br>
+                  {/* File results */}
+                  <div className={styles.tableContainer}>
                     <table className={styles.tableDiv}>
                       <tbody>
                         {this.state.filteredFiles.map((item: any) => (
@@ -256,17 +253,12 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                       </tbody>
                     </table>
                   </div>
-                    {/* <div key={file.Id}>
-                          <IconButton iconProps={KnowledgeArticle} ariaLabel="File icon" />
-                          <a href={file.ServerRelativeUrl} target="_blank">
-                            {file.Name}
-                          </a>
-                        </div> */}
-                  </>
                 </div>
               </div>}
+            {(this.state.searchKey !== "" && !hasSearchResults) && <p className={styles.noItems}>{"No items found."}</p>}
+            {/* END - Search results grid */}
 
-            {(!this.state.searchQuery && hasItemsInSelectedFolder && this.state.selectedFolder) &&
+            {(this.state.searchKey === "" && hasItemsInSelectedFolder && this.state.selectedFolder) &&
               <div>
                 {this.state.selectedFolder !== null && <div className={styles.buttongrid}>
                   {this.state.selectedFolder.subfolders.map((subfolder: any) => (
@@ -274,7 +266,7 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                       <DefaultButton
                         key={subfolder.UniqueId}
                         className={styles.button}
-                        onClick={() => this.handleFolderSelection(subfolder)}
+                        onClick={() => this.onFolderSelected(subfolder)}
                         styles={{ root: { fontSize: this.props.ButtonFontSize } }}
                         iconProps={KnowledgeArticle}
                       >
@@ -302,10 +294,8 @@ export default class FinderWp extends React.Component<IFinderWpProps, IFinderWpS
                   </table>
                 </div>}
               </div>}
-
-
+            {(this.state.searchKey === "" && !hasItemsInSelectedFolder && this.state.selectedFolder) && <p className={styles.noItems}>{"No items found."}</p>}
             {/* END - Child item structure */}
-
           </div>
         </div>
       </section>
