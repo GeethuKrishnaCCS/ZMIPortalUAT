@@ -41,7 +41,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
     if (eventdata.length > 0) {
 
       for (let i = 0; i < eventdata.length; i++) {
-        const isostartdatetimestring = eventdata[i].start.dateTime + "Z";
+        /* const isostartdatetimestring = eventdata[i].start.dateTime + "Z";
         const isostartDateTime = new Date(isostartdatetimestring);
         const localstartDateTime = isostartDateTime.toLocaleDateString() + " " + isostartDateTime.toLocaleTimeString();
         const isoenddatetimestring = eventdata[i].end.dateTime + "Z";
@@ -59,8 +59,31 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
         const localrstartDateTime = isorstartDateTime.toLocaleDateString() + " " + isorstartDateTime.toLocaleTimeString();
         const isorenddatetimestring = recurrence.range.endDate + "Z";
         const isorendDateTime = new Date(isorenddatetimestring);
-        const localrendDateTime = isorendDateTime.toLocaleDateString() + " " + isorendDateTime.toLocaleTimeString();
-        
+        const localrendDateTime = isorendDateTime.toLocaleDateString() + " " + isorendDateTime.toLocaleTimeString(); */
+
+
+        const isostartdatetimestring = eventdata[i].start.dateTime + "Z";
+        const isostartDateTime = new Date(isostartdatetimestring);
+        const localstartDateTime = isostartDateTime
+        const isoenddatetimestring = eventdata[i].end.dateTime + "Z";
+        const isoendDateTime = new Date(isoenddatetimestring);
+        const localendDateTime = isoendDateTime;
+
+        const recurrence = eventdata[i].recurrence
+        const startDate = moment(new Date(localstartDateTime)).format("MMM-DD");
+        const endDate = moment(new Date(localendDateTime)).format("MMM-DD");
+        const starttime = moment(new Date(localstartDateTime)).format("hh:mm A");
+        const endtime = moment(new Date(localendDateTime)).format("hh:mm A");
+        if (recurrence !== null) {
+          const isorstartdatetimestring = recurrence.range.startDate + "Z";
+          const isorstartDateTime = new Date(isorstartdatetimestring);
+          //const localrstartDateTime = isorstartDateTime + " " + isorstartDateTime;
+          const localrstartDateTime = isorstartDateTime;
+          const isorenddatetimestring = recurrence.range.endDate + "Z";
+          const isorendDateTime = new Date(isorenddatetimestring);
+          //const localrendDateTime = isorendDateTime + " " + isorendDateTime;
+          const localrendDateTime = isorendDateTime;
+
           rstartDate = moment(new Date(localrstartDateTime)).format("MMM-DD");
           rendDate = moment(new Date(localrendDateTime)).format("MMM-DD");
           recurrencetype = recurrence.pattern.type;
@@ -150,10 +173,10 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
       for (let i = 0; i < eventdata.length; i++) {
         const isostartdatetimestring = eventdata[i].start.dateTime + "Z";
         const isostartDateTime = new Date(isostartdatetimestring);
-        const localstartDateTime = isostartDateTime.toLocaleDateString() + " " + isostartDateTime.toLocaleTimeString();
+        const localstartDateTime = isostartDateTime//.toLocaleDateString() + " " + isostartDateTime.toLocaleTimeString();
         const isoenddatetimestring = eventdata[i].end.dateTime + "Z";
         const isoendDateTime = new Date(isoenddatetimestring);
-        const localendDateTime = isoendDateTime.toLocaleDateString() + " " + isoendDateTime.toLocaleTimeString();
+        const localendDateTime = isoendDateTime//.toLocaleDateString() + " " + isoendDateTime.toLocaleTimeString();
         const startDate = moment(new Date(localstartDateTime)).format("MMM-DD");
         const endDate = moment(new Date(localendDateTime)).format("MMM-DD");
         const starttime = moment(new Date(localstartDateTime)).format("hh:mm A");
@@ -258,59 +281,59 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
             headerOrder={["MONTH_YEAR", "LEFT_BUTTON", "RIGHT_BUTTON"]}
           />
           {this.state.eventdataArray.length > 0 &&
-          <div className={styles.border}>
-            <div className={styles.uparrow}>
-              <IconButton
-                iconProps={ChevronUp}
-                ariaLabel="Scroll up"
-                onClick={this.handleScrollUp}
-                disabled={this.state.currentIndex === 0}
-                className={styles.customIconButton}
-              />
-            </div>
-            <div className={styles.borderbox}>
-              {displayedItems.length > 0 ? (
-                displayedItems.map((item: any, index: any) => (
-                  <div key={index} >
-<div className={styles.flex}>
-                      {item.recurrence !== null && <div className={styles.dateleft}>{item.startDate}-<br></br>{item.endDate}</div>}
-                      {item.recurrence === null && <div className={styles.dateleft}>{item.startDate}</div>}
-                      <div className={styles.meetingdetail}>
-                        <div>
-                          {item.recurrence !== null && <div className={styles.eventdsc}>Recurring Events</div>}
-                          {item.recurrence === null && <div className={styles.eventdsc}>{item.subject}</div>}
-                          {item.recurrence !== null && <div className={styles.eventdsc}>{item.eventdays}</div>}
-                          <div className={styles.eventdatetime}>{item.startTime}-{item.endTime}</div>
+            <div className={styles.border}>
+              <div className={styles.uparrow}>
+                <IconButton
+                  iconProps={ChevronUp}
+                  ariaLabel="Scroll up"
+                  onClick={this.handleScrollUp}
+                  disabled={this.state.currentIndex === 0}
+                  className={styles.customIconButton}
+                />
+              </div>
+              <div className={styles.borderbox}>
+                {displayedItems.length > 0 ? (
+                  displayedItems.map((item: any, index: any) => (
+                    <div key={index} >
+                      <div className={styles.flex}>
+                        {item.recurrence !== null && <div className={styles.dateleft}>{item.startDate}-<br></br>{item.endDate}</div>}
+                        {item.recurrence === null && <div className={styles.dateleft}>{item.startDate}</div>}
+                        <div className={styles.meetingdetail}>
+                          <div>
+                            {item.recurrence !== null && <div className={styles.eventdsc}>Recurring Events</div>}
+                            {item.recurrence === null && <div className={styles.eventdsc}>{item.subject}</div>}
+                            {item.recurrence !== null && <div className={styles.eventdsc}>{item.eventdays}</div>}
+                            <div className={styles.eventdatetime}>{item.startTime}-{item.endTime}</div>
+                          </div>
+                          <div>
+                            {item.isOnlineMeeting !== false && <div className={styles.meetinglink}><a href={item.onlineMeetingUrl} target="_blank">
+                              Meeting
+                            </a></div>}
+                          </div>
+
+
+
                         </div>
-                        <div>
-                          {item.isOnlineMeeting !== false && <div className={styles.meetinglink}><a href={item.onlineMeetingUrl} target="_blank">
-                            Meeting
-                          </a></div>}
-                        </div>
-
-
-
                       </div>
+
+
+
                     </div>
-                   
+                  ))
+                ) : (
+                  <div>No Events Found</div>
+                )}
+              </div>
 
-
-                  </div>
-                ))
-              ) : (
-                <div>No Events Found</div>
-              )}
-            </div>
-
-            <div className={styles.downarrow}>
-              <IconButton
-                iconProps={ChevronDown}
-                ariaLabel="Scroll down"
-                onClick={this.handleScrollDown}
-                disabled={this.state.currentIndex >= this.state.eventdataArray.length - 1}
-                className={styles.customIconButton}
-              />
-            </div>
+              <div className={styles.downarrow}>
+                <IconButton
+                  iconProps={ChevronDown}
+                  ariaLabel="Scroll down"
+                  onClick={this.handleScrollDown}
+                  disabled={this.state.currentIndex >= this.state.eventdataArray.length - 1}
+                  className={styles.customIconButton}
+                />
+              </div>
               {/* <div className={styles.borderbox}>
                 {this.state.eventdataArray.map((item: any, key: any) => {
                   return (
