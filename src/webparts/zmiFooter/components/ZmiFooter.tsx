@@ -63,7 +63,7 @@ export default class ZmiFooter extends React.Component<IZmiFooterProps, IZmiFoot
     }
     const LinkedinLogo = footerdata.filter((item: any) => item.Title === "LINKED IN");
     if (LinkedinLogo.length > 0) {
-      this.setState({ linkedinLogoUrl: LinkedinLogo[0].Logo.Url, linkedinLogolink: CompanyLogo[0].Link });
+      this.setState({ linkedinLogoUrl: LinkedinLogo[0].Logo.Url, linkedinLogolink: LinkedinLogo[0].Link });
     }
 
   }
