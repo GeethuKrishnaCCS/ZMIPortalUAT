@@ -3,7 +3,7 @@
   "solution": {
     "name": "zmi-components-client-side-solution",
     "id": "f9877f63-d774-43c6-9c2d-c57ccb1e573b",
-    "version": "1.0.0.17",
+    "version": "1.0.0.18",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
