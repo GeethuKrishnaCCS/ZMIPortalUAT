@@ -13,6 +13,7 @@ declare interface IWelcomeEmployeeWebPartStrings {
   UnknownEnvironment: string;
 
   WelcomeEmployeeListname: string;
+  WelcomeGreeting: string;
 }
 
 declare module 'WelcomeEmployeeWebPartStrings' {

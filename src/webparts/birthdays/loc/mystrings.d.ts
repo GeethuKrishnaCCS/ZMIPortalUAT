@@ -12,6 +12,10 @@ declare interface IBirthdaysWebPartStrings {
   AppOutlookEnvironment: string;
 
   PropertyPaneListName: string;
+  WebpartName: string;
+  bdayGreetingWish: string;
+  WorkGreetingWish: string;
+  weddingGreetingWish: string;
 
   BdayToggleValue: string;
   WorkToggleValue: string;

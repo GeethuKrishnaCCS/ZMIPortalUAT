@@ -26,6 +26,8 @@ export default class StackStyle extends React.Component<
       Reload: true
     };
     this.updateRenderedNews = this.updateRenderedNews.bind(this);
+    this.Next = this.Next.bind(this);
+    this.Back = this.Back.bind(this);
 
   }
 
@@ -63,7 +65,7 @@ export default class StackStyle extends React.Component<
     let count = 0;
     const min = this.state.Next;
     const max = min + 4;
-    News.map((Post: any) => {
+    News.forEach((Post: any) => {
       count = count + 1;
       if (count > min && count < max) {
         array.push(Post);
@@ -78,7 +80,7 @@ export default class StackStyle extends React.Component<
     const min = this.state.Next - 6;
     const max = this.state.Next - 2;
     let count = 0;
-    News.map((Post: any) => {
+    News.forEach((Post: any) => {
       count = count + 1;
       if (count > min && count < max) {
         array.push(Post);
@@ -92,18 +94,6 @@ export default class StackStyle extends React.Component<
   public render(): React.ReactElement<StylingProps> {
     const backicon: IIconProps = { iconName: 'ChevronLeftSmall' };
     const nexticon: IIconProps = { iconName: 'ChevronRightSmall' };
-
-
-    // const hostStyles: Partial<ITooltipHostStyles> = {
-    //   root: {
-    //     display: 'inline-block',
-    //     fontSize : '15px',
-    //     background : '#ecf6ff',
-    //     padding: '15px',
-    //     lineHeight: '22.5px',
-    //     fontWeight: '500'
-    //   }
-    // };
 
     let i = 0;
     return (
@@ -135,25 +125,21 @@ export default class StackStyle extends React.Component<
                             content={Post.Description}
                             delay={TooltipDelay.zero}
                             directionalHint={DirectionalHint.bottomCenter}
-                            // styles={hostStyles}
-                            // className={styles.hostStyles}
-
                             tooltipProps={{
                               calloutProps: {
                                 styles: {
                                   beak: {
-                                  background: '#ecf6ff', fontSize: '15px', padding: '15px', lineHeight: '22.5px', fontWeight: '500'},                                  
+                                    background: '#ecf6ff', fontSize: '15px', padding: '15px', lineHeight: '22.5px', fontWeight: '500'
+                                  },
                                   beakCurtain: { background: '#ecf6ff', fontSize: '15px', padding: '15px', lineHeight: '22.5px', fontWeight: '500' },
                                   calloutMain: { background: '#ecf6ff', fontSize: '15px', padding: '15px', lineHeight: '22.5px', fontWeight: '500' }
                                 },
                               },
                               styles: {
-                               
-                                content: { fontSize: '15px', lineHeight: '22.5px', fontWeight: '500', fontFamily: 'var(--fontFamilyCustomFont500, var(--fontFamilyBase))'},
+
+                                content: { fontSize: '15px', lineHeight: '22.5px', fontWeight: '500', fontFamily: 'var(--fontFamilyCustomFont500, var(--fontFamilyBase))' },
                               },
                             }}
-
-
                           >
                             <div className={styles.TitleStyling}>{truncatedDescription}</div>
                           </TooltipHost>

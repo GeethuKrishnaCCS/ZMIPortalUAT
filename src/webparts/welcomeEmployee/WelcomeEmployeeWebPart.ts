@@ -24,13 +24,14 @@ export default class WelcomeEmployeeWebPart extends BaseClientSideWebPart<IWelco
       WelcomeEmployee,
       {
         description: this.properties.description,
+        WelcomeGreeting: this.properties.WelcomeGreeting,
         WelcomeEmployeelistname: this.properties.WelcomeEmployeelistname,
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
         context: this.context,
-        
+
       }
     );
 
@@ -114,6 +115,9 @@ export default class WelcomeEmployeeWebPart extends BaseClientSideWebPart<IWelco
                 }),
                 PropertyPaneTextField('WelcomeEmployeelistname', {
                   label: strings.WelcomeEmployeeListname
+                }),
+                PropertyPaneTextField('WelcomeGreeting', {
+                  label: strings.WelcomeGreeting
                 }),
               ]
             }
