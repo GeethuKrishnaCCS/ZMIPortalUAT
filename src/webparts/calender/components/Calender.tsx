@@ -121,6 +121,12 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
             }
             recurrencedays = recurrencedaysArray.join(', ');
           }
+          else if (recurrencetype === "daily") {
+            recurrencedaysArray = [];
+            recurrenceday = "(Everyday)";
+            recurrencedaysArray.push(recurrenceday);
+            recurrencedays = recurrencedaysArray;
+          }
         }
         const eventdatavalue: any = {
           startDate: recurrence !== null ? rstartDate : startDate,
@@ -171,6 +177,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
     if (eventdata.length > 0) {
       console.log(eventdata)
       for (let i = 0; i < eventdata.length; i++) {
+        
         const isostartdatetimestring = eventdata[i].start.dateTime + "Z";
         const isostartDateTime = new Date(isostartdatetimestring);
         const localstartDateTime = isostartDateTime//.toLocaleDateString() + " " + isostartDateTime.toLocaleTimeString();
