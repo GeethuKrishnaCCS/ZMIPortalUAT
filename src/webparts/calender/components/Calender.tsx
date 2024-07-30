@@ -20,7 +20,6 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
       itemsPerPage: 1,
     }
     this._Service = new BaseService(this.props.context);
-    //this.dateChange =this.dateChange.bind(this);
     this.searchEvents = this.searchEvents.bind(this);
     this.handleScrollUp = this.handleScrollUp.bind(this);
     this.handleScrollDown = this.handleScrollDown.bind(this);
@@ -35,9 +34,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
     let recurrencedays: any;
     const today = moment(new Date().setMilliseconds(0)).format('YYYY-MM-DDT00:00:00.SSSSSSS');
     const nextDay = moment(today).add(1, 'days').format('YYYY-MM-DDT00:00:00.SSSSSSS');
-    console.log(nextDay)
     const eventdata = await this._Service.getevents(this.props.context, today, nextDay)
-    console.log(eventdata);
     if (eventdata.length > 0) {
 
       for (let i = 0; i < eventdata.length; i++) {
@@ -259,14 +256,12 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
   private handleScrollUp() {
     const newIndex = Math.max(this.state.currentIndex - this.state.itemsPerPage, 0);
     this.setState({ currentIndex: newIndex });
-    console.log('upcurrentIndex: ', this.state.currentIndex);
   }
 
 
   private handleScrollDown() {
     const newIndex = Math.min(this.state.currentIndex + this.state.itemsPerPage, this.state.eventdataArray.length - 1);
     this.setState({ currentIndex: newIndex });
-    console.log('downcurrentIndex: ', this.state.currentIndex);
   }
   public render(): React.ReactElement<ICalenderProps> {
     const ChevronUp: IIconProps = { iconName: 'ChevronUp' };

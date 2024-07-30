@@ -176,13 +176,8 @@ export default class StackStyle extends React.Component<
           </div>
        
           <div>
-            {/* <div className={`${styles.Dot} active`}><div className={styles.InnerDot}></div></div> */}
             {this.renderdots()}
-            {/* <div className={styles.Dot}><div className={styles.InnerDot}></div></div> */}
-          </div>  
-          {/* <div className={styles.NavigationContainer}>
-            <div className={styles.NavigationPageNumStyling}>{this.state.Count} out of {Math.ceil(this.props.News.length / 3)}</div>
-          </div> */}
+          </div>
       </div>
       </div>
     );
