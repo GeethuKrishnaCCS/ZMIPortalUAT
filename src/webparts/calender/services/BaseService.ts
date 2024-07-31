@@ -18,6 +18,7 @@ export class BaseService {
         return this._sp.web.currentUser();
     }
     public async getevents(context: any, start: string, end: string): Promise<any> {
+        // const filterQuery = `(start/dateTime ge '${start}' and start/dateTime le '${end}') or (isAllDay eq true and end/dateTime ge '${start}')`;
         const filterQuery = `start/dateTime ge '${start}' and start/dateTime le '${end}'`; // Use the correct field name in your query
         //const filterQuery = `(start/dateTime ge '${start}' and start/dateTime le '${end}') or isAllDay eq true`;
         const client = await context.msGraphClientFactory.getClient("3");
