@@ -119,6 +119,7 @@ export default class StackStyle extends React.Component<
                 <div className={styles.teammembers}>
                   {this.state.RenderedNews.map((Post, key) => {
                     const plainText = this.stripHtml(Post.Description);
+                    // const plainTextLength = plainText.length;
                     i = i + 1;
                     const truncatedDescription = plainText.length > 200 ? `${plainText.slice(0, 200)}...` : plainText;
                     return (
