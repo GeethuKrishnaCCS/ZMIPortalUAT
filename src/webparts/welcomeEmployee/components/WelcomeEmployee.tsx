@@ -3,6 +3,7 @@ import styles from './WelcomeEmployee.module.scss';
 import type { IWelcomeEmployeeProps, IWelcomeEmployeeState } from '../interfaces/IWelcomeEmployeeProps';
 import { welcomeEmployeeService } from '../services';
 import StackStyle from './StackStyle';
+import * as _ from 'lodash';
 
 
 export default class WelcomeEmployee extends React.Component<IWelcomeEmployeeProps, IWelcomeEmployeeState, {}> {
@@ -13,10 +14,7 @@ export default class WelcomeEmployee extends React.Component<IWelcomeEmployeePro
     this._service = new welcomeEmployeeService(this.props.context);
 
     this.state = {
-
       listItems: [],
-
-
     }
     this.getData = this.getData.bind(this);
 
@@ -28,10 +26,18 @@ export default class WelcomeEmployee extends React.Component<IWelcomeEmployeePro
 
   public async getData() {
     const url: string = this.props.context.pageContext.web.serverRelativeUrl;
-    const getEmployee = await this._service.getListItems(this.props.WelcomeEmployeelistname, url)
-    this.setState({ listItems: getEmployee })
-
+    
+    try {
+      const getEmployee = await this._service.getListItems(this.props.WelcomeEmployeelistname, url);
+      const sortedemployees = _.orderBy(getEmployee, (e: any) => {
+        return e.Id;
+    }, ['desc']);
+      this.setState({ listItems: sortedemployees });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   }
+  
 
   public render(): React.ReactElement<IWelcomeEmployeeProps> {
     const {
@@ -42,7 +48,7 @@ export default class WelcomeEmployee extends React.Component<IWelcomeEmployeePro
       <section className={`${styles.welcomeEmployee} ${hasTeamsContext ? styles.teams : ''}`}>
         <div>
           <div className={styles.heading}>{"Welcome to ZMI Holdings"}</div>
-          <div className={styles.subheading}>{"Welcome new colleague to the team"}</div>
+          <div className={styles.subheading}>{this.props.WelcomeGreeting}</div>
           <StackStyle listItems={this.state.listItems} context={this.props.context} />
         </div>
       </section>

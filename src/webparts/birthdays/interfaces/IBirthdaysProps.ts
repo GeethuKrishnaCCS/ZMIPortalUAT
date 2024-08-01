@@ -12,6 +12,10 @@ export interface IBirthdaysProps {
   WorkToggleValue: boolean;
   WeddingToggleValue: boolean;
   NoOfItemDisplay: any;
+  webpartName: string;
+  bdayGreetingWish: string;
+  WorkGreetingWish: string;
+  weddingGreetingWish: string;
 }
 export interface IBirthdaysWebPartProps {
   description: string;
@@ -20,6 +24,10 @@ export interface IBirthdaysWebPartProps {
   BdayToggleValue: boolean;
   WorkToggleValue: boolean;
   WeddingToggleValue: boolean;
+  webpartName: string;
+  bdayGreetingWish: string;
+  WorkGreetingWish: string;
+  weddingGreetingWish: string;
 }
 
 export interface IBirthdaysState {

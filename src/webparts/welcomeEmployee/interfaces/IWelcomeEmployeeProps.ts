@@ -8,6 +8,7 @@ export interface IWelcomeEmployeeProps {
   userDisplayName: string;
   context: WebPartContext;
   WelcomeEmployeelistname: string;
+  WelcomeGreeting: string;
   
 }
 
@@ -15,6 +16,7 @@ export interface IWelcomeEmployeeWebPartProps {
   description: string;
   listItems:any;
   WelcomeEmployeelistname: string;
+  WelcomeGreeting: string;
 }
 
 export interface IWelcomeEmployeeState {

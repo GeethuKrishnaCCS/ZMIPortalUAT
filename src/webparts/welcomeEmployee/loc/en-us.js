@@ -13,6 +13,7 @@ define([], function() {
     "AppOutlookEnvironment": "The app is running in Outlook",
     "UnknownEnvironment": "The app is running in an unknown environment",
     
-    "WelcomeEmployeeListname": "ListName - WelcomeEmployee"
+    "WelcomeEmployeeListname": "ListName - WelcomeEmployee",
+    "WelcomeGreeting": " Welcome Greeting "
   }
 });

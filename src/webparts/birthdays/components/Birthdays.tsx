@@ -1,18 +1,12 @@
 import * as React from 'react';
 import styles from './Birthdays.module.scss';
-// import { escape } from '@microsoft/sp-lodash-subset';
 import { IBirthdaysProps, IBirthdaysState } from '../interfaces/IBirthdaysProps';
 import { BirthdaysService } from '../services';
-
-// import { Person } from '@microsoft/mgt-react';
 import { IIconProps, IconButton } from '@fluentui/react';
-//import { Person } from '@microsoft/mgt-react/dist/es6/spfx';
 import { Person } from '@microsoft/mgt-react';
 
 import * as moment from 'moment';
 import { TemplateHelper } from '@microsoft/mgt';
-// import { avatarType } from '@microsoft/mgt-spfx';
-// import { PersonCardInteraction } from '@microsoft/mgt-spfx';
 
 
 
@@ -25,24 +19,22 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
     this.state = {
       listItems: [],
       today: "",
-      // bdayGreetings: [],
-      // workGreetings: [],
       greetings: [],
-      currentIndex: "",
+      currentIndex: 0,
       itemsPerPage: this.props.NoOfItemDisplay !== "" ? parseInt(this.props.NoOfItemDisplay) : 3,
     }
 
-    this.getData = this.getData.bind(this);
+    this.getAnniversaryDetail = this.getAnniversaryDetail.bind(this);
     this.handleScrollUp = this.handleScrollUp.bind(this);
     this.handleScrollDown = this.handleScrollDown.bind(this);
-    this.personDetail1 = this.personDetail1.bind(this);
+    this.getEmployeeDetail = this.getEmployeeDetail.bind(this);
   }
 
   public async componentDidMount() {
-    await this.getData();
+    await this.getAnniversaryDetail();
   }
 
-  public async getData() {
+  public async getAnniversaryDetail() {
     try {
       const url: string = this.props.context.pageContext.web.serverRelativeUrl;
       const listItem = await this._service.getItemSelectExpand(url, this.props.listName, "*, Employee/ID, Employee/Title,Employee/EMail", "Employee");
@@ -58,7 +50,6 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
           const dateOfWedding = moment(item.DateOfWedding).format('MMM DD, YYYY');
 
           const employeeInfo = await this._service.getUser(item.Employee.ID);
-          // console.log('employeeInfo: ', employeeInfo);
 
           if (dateOfBirth === todayDate && this.props.BdayToggleValue) {
             greetings.push({ ...item, type: 'Birthday', employeeInfo });
@@ -70,7 +61,7 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
             greetings.push({ ...item, type: 'Wedding Anniversary', employeeInfo });
           }
         } catch (itemError) {
-          console.error('Error processing item:', item, itemError);
+          console.error('Error in Fetching Data:', item, itemError);
         }
       });
 
@@ -96,7 +87,7 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
     this.setState({ currentIndex: newIndex });
   }
 
-  public personDetail1(_name: any, _email: any) {
+  public getEmployeeDetail(_name: any, _email: any) {
     const det = {
       displayName: _name,
       mail: _email,
@@ -112,12 +103,6 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
     const ChevronDown: IIconProps = { iconName: 'ChevronDown' };
     TemplateHelper.setBindingSyntax('[[', ']]');
 
-    //   const personDetail1: any = {
-    //     displayName: 'Geethu Krishna',
-    //     mail: 'geethu.krishna@ccsdev01.onmicrosoft.com',
-    //     personImage: 'https://ccsdev01.sharepoint.com//_layouts/15/userphoto.aspx?size=L&accountname=geethu.krishna@ccsdev01.onmicrosoft.com'
-    // };
-
     const { greetings, currentIndex, itemsPerPage } = this.state;
     const displayedItems = greetings.slice(currentIndex, currentIndex + itemsPerPage);
 
@@ -125,7 +110,7 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
       <section className={`${styles.birthdays} ${hasTeamsContext ? styles.teams : ''}`}>
 
         <div>
-          <div className={styles.defaultBirthdayLabel}>{"Anniversaries"}</div>
+          <div className={styles.defaultBirthdayLabel}>{this.props.webpartName}</div>
           <div className={styles.box}>
             <div className={styles.uparrow}>
               <IconButton
@@ -145,27 +130,23 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
                     <div >
                       <mgt-person
                         view="threelines"
-                        person-details={JSON.stringify(this.personDetail1(item.Employee.Title, item.Employee.EMail))}
+                        person-details={JSON.stringify(this.getEmployeeDetail(item.Employee.Title, item.Employee.EMail))}
                         styles={{ fontSize: "14px", fontFamily: 'var(--fontFamilyCustomFont500, var(--fontFamilyBase))' }}
                         show-name
-                        // show-personImage
-                        // avatarType={this.personDetail1(item.Employee.Title, item.Employee.EMail).personImage ? "initials" : "photo"}
                         avatarType='initials'
-                        // personImage={this.personDetail1(item.Employee.Title, item.Employee.EMail).personImage}
                         avatarSize='large'
                       >
                         <template data-type="line3">
                           <div className={styles.secondarytextstyle}>
-                            {item.type === 'Birthday' ? `Birthday on ${moment(item.DateOfBirth).format('MMM DD')}` :
-                              item.type === 'Work Anniversary' ? `Work Anniversary on ${moment(item.DateOfJoining).format('MMM DD')}` :
-                                item.type === 'Wedding Anniversary' ? `Wedding Anniversary on ${moment(item.DateOfWedding).format('MMM DD')}` : ''}
+                            {item.type === 'Birthday' ? `${this.props.bdayGreetingWish} on ${moment(item.DateOfBirth).format('MMM DD')}` :
+                              item.type === 'Work Anniversary' ? `${this.props.WorkGreetingWish} on ${moment(item.DateOfJoining).format('MMM DD')}` :
+                                item.type === 'Wedding Anniversary' ? `${this.props.weddingGreetingWish} on ${moment(item.DateOfWedding).format('MMM DD')}` : ''}
                           </div>
                         </template>
                       </mgt-person>
                     </div>
 
                     <Person
-
                     //  personQuery={item.Employee.Title}
                     //  view="oneline"
                     // avatarType='initials'
@@ -173,7 +154,7 @@ export default class Birthdays extends React.Component<IBirthdaysProps, IBirthda
                   </div>
                 ))
               ) : (
-                <div>No Anniversaries Today</div>
+                <div>{"No Anniversaries Today"}</div>
               )}
             </div>
 

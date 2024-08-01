@@ -4,96 +4,6 @@
   height: 100%;
   width: 100%;
 
-  // .SingleStyle {
-  //   .SingleStyleContainer {
-  //     width: 100%;
-  //   }
-
-  //   .NewsContainer {
-  //     height: 173px;
-  //     margin-bottom: 15px;
-  //   }
-
-  //   .ImgContainer {
-  //     width: 276px;
-  //     height: 173px;
-  //     float: left;
-  //     overflow: hidden;
-  //   }
-
-  //   .Image {
-  //     object-fit: cover;
-  //     width: 100%;
-  //     height: 100%;
-  //   }
-
-  //   .NewsBody {
-  //     float: left;
-  //     margin-left: 20px;
-  //   }
-
-  //   .TitleContainer {
-  //     font-weight: 600;
-  //     font-size: 20px;
-  //     padding: 8px 0px;
-  //   }
-
-  //   .TitleStyling {
-  //     text-decoration: none;
-  //   }
-
-
-  //   .DescriptionContainer {
-  //     height: 72px;
-  //     overflow: hidden;
-  //     width: 418px;
-  //     padding: 7px 0px
-  //   }
-
-  //   .IconContainer {
-  //     float: right;
-  //     margin-top: 4px;
-  //     padding: 9px
-  //   }
-
-  //   .IconLabelStyling {
-  //     margin-left: 2px
-  //   }
-
-  //   .AuthorContainer {
-  //     float: left;
-  //     margin-top: 11px;
-  //     font-size: 12px;
-  //   }
-
-
-  //   .NavigationContainer {
-  //     width: 100%;
-  //     float: left;
-  //     height: 30px;
-  //     padding-bottom: 7px;
-  //   }
-
-  //   .NavigationLeftButtonStyling {
-  //     float: left;
-  //     padding: 20px;
-  //     border: none;
-  //     cursor: pointer;
-  //   }
-
-  //   .NavigationRightButtonStyling {
-  //     float: right;
-  //     padding: 20px;
-  //     border: none;
-  //     cursor: pointer;
-  //   }
-
-  //   .NavigationPageNumStyling {
-  //     text-align: center;
-  //     padding: 20px;
-  //   }
-  // }
-
   .SingleStyle {
     .SingleStyleContainer {
       width: 100%;
@@ -216,41 +126,29 @@
     }
 
     .NewsContainer {
-      // height: 380px;
       width: 33.33%;
-      // border: 1px solid rgb(236, 246, 255);
       border-radius: 10px;
       background-color: rgb(236, 246, 255);
-      // margin-left: 16px;
 
       &:first-child {
         margin-left: 0px;
       }
-      
     }
 
     .ImgContainer {
-
-      // border-radius: 10px;
       border-radius: 10px 10px 0px 0;
       height: 250px;
-      // margin: 1em;
       overflow: hidden;
-      // border: 1px solid #9c9ea3;
     }
 
     .Image {
       object-fit: cover;
       width: 100%;
       height: 100%;
-      // margin-left: 0.5px;
-      // margin-right: 0.5px;
     }
 
     .NewsBody {
       float: left;
-      // height: 220px;
-      // width: 100%;
       padding: 16px 20px;
       height: 235px;
 
@@ -258,73 +156,32 @@
       @media screen and (max-width: 767px) {
         height: auto;
       }
-      // .description {
-      //   position: relative;
-
-      //   span.onhoverdescription {
-      //     z-index: 10;
-      //     position: absolute;
-      //     top: 40px;
-      //     background: white;
-      //     width: 500px;
-      //     padding: 20px;
-      //     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      //     border-radius: 10px;
-      //     font-size: 15px;
-      //     color: black;
-      //     font-family: var(--fontFamilyCustomFont400, var(--fontFamilyBase));
-      //     opacity: 0;
-      //     transition: all ease-in-out .2s;
-      //   }
-      //   &:hover {
-      //     span.onhoverdescription {
-      //       opacity: 1;
-      //     }
-
-      //   }
-
-      // }
-
-
     }
 
     .EmployeeName {
       font-size: 16px;
       color: black;
-      // padding: 12px 12px 0 12px;
       font-weight: 700;
       line-height: 24px;
       margin-bottom: 16px;
       font-family: var(--fontFamilyCustomFont500, var(--fontFamilyBase));
     }
 
-    // .TitleContainer {
-    // font-size: 15px;
-    // font-weight: 500;
-    // height: 150px;
-    // overflow: hidden;
-    // padding: 8px 12px;
-    // }
-
     .TitleStyling {
       color: black;
       font-size: 15px;
       font-weight: 500;
       line-height: 22.5px;
-      // display: block;
       font-family: var(--fontFamilyCustomFont500, var(--fontFamilyBase));
-
     }
 
-    .hostStyles{
+    .hostStyles {
       font-size: 15px;
       font-weight: 500;
       background: #ecf6ff;
       padding: 15px;
       line-height: 22.5px;
     }
-
-    
 
     .DescriptionContainer {
       height: 85px;
@@ -345,13 +202,10 @@
 
     .AuthorContainer {
       float: left;
-      // margin-bottom: 5px;
       font-size: 12px;
       padding: 9x;
-      // margin-left: 9px;
       color: #1d5447;
       margin: 1em;
-
       font-family: 'Inter';
     }
 
@@ -379,7 +233,6 @@
         width: 48px;
         height: 48px;
         top: 201px;
-        // margin-top: -24px;
         background: rgba(20, 20, 20, 0.65);
 
         span {
@@ -400,7 +253,6 @@
         width: 48px;
         height: 48px;
         top: 201px;
-        // margin-top: -24px;
         background: rgba(20, 20, 20, 0.65);
 
         span {
@@ -411,8 +263,6 @@
           opacity: .4;
           pointer-events: none;
         }
-
-
       }
 
 
@@ -424,16 +274,8 @@
           flex-direction: column;
           gap: 10px;
         }
-
-        // .NewsContainer{
-        //   width: 100%;
-        //   margin: 0;
-        // }
       }
     }
-
-
-
   }
 
   @media screen and (max-width: 767px) {
@@ -441,7 +283,6 @@
       .heading {
         align-items: center;
       }
-
 
       .NewsContainer {
         width: 100%;
@@ -451,7 +292,5 @@
     }
 
   }
-
-
 
 }

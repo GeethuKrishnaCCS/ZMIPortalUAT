@@ -31,17 +31,25 @@ export default class Welcome extends React.Component<IWelcomeProps, IWelcomeStat
   }
 
   public async getUser() {
-    const getcurrentuser = await this._service.getCurrentUser();
-    this.setState({ displayName: getcurrentuser.Title })
+    try {
+      const getcurrentuser = await this._service.getCurrentUser();
+      this.setState({ displayName: getcurrentuser.Title });
+    } catch (error) {
+      console.error("Error fetching current user:", error);     
+    }
   }
-
+  
   public async getData() {
     const url: string = this.props.context.pageContext.web.serverRelativeUrl;
-    const getBannerDetails = await this._service.getListItems(this.props.welcomeBannerList, url)
-    console.log('getBannerDetails: ', getBannerDetails);
-    this.setState({ bannerDetails: getBannerDetails });
-
+  
+    try {
+      const getBannerDetails = await this._service.getListItems(this.props.welcomeBannerList, url);
+      this.setState({ bannerDetails: getBannerDetails });
+    } catch (error) {
+      console.error("Error fetching banner details:", error);
+    }
   }
+  
 
   private handleButtonClick(url: string) {
     window.open(url, '_blank');
@@ -62,12 +70,6 @@ export default class Welcome extends React.Component<IWelcomeProps, IWelcomeStat
                 className={styles.welcomebgimage}>
 
                 <div className={styles.welcomeheading}>{"Welcome,"} {this.state.displayName}{"!"}</div>
-                {/* <div className={styles.searchdiv}>
-                  <SearchBox
-                    className={styles.searchbox}
-                    placeholder="Search"
-                  />
-                </div> */}
 
                 <div className={styles.buttoncontainer} >
                   {this.state.bannerDetails.map((item: any) => (

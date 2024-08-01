@@ -36,6 +36,10 @@ export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWe
         BdayToggleValue: this.properties.BdayToggleValue,
         WorkToggleValue: this.properties.WorkToggleValue,
         WeddingToggleValue: this.properties.WeddingToggleValue,
+        webpartName: this.properties.webpartName,
+        bdayGreetingWish: this.properties.bdayGreetingWish,
+        WorkGreetingWish: this.properties.WorkGreetingWish,
+        weddingGreetingWish: this.properties.weddingGreetingWish,
       }
     );
 
@@ -122,21 +126,33 @@ export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWe
                 PropertyPaneTextField('listName', {
                   label: strings.PropertyPaneListName
                 }),
+                PropertyPaneTextField('webpartName', {
+                  label: strings.WebpartName
+                }),
+                PropertyPaneTextField('bdayGreetingWish', {
+                  label: strings.bdayGreetingWish
+                }),
                 PropertyPaneToggle('BdayToggleValue', {
-                  label: strings.BdayToggleValue,  
-                  checked: this.properties.BdayToggleValue  
+                  label: strings.BdayToggleValue,
+                  checked: this.properties.BdayToggleValue
+                }),
+                PropertyPaneTextField('WorkGreetingWish', {
+                  label: strings.WorkGreetingWish
                 }),
                 PropertyPaneToggle('WorkToggleValue', {
-                  label: strings.WorkToggleValue,  
-                  checked: this.properties.WorkToggleValue  
+                  label: strings.WorkToggleValue,
+                  checked: this.properties.WorkToggleValue
+                }),
+                PropertyPaneTextField('weddingGreetingWish', {
+                  label: strings.weddingGreetingWish
                 }),
                 PropertyPaneToggle('WeddingToggleValue', {
-                  label: strings.WeddingToggleValue, 
-                  checked: this.properties.WeddingToggleValue  
+                  label: strings.WeddingToggleValue,
+                  checked: this.properties.WeddingToggleValue
                 }),
                 PropertyPaneTextField('NoOfItemDisplay', {
                   label: strings.PropertyPaneNoOfItemDisplay
-                }),                
+                }),
               ]
             }
           ]

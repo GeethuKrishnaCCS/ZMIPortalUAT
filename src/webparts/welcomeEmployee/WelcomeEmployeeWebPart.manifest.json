@@ -23,7 +23,8 @@
     "officeFabricIconFontName": "Page",
     "properties": {
       "description": "WelcomeEmployee",
-      "WelcomeEmployeelistname" : "WelcomeEmployee"
+      "WelcomeEmployeelistname" : "WelcomeEmployee",
+      " WelcomeGreeting": "Welcome new colleague to the team"
     }
   }]
 }

@@ -26,17 +26,17 @@ export default class StackStyle extends React.Component<
       Reload: true
     };
     this.updateRenderedNews = this.updateRenderedNews.bind(this);
+    this.Next = this.Next.bind(this);
+    this.Back = this.Back.bind(this);
 
   }
 
   public componentDidMount() {
-    console.log('Props in StackStyle on mount:', this.props.listItems);
     this.updateRenderedNews(this.props.listItems);
   }
 
   public componentDidUpdate(prevProps: StylingProps) {
     if (prevProps.listItems !== this.props.listItems) {
-      console.log('Props in StackStyle on update:', this.props.listItems);
       this.updateRenderedNews(this.props.listItems);
     }
   }
@@ -55,7 +55,7 @@ export default class StackStyle extends React.Component<
     });
 
     this.setState({ RenderedNews: array, Next: 3, Count: 1, UpdateCount: 0 });
-    console.log('RenderedNews:', this.state.RenderedNews);
+
   }
 
   public Next(News: any) {
@@ -63,7 +63,7 @@ export default class StackStyle extends React.Component<
     let count = 0;
     const min = this.state.Next;
     const max = min + 4;
-    News.map((Post: any) => {
+    News.forEach((Post: any) => {
       count = count + 1;
       if (count > min && count < max) {
         array.push(Post);
@@ -78,7 +78,7 @@ export default class StackStyle extends React.Component<
     const min = this.state.Next - 6;
     const max = this.state.Next - 2;
     let count = 0;
-    News.map((Post: any) => {
+    News.forEach((Post: any) => {
       count = count + 1;
       if (count > min && count < max) {
         array.push(Post);
@@ -88,22 +88,19 @@ export default class StackStyle extends React.Component<
     this.setState({ RenderedNews: array, Next: newVal, Count: this.state.Count - 1 });
   }
 
+  public stripHtml(html) {
+    return html.replace(/<\/?[^>]+(>|$)/g, "");
+  }
+
 
   public render(): React.ReactElement<StylingProps> {
     const backicon: IIconProps = { iconName: 'ChevronLeftSmall' };
     const nexticon: IIconProps = { iconName: 'ChevronRightSmall' };
 
+    const HtmlContent = ({ html }) => (< div dangerouslySetInnerHTML={{ __html: html }} />);
+    const stripHtmlTags = (html) => { const div = document.createElement('div'); div.innerHTML = html; return div.textContent || div.innerText || ''; };
 
-    // const hostStyles: Partial<ITooltipHostStyles> = {
-    //   root: {
-    //     display: 'inline-block',
-    //     fontSize : '15px',
-    //     background : '#ecf6ff',
-    //     padding: '15px',
-    //     lineHeight: '22.5px',
-    //     fontWeight: '500'
-    //   }
-    // };
+    
 
     let i = 0;
     return (
@@ -121,8 +118,10 @@ export default class StackStyle extends React.Component<
               {this.state.RenderedNews.length > 0 ? (
                 <div className={styles.teammembers}>
                   {this.state.RenderedNews.map((Post, key) => {
+                    const plainText = this.stripHtml(Post.Description);
+                    // const plainTextLength = plainText.length;
                     i = i + 1;
-                    const truncatedDescription = Post.Description.length > 180 ? `${Post.Description.slice(0, 180)}...` : Post.Description;
+                    const truncatedDescription = plainText.length > 200 ? `${plainText.slice(0, 200)}...` : plainText;
                     return (
                       <div className={styles.NewsContainer}>
                         <div className={styles.ImgContainer}>
@@ -132,31 +131,30 @@ export default class StackStyle extends React.Component<
                           <div className={styles.EmployeeName}>{Post.Name}</div>
 
                           <TooltipHost
-                            content={Post.Description}
+                            content={<HtmlContent html={Post.Description} />}
                             delay={TooltipDelay.zero}
                             directionalHint={DirectionalHint.bottomCenter}
-                            // styles={hostStyles}
-                            // className={styles.hostStyles}
-
                             tooltipProps={{
                               calloutProps: {
                                 styles: {
                                   beak: {
-                                  background: '#ecf6ff', fontSize: '15px', padding: '15px', lineHeight: '22.5px', fontWeight: '500'},                                  
+                                    background: '#ecf6ff', fontSize: '15px', padding: '15px', lineHeight: '22.5px', fontWeight: '500'
+                                  },
                                   beakCurtain: { background: '#ecf6ff', fontSize: '15px', padding: '15px', lineHeight: '22.5px', fontWeight: '500' },
                                   calloutMain: { background: '#ecf6ff', fontSize: '15px', padding: '15px', lineHeight: '22.5px', fontWeight: '500' }
                                 },
                               },
                               styles: {
-                               
-                                content: { fontSize: '15px', lineHeight: '22.5px', fontWeight: '500', fontFamily: 'var(--fontFamilyCustomFont500, var(--fontFamilyBase))'},
+
+                                content: { fontSize: '15px', lineHeight: '22.5px', fontWeight: '500', fontFamily: 'var(--fontFamilyCustomFont500, var(--fontFamilyBase))' },
                               },
                             }}
-
-
                           >
-                            <div className={styles.TitleStyling}>{truncatedDescription}</div>
+
+                            {/* <div className={styles.TitleStyling} dangerouslySetInnerHTML={{ __html: truncatedDescription }} /> */}
+                            <div className={styles.TitleStyling}> {stripHtmlTags(truncatedDescription)}</div>
                           </TooltipHost>
+
 
                         </div>
                       </div>

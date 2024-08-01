@@ -25,19 +25,6 @@ export class WelcomeService extends BaseService {
     public async getCurrentUser(): Promise<any> {
         return this._spfi.web.currentUser();
     }
-    
-    public getItemSelectExpandFilter(siteUrl: string, listname: string, select: string, expand: string, filter: string): Promise<any> {
-        return this._spfi.web.getList(siteUrl + "/Lists/" + listname).items
-            .select(select)
-            .expand(expand)
-            .filter(filter)()
-    }
-    public getItemSelectExpand(siteUrl: string, listname: string, select: string, expand: string): Promise<any> {
-        return this._spfi.web.getList(siteUrl + "/Lists/" + listname).items
-            .select(select)
-            .expand(expand)
-            ()
-    }
 
 
 }
