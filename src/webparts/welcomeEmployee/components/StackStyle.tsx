@@ -32,13 +32,11 @@ export default class StackStyle extends React.Component<
   }
 
   public componentDidMount() {
-    console.log('Props in StackStyle on mount:', this.props.listItems);
     this.updateRenderedNews(this.props.listItems);
   }
 
   public componentDidUpdate(prevProps: StylingProps) {
     if (prevProps.listItems !== this.props.listItems) {
-      console.log('Props in StackStyle on update:', this.props.listItems);
       this.updateRenderedNews(this.props.listItems);
     }
   }
@@ -57,7 +55,7 @@ export default class StackStyle extends React.Component<
     });
 
     this.setState({ RenderedNews: array, Next: 3, Count: 1, UpdateCount: 0 });
-    console.log('RenderedNews:', this.state.RenderedNews);
+  
   }
 
   public Next(News: any) {

@@ -3,6 +3,7 @@ import styles from './WelcomeEmployee.module.scss';
 import type { IWelcomeEmployeeProps, IWelcomeEmployeeState } from '../interfaces/IWelcomeEmployeeProps';
 import { welcomeEmployeeService } from '../services';
 import StackStyle from './StackStyle';
+import * as _ from 'lodash';
 
 
 export default class WelcomeEmployee extends React.Component<IWelcomeEmployeeProps, IWelcomeEmployeeState, {}> {
@@ -13,10 +14,7 @@ export default class WelcomeEmployee extends React.Component<IWelcomeEmployeePro
     this._service = new welcomeEmployeeService(this.props.context);
 
     this.state = {
-
       listItems: [],
-
-
     }
     this.getData = this.getData.bind(this);
 
@@ -31,7 +29,10 @@ export default class WelcomeEmployee extends React.Component<IWelcomeEmployeePro
     
     try {
       const getEmployee = await this._service.getListItems(this.props.WelcomeEmployeelistname, url);
-      this.setState({ listItems: getEmployee });
+      const sortedemployees = _.orderBy(getEmployee, (e: any) => {
+        return e.Id;
+    }, ['desc']);
+      this.setState({ listItems: sortedemployees });
     } catch (error) {
       console.error("Error fetching data:", error);
     }
