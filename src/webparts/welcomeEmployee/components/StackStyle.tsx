@@ -55,7 +55,7 @@ export default class StackStyle extends React.Component<
     });
 
     this.setState({ RenderedNews: array, Next: 3, Count: 1, UpdateCount: 0 });
-  
+
   }
 
   public Next(News: any) {
@@ -88,10 +88,19 @@ export default class StackStyle extends React.Component<
     this.setState({ RenderedNews: array, Next: newVal, Count: this.state.Count - 1 });
   }
 
+  public stripHtml(html) {
+    return html.replace(/<\/?[^>]+(>|$)/g, "");
+  }
+
 
   public render(): React.ReactElement<StylingProps> {
     const backicon: IIconProps = { iconName: 'ChevronLeftSmall' };
     const nexticon: IIconProps = { iconName: 'ChevronRightSmall' };
+
+    const HtmlContent = ({ html }) => (< div dangerouslySetInnerHTML={{ __html: html }} />);
+    const stripHtmlTags = (html) => { const div = document.createElement('div'); div.innerHTML = html; return div.textContent || div.innerText || ''; };
+
+    
 
     let i = 0;
     return (
@@ -109,8 +118,9 @@ export default class StackStyle extends React.Component<
               {this.state.RenderedNews.length > 0 ? (
                 <div className={styles.teammembers}>
                   {this.state.RenderedNews.map((Post, key) => {
+                    const plainText = this.stripHtml(Post.Description);
                     i = i + 1;
-                    const truncatedDescription = Post.Description.length > 180 ? `${Post.Description.slice(0, 180)}...` : Post.Description;
+                    const truncatedDescription = plainText.length > 200 ? `${plainText.slice(0, 200)}...` : plainText;
                     return (
                       <div className={styles.NewsContainer}>
                         <div className={styles.ImgContainer}>
@@ -120,7 +130,7 @@ export default class StackStyle extends React.Component<
                           <div className={styles.EmployeeName}>{Post.Name}</div>
 
                           <TooltipHost
-                            content={Post.Description}
+                            content={<HtmlContent html={Post.Description} />}
                             delay={TooltipDelay.zero}
                             directionalHint={DirectionalHint.bottomCenter}
                             tooltipProps={{
@@ -139,8 +149,11 @@ export default class StackStyle extends React.Component<
                               },
                             }}
                           >
-                            <div className={styles.TitleStyling}>{truncatedDescription}</div>
+
+                            {/* <div className={styles.TitleStyling} dangerouslySetInnerHTML={{ __html: truncatedDescription }} /> */}
+                            <div className={styles.TitleStyling}> {stripHtmlTags(truncatedDescription)}</div>
                           </TooltipHost>
+
 
                         </div>
                       </div>
