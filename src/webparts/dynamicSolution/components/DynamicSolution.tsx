@@ -123,15 +123,17 @@ export default class Dynamicsolution extends React.Component<IDynamicsolutionPro
           .api(`me/transitiveMemberOf/microsoft.graph.group?$count=true`)
           .get(async (error, response: any, rawResponse?: any) => {
             console.log(JSON.stringify(response));
-            console.log(response.value);
-            response.value.map((group: any) => {
-              let tempgroups = {
-                value: group.displayName,
-                label: group.displayName
-              }
-              groups.push(tempgroups);
-            });
-            this.setState({ groups: groups });
+            if (response !== null) {
+              console.log(response.value);
+              response.value.map((group: any) => {
+                let tempgroups = {
+                  value: group.displayName,
+                  label: group.displayName
+                }
+                groups.push(tempgroups);
+              });
+              this.setState({ groups: groups });
+            }
             if (type === "QuickLinkType") {
               if (AudienceTargets.length !== 0) {
                 const access = response.value.filter((item: any) => AudienceTargets.includes(item.displayName));
