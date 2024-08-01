@@ -10,6 +10,17 @@ declare interface IBirthdaysWebPartStrings {
   AppTeamsTabEnvironment: string;
   AppOfficeEnvironment: string;
   AppOutlookEnvironment: string;
+
+  PropertyPaneListName: string;
+  WebpartName: string;
+  bdayGreetingWish: string;
+  WorkGreetingWish: string;
+  weddingGreetingWish: string;
+
+  BdayToggleValue: string;
+  WorkToggleValue: string;
+  WeddingToggleValue: string;
+  PropertyPaneNoOfItemDisplay: string;
 }
 
 declare module 'BirthdaysWebPartStrings' {

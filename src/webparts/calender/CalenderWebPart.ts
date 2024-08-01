@@ -23,6 +23,7 @@ export default class CalenderWebPart extends BaseClientSideWebPart<ICalenderProp
         siteUrl: this.context.pageContext.web.serverRelativeUrl,
         eventListName: this.properties.eventListName,
         context: this.context,
+        description:this.properties.description
       }
     );
 

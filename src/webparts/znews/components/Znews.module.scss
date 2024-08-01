@@ -1,0 +1,332 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.znews {
+  // height: 100%;
+  width: 100%;
+
+  .SingleStyle {
+    .SingleStyleContainer {
+      width: 100%;
+    }
+
+    .NewsContainer {
+      height: 173px;
+      margin-bottom: 15px;
+    }
+
+    .ImgContainer {
+      width: 276px;
+      height: 173px;
+      float: left;
+      overflow: hidden;
+    }
+
+    .Image {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    .NewsBody {
+      float: left;
+      margin-left: 20px;
+    }
+
+    .TitleContainer {
+      font-weight: 600;
+      font-size: 20px;
+      padding: 8px 0px;
+    }
+
+    .TitleStyling {
+      text-decoration: none;
+    }
+
+    .DescriptionContainer {
+      height: 72px;
+      overflow: hidden;
+      width: 418px;
+      padding: 7px 0px
+    }
+
+    .IconContainer {
+      float: right;
+      margin-top: 4px;
+      padding: 9px
+    }
+
+    .IconLabelStyling {
+      margin-left: 2px
+    }
+
+    .AuthorContainer {
+      float: left;
+      margin-top: 11px;
+      font-size: 12px;
+    }
+
+    .NavigationContainer {
+      width: 100%;
+      float: left;
+      height: 30px;
+      padding-bottom: 7px;
+    }
+
+    .NavigationLeftButtonStyling {
+      float: left;
+      padding: 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .NavigationRightButtonStyling {
+      float: right;
+      padding: 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .NavigationPageNumStyling {
+      text-align: center;
+      padding: 20px;
+    }
+  }
+
+  .StackStyle {
+    .StackStyleContainer {
+      width: 100%;
+      min-height: 420px;
+    }
+
+    .heading {
+      display: flex;
+      margin-bottom: 10px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .title {
+      font-family: var(--fontFamilyCustomFont500,var(--fontFamilyBase));
+      font-size: 48px;
+      font-weight: 500;
+      font-size: 48px;
+      line-height: 72px;
+      text-align: left;
+      color: #000000;
+      margin-bottom: 28px;
+      @media screen and (max-width: 768px) {
+        font-size: 30px;
+        line-height: 31px;
+        margin-bottom: 0px;
+      }
+
+    }
+
+    .seeall {
+      text-align: right;
+      margin-right: 1em;
+      font-size: 17px;
+    }
+
+    .link {
+      color: #1d5447;
+      text-decoration: underline;
+    }
+
+    .NewsSlider{
+      width: 100%;
+      position: relative;
+      display: flex;
+    }
+
+    .Prevbtn{
+      width:48px;
+      position: absolute;
+      left: 0;
+      top: 161px;
+    }
+    .Nextbtn{
+      width:48px;
+      position: absolute;
+      right: 0;
+      top: 161px;
+    }
+    .NewsCard{
+      width: 100%;
+      display: flex;
+      @media screen and (max-width: 768px) {
+        display: block;
+      }
+    }
+
+    .NewsContainer {
+      width: calc(33.333% - 10.666px);
+      background-color: white;;
+      margin-left: 16px;
+      border-radius: 20px;
+      overflow: hidden;
+      
+      &:first-child {
+        margin-left: 0px;
+      }
+    }
+
+    .ImgContainer {
+      width: 100%;
+      height: 370px;
+      overflow: hidden;
+   
+      .Image {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .NewsBody {
+      float: left;
+      width: 100%;
+      
+    }
+
+    .TitleContainer {
+      padding: 20px 20px 32px;
+      overflow: hidden;
+      font-family: var(--fontFamilyCustomFont600,var(--fontFamilyBase));
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 27px;
+      color: #101C4E;
+      background: white;;
+      @media screen and (max-width: 768px) {
+        font-size: 16px;
+        line-height: 22px;
+      }
+    }
+
+    .TitleStyling {
+      text-decoration: none;
+      color: #101C4E;
+
+    }
+
+    .DescriptionContainer {
+      height: 85px;
+      overflow: hidden;
+      padding: 9px
+    }
+
+    .IconContainer {
+      float: right;
+      margin-top: 20px;
+      padding: 9px;
+      font-size: 12px;
+    }
+
+    .IconLabelStyling {
+      margin-left: 2px
+    }
+    .footer{
+      height: 17%;
+      background-color:$ms-color-themePrimary ;
+      border-radius: 0em 0em 1em 1em;
+    }
+    .AuthorContainer {
+      float: left;
+      // margin-bottom: 5px;
+      font-size: 12px;
+      padding: 9x;
+      background-color: $ms-color-themePrimary;
+      color: #1d5447;
+      margin: 1em;
+    }
+
+    .NavigationContainer {
+      width: 100%;
+      float: left;     
+    }
+
+    .NavigationLeftButtonStyling {
+      float: left;
+      padding: 20px;
+      border: none;
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      background: rgba(20, 20, 20, 0.65);
+      color: #ffffff;
+    }
+
+    .NavigationRightButtonStyling {
+      float: right;
+      padding: 20px;
+      border: none;
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      background: rgba(20, 20, 20, 0.65);
+      color: #ffffff;
+    }
+
+    .NavigationPageNumStyling {
+      text-align: center;
+      padding: 20px;
+    }
+
+    button:disabled{
+        opacity: 0.4;
+        pointer-events: none;
+    }
+
+    .NavDot{
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      margin-top: 32px;
+
+      .Dot{
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        background: #fff;
+        border: inset 1px solid rgba(109, 110, 113, 1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .InnerDot{
+           background: #fff; 
+           width: 12px;
+           height: 12px;
+           border-radius: 100%;
+        }
+
+        &.active{
+          border: inset 1px solid rgba(0, 113, 206, 1);
+
+           .InnerDot{
+            background: rgba(0, 113, 206, 1);
+           }
+        }
+      }
+    }
+  }
+ 
+  @media screen and (max-width: 767px) {
+    .StackStyle {
+    .heading {
+      align-items: center;
+    }
+    // .TitleContainer {
+    //   height: 0;
+    // }
+    .NewsContainer {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 1em;
+    }
+  }
+  }
+}

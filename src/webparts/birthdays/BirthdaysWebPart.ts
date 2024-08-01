@@ -3,18 +3,18 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneToggle
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import * as strings from 'BirthdaysWebPartStrings';
 import Birthdays from './components/Birthdays';
-import { IBirthdaysProps } from './components/IBirthdaysProps';
+import { IBirthdaysProps, IBirthdaysWebPartProps } from './interfaces/IBirthdaysProps';
+import { SharePointProvider } from '@microsoft/mgt-sharepoint-provider';
+import { Providers } from '@microsoft/mgt-element';
 
-export interface IBirthdaysWebPartProps {
-  description: string;
-}
 
 export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWebPartProps> {
 
@@ -29,7 +29,17 @@ export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWe
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        context: this.context,
+        listName: this.properties.listName,
+        NoOfItemDisplay: this.properties.NoOfItemDisplay,
+        BdayToggleValue: this.properties.BdayToggleValue,
+        WorkToggleValue: this.properties.WorkToggleValue,
+        WeddingToggleValue: this.properties.WeddingToggleValue,
+        webpartName: this.properties.webpartName,
+        bdayGreetingWish: this.properties.bdayGreetingWish,
+        WorkGreetingWish: this.properties.WorkGreetingWish,
+        weddingGreetingWish: this.properties.weddingGreetingWish,
       }
     );
 
@@ -37,6 +47,9 @@ export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWe
   }
 
   protected onInit(): Promise<void> {
+    if (!Providers.globalProvider) {
+      Providers.globalProvider = new SharePointProvider(this.context);
+    }
     return this._getEnvironmentMessage().then(message => {
       this._environmentMessage = message;
     });
@@ -109,7 +122,37 @@ export default class BirthdaysWebPart extends BaseClientSideWebPart<IBirthdaysWe
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
-                })
+                }),
+                PropertyPaneTextField('listName', {
+                  label: strings.PropertyPaneListName
+                }),
+                PropertyPaneTextField('webpartName', {
+                  label: strings.WebpartName
+                }),
+                PropertyPaneTextField('bdayGreetingWish', {
+                  label: strings.bdayGreetingWish
+                }),
+                PropertyPaneToggle('BdayToggleValue', {
+                  label: strings.BdayToggleValue,
+                  checked: this.properties.BdayToggleValue
+                }),
+                PropertyPaneTextField('WorkGreetingWish', {
+                  label: strings.WorkGreetingWish
+                }),
+                PropertyPaneToggle('WorkToggleValue', {
+                  label: strings.WorkToggleValue,
+                  checked: this.properties.WorkToggleValue
+                }),
+                PropertyPaneTextField('weddingGreetingWish', {
+                  label: strings.weddingGreetingWish
+                }),
+                PropertyPaneToggle('WeddingToggleValue', {
+                  label: strings.WeddingToggleValue,
+                  checked: this.properties.WeddingToggleValue
+                }),
+                PropertyPaneTextField('NoOfItemDisplay', {
+                  label: strings.PropertyPaneNoOfItemDisplay
+                }),
               ]
             }
           ]

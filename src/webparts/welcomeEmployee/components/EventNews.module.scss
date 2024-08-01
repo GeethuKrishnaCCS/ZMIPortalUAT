@@ -1,0 +1,296 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.eventNews {
+  height: 100%;
+  width: 100%;
+
+  .SingleStyle {
+    .SingleStyleContainer {
+      width: 100%;
+    }
+
+    .NewsContainer {
+      height: 173px;
+      margin-bottom: 15px;
+    }
+
+    .ImgContainer {
+      width: 276px;
+      height: 173px;
+      float: left;
+      overflow: hidden;
+    }
+
+    .Image {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    .NewsBody {
+      float: left;
+      margin-left: 20px;
+    }
+
+    .TitleContainer {
+      font-weight: 600;
+      font-size: 20px;
+      padding: 8px 0px;
+    }
+
+    .TitleStyling {
+      text-decoration: none;
+    }
+
+    .DescriptionContainer {
+      height: 72px;
+      overflow: hidden;
+      width: 418px;
+      padding: 7px 0px
+    }
+
+    .IconContainer {
+      float: right;
+      margin-top: 4px;
+      padding: 9px
+    }
+
+    .IconLabelStyling {
+      margin-left: 2px
+    }
+
+    .AuthorContainer {
+      float: left;
+      margin-top: 11px;
+      font-size: 12px;
+    }
+
+    .NavigationContainer {
+      width: 100%;
+      float: left;
+      height: 30px;
+      padding-bottom: 7px;
+    }
+
+    .NavigationLeftButtonStyling {
+      float: left;
+      padding: 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .NavigationRightButtonStyling {
+      float: right;
+      padding: 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .NavigationPageNumStyling {
+      text-align: center;
+      padding: 20px;
+    }
+  }
+
+  .StackStyle {
+    .StackStyleContainer {
+      width: 100%;
+      min-height: 420px;
+    }
+
+    .heading {
+      display: flex;
+      margin-bottom: 10px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .title {
+      color: #1d5447;
+      font-size: 18px;
+      margin-left: 15px;
+      text-align: left;
+      font-family: 'Inter';
+    }
+
+    .seeall {
+      font-size: 16px;
+      margin-right: 1em;
+      text-align: right;
+      font-family: 'Inter';
+    }
+
+    .link {
+      color: #1d5447;
+      text-decoration: underline;
+    }
+
+    .NewsContainer {
+      width: 33.33%;
+      border-radius: 10px;
+      background-color: rgb(236, 246, 255);
+
+      &:first-child {
+        margin-left: 0px;
+      }
+    }
+
+    .ImgContainer {
+      border-radius: 10px 10px 0px 0;
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .Image {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    .NewsBody {
+      float: left;
+      padding: 16px 20px;
+      height: 235px;
+
+
+      @media screen and (max-width: 767px) {
+        height: auto;
+      }
+    }
+
+    .EmployeeName {
+      font-size: 16px;
+      color: black;
+      font-weight: 700;
+      line-height: 24px;
+      margin-bottom: 16px;
+      font-family: var(--fontFamilyCustomFont500, var(--fontFamilyBase));
+    }
+
+    .TitleStyling {
+      color: black;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 22.5px;
+      font-family: var(--fontFamilyCustomFont500, var(--fontFamilyBase));
+    }
+
+    .hostStyles {
+      font-size: 15px;
+      font-weight: 500;
+      background: #ecf6ff;
+      padding: 15px;
+      line-height: 22.5px;
+    }
+
+    .DescriptionContainer {
+      height: 85px;
+      overflow: hidden;
+      padding: 9px
+    }
+
+    .IconContainer {
+      float: right;
+      margin-top: 20px;
+      padding: 9px;
+      font-size: 12px;
+    }
+
+    .IconLabelStyling {
+      margin-left: 2px
+    }
+
+    .AuthorContainer {
+      float: left;
+      font-size: 12px;
+      padding: 9x;
+      color: #1d5447;
+      margin: 1em;
+      font-family: 'Inter';
+    }
+
+    .NavigationContainer {
+      width: 100%;
+      float: left;
+      height: 30px;
+      padding-top: 9px;
+      padding-bottom: 7px;
+    }
+
+
+
+    .NavigationPageNumStyling {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .teamcardwrap {
+      position: relative;
+
+      .NavigationLeftButtonStyling {
+        left: 0;
+        position: absolute;
+        width: 48px;
+        height: 48px;
+        top: 201px;
+        background: rgba(20, 20, 20, 0.65);
+
+        span {
+          color: white;
+        }
+
+        &:disabled {
+          opacity: .4;
+          pointer-events: none;
+        }
+
+
+      }
+
+      .NavigationRightButtonStyling {
+        right: 0;
+        position: absolute;
+        width: 48px;
+        height: 48px;
+        top: 201px;
+        background: rgba(20, 20, 20, 0.65);
+
+        span {
+          color: white;
+        }
+
+        &:disabled {
+          opacity: .4;
+          pointer-events: none;
+        }
+      }
+
+
+      .teammembers {
+        display: flex;
+        gap: 18px;
+
+        @media screen and (max-width: 767px) {
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .StackStyle {
+      .heading {
+        align-items: center;
+      }
+
+      .NewsContainer {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 1em;
+      }
+    }
+
+  }
+
+}

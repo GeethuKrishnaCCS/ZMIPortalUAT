@@ -1,53 +1,312 @@
 @import '~@fluentui/react/dist/sass/References.scss';
 
 .calender {
-  .border{
-    border: 1px solid #000000;
-    width: 70%;
-    border-collapse: collapse;
-    background-color: #f2f2f2;
+  .heading {
+    display: flex;
+    margin-bottom: 10px;
+ 
   }
+
+  .title {
+    font-family: var(--fontFamilyCustomFont500,var(--fontFamilyBase));
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 72px;
+    text-align: left;
+    color: #000000;
+    margin-bottom: 0px;
+    @media screen and (max-width: 768px) {
+
+      font-size: 30px;
+      line-height: 31px;
+    }
+
+  }
+  .noeventborder{
+    border: 1px solid rgba(102, 102, 102, 1);
+    border-collapse: collapse;
+    border-radius: 12px;
+    max-height: 6em;
+      min-height: 6em;
+      font-family: var(--fontFamilyCustomFont500,var(--fontFamilyBase));
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ecf6ff;
+  }
+  .border{
+    border: 1px solid rgba(102, 102, 102, 1);
+    border-collapse: collapse;
+    border-radius: 12px;
+    max-height: 20em;
+      min-height: 8em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ecf6ff;
+      flex-direction: column;
+   .borderbox{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: space-between;
+    }
+    div.flex{
+      align-items: center;
+      padding: 20px ;
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+        gap: 5px;
+
+      }
+      .dateleft{
+        padding-right: 20px;
+        border-right:1px solid rgba(168, 168, 168, 1) ;
+        font-family: var(--fontFamilyCustomFont300,var(--fontFamilyBase));
+        font-size: 15px;
+        line-height: 20px;
+        color: #000000;
+        min-width: 70px;
+        flex: none;
+        @media screen and (max-width: 768px) {
+          border-right: 0px;
+          border-bottom: 1px solid rgba(168, 168, 168, .5) ;
+          width: 100%;
+          padding-bottom: 3px;
+          text-align: center;
+          padding-right: 0;
+        }
+      }
+      .meetingdetail{
+        padding: 0 0px 0 20px;
+        flex-grow: 1;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        color: #000000;
+        justify-content: space-between;
+        @media screen and (max-width: 768px) {
+          padding: 0 0px 0 0px;
+        }
+        .eventdsc{
+          font-family: var(--fontFamilyCustomFont600,var(--fontFamilyBase));
+          font-size: 12px;
+          line-height: 18px;
+          font-weight: 600;
+        }
+        .eventdatetime{
+          font-family: var(--fontFamilyCustomFont300,var(--fontFamilyBase));
+          font-weight: 300;
+          font-size: 12px;
+          margin-top: 8px;
+          line-height: 18px;
+        }
+        .meetinglink{
+          color: white;
+          background: #0071CE;
+          padding: 9px 18px;
+          border-radius: 50px;
+          font-weight: 700;
+          font-size: 12px;
+          a{
+            color: white;
+            text-decoration: none;
+            font-family: var(--fontFamilyCustomFont600,var(--fontFamilyBase));
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 18px;
+          }
+        }
+      }
+    }
+    
+  }
+
   div.flex {
     display: flex;
   }
+  .uparrow {
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .downarrow {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .customIconButton:hover {
+    background-color: transparent;
+  }
+  
+  .customIconButton:disabled {
+    background: none;
+  }
   .fadebg {
-    background: #f5f6f8;
     padding: 30px 20px 30px 5px;
     width: 25%;
     border-right: 1px solid #c9c9c9;
+    
   }
   .rightcnt {
     padding: 30px 20px 20px 9px;
     width: 50%;
   }
-  .tableClass {
-    border: 1px solid #ddd;
-    width: 100%;
+  .recurr{
+    font-size:small;
+    font-weight: bold;
+  } 
+  .subject{
+    border: 1px solid #000000;
     border-collapse: collapse;
-    background-color: #f2f2f2;
-  }
-    
-    .tbody {
+    text-align: center;
+    background-color:$ms-color-themePrimary;
+    border-radius: 1em;
+  } 
+  .calendarwrap{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    div.customdatepicker{
       width: 100%;
-      border-collapse: collapse;
+      box-shadow: none;
+      border: 1px solid rgba(102, 102, 102, 1);
+      border-radius: 12px;
+      box-sizing: border-box;
+      button{
+        i{
+          border-color: #000000;
+        }
+      }
+      > div{
+        width: 100%;
+        color: #000000;
+        > div{
+          width: 100%;
+          padding: 20px 15px;
+          background-color: #ecf6ff;
+          border-radius: 1em;
+          > div 
+          {
+            div{
+              span{
+                font-size: 18px;
+                font-family: var(--fontFamilyCustomFont500,var(--fontFamilyBase));
+               
+              }
+            }
+            > div{
+              width: 100%;
+              padding: 0;
+              >div{
+                width: 100%;
+                > div{
+                  div{
+                    font-size: 18px;
+                    font-family: var(--fontFamilyCustomFont600,var(--fontFamilyBase));
+                    color: #000000;
+                  }
+                }
+              }
+          }
+        
+           
+          }
+        }
+      }
     }
+  }
+ 
+}
+div.customdatepicker > div > div > div:first-child div > div{
+  text-align: left;
+  font-weight:700;
+  
+span{
+  font-size: 24px !important;
+  line-height: 36px;
+}
+}
+div.customdatepicker > div > div > div:nth-child(2) div > div:first-child div:first-child >div{
+  font-weight: 700 !important;
+}
+div.customdatepicker > div > div > div:nth-child(2) div > div > div > div{
+ height: 49px;
+ width: 49px;
+}
+div.customdatepicker > div > div > div:first-child{
+  padding-bottom: 20px;
+}
 
-    .td1 {
-      border: 1px solid #000000;
-      padding: "8px";
-      width: "5px";
-      border-collapse: collapse;
-      text-align: left;
-      color: #000000;
-    }
-    .td2 {
-      border: 1px solid #000000;
-      padding: "8px";
-      width: "1em";
-      border-collapse: collapse;
-      text-align: left;
-      color: #000000;
-    }
+@media screen and (max-width: 768px) {
+  div.customdatepicker > div > div > div:nth-child(2) div > div > div > div{
+    height: 37px !important;
+    width: 37px !important;
+   }
   
-  
+
+  div.customdatepicker_1bbd6659>div>div>div:first-child div>div span{
+    font-size: 20px !important;
+  }
+  .calendarwrap{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    div.customdatepicker{
+      width: 100%;
+      box-shadow: none;
+      border: 1px solid rgba(102, 102, 102, 1);
+      border-radius: 12px;
+      box-sizing: border-box;
+      button{
+        i{
+          border-color: #000000;
+        }
+      }
+      > div{
+       
+        > div{
+     
+          > div 
+          {
+            div{
+              span{
+                font-size: 16px !important;
+               
+               
+              }
+            }
+            > div{
+              
+              >div{
+          
+                > div{
+                  div{
+                    font-size: 16px !important;
+                    
+                  }
+                }
+              }
+          }
+        
+           
+          }
+        }
+      }
+    }
+  }
+  div.customdatepicker > div > div > div:first-child div > div{
+   
+    
+  span{
+    font-size: 20px !important;
+    line-height: 26px !important;
+  }
+  }
 }

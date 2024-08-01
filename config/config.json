@@ -10,6 +10,14 @@
         }
       ]
     },
+    "finder-wp-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/finderWp/FinderWpWebPart.js",
+          "manifest": "./src/webparts/finderWp/FinderWpWebPart.manifest.json"
+        }
+      ]
+    },
     "calender-web-part": {
       "components": [
         {
@@ -17,11 +25,59 @@
           "manifest": "./src/webparts/calender/CalenderWebPart.manifest.json"
         }
       ]
+    },
+    "welcome-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/welcome/WelcomeWebPart.js",
+          "manifest": "./src/webparts/welcome/WelcomeWebPart.manifest.json"
+        }
+      ]
+    },
+    "welcome-employee-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/welcomeEmployee/WelcomeEmployeeWebPart.js",
+          "manifest": "./src/webparts/welcomeEmployee/WelcomeEmployeeWebPart.manifest.json"
+        }
+      ]
+    },
+    "znews-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/znews/ZnewsWebPart.js",
+          "manifest": "./src/webparts/znews/ZnewsWebPart.manifest.json"
+        }
+      ]
+    },
+    "dynamic-solution-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/dynamicSolution/DynamicSolutionWebPart.js",
+          "manifest": "./src/webparts/dynamicSolution/DynamicSolutionWebPart.manifest.json"
+        }
+      ]
+    },
+    "zmi-footer-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/zmiFooter/ZmiFooterWebPart.js",
+          "manifest": "./src/webparts/zmiFooter/ZmiFooterWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "BirthdaysWebPartStrings": "lib/webparts/birthdays/loc/{locale}.js",
-    "CalenderWebPartStrings": "lib/webparts/calender/loc/{locale}.js"
+    "FinderWpWebPartStrings": "lib/webparts/finderWp/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
+    "WelcomeWebPartStrings": "lib/webparts/welcome/loc/{locale}.js",
+    "WelcomeEmployeeWebPartStrings": "lib/webparts/welcomeEmployee/loc/{locale}.js",
+    "CalenderWebPartStrings": "lib/webparts/calender/loc/{locale}.js",
+    "ZnewsWebPartStrings": "lib/webparts/znews/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
+    "DynamicSolutionWebPartStrings": "lib/webparts/dynamicSolution/loc/{locale}.js",
+    "ZmiFooterWebPartStrings": "lib/webparts/zmiFooter/loc/{locale}.js"
   }
 }

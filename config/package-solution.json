@@ -3,10 +3,10 @@
   "solution": {
     "name": "zmi-components-client-side-solution",
     "id": "f9877f63-d774-43c6-9c2d-c57ccb1e573b",
-    "version": "1.0.0.0",
+    "version": "1.0.0.19",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
-    "isDomainIsolated": true,
+    "isDomainIsolated": false,
     "developer": {
       "name": "",
       "websiteUrl": "",
@@ -14,20 +14,20 @@
       "termsOfUseUrl": "",
       "mpnId": "Undefined-1.17.3"
     },
-    "webApiPermissionRequests": [  
+    "webApiPermissionRequests": [
       {
-         "resource": "Microsoft Graph",
-         "scope": "Calendars.Read"
-       },
-       {
-         "resource": "Microsoft Graph",
-         "scope": "Calendars.ReadBasic"
-       },
-       {
-         "resource": "Microsoft Graph",
-         "scope": "Calendars.ReadWrite"
-       }
-      ],
+        "resource": "Microsoft Graph",
+        "scope": "Calendars.Read"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Calendars.ReadBasic"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Calendars.ReadWrite"
+      }
+    ],
     "metadata": {
       "shortDescription": {
         "default": "zmi-components description"

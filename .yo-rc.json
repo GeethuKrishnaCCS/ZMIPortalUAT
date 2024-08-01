@@ -2,12 +2,12 @@
   "@microsoft/generator-sharepoint": {
     "plusBeta": false,
     "isCreatingSolution": false,
-    "nodeVersion": "14.20.0",
+    "nodeVersion": "18.20.3",
     "sdksVersions": {
       "@microsoft/microsoft-graph-client": "3.0.2",
-      "@microsoft/teams-js": "2.9.1"
+      "@microsoft/teams-js": "2.12.0"
     },
-    "version": "1.17.3",
+    "version": "1.19.0",
     "libraryName": "zmi-components",
     "libraryId": "f9877f63-d774-43c6-9c2d-c57ccb1e573b",
     "environment": "spo",
