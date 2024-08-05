@@ -44,7 +44,6 @@ export default class ZmiFooter extends React.Component<IZmiFooterProps, IZmiFoot
     await this.checkuserAdmin();
     const footerdataArray: any[] = []
     const footerdata = await this._Service.getListItems(this.props.siteUrl, this.props.settingsList)
-    console.log(footerdata);
     for (let i = 0; i < footerdata.length; i++) {
       if (footerdata[i].Title !== "Company Logo" && footerdata[i].Title !== "LINKED IN") {
         const footerda = {
@@ -71,7 +70,6 @@ export default class ZmiFooter extends React.Component<IZmiFooterProps, IZmiFoot
     const currentuser = await this._Service.getCurrentUser();
     if (currentuser) {
       const admindata = await this._Service.getAdminListItems(this.props.siteUrl, this.props.adminList)
-      console.log(admindata);
       const userAdmin = admindata.filter((item: any) => item.Admin.ID === currentuser.Id);
       if (userAdmin.length > 0) {
         this.setState({ isAdmin: true });
@@ -83,7 +81,6 @@ export default class ZmiFooter extends React.Component<IZmiFooterProps, IZmiFoot
     let LogoUrl: string = "";
     let footerdataitems: any[] = [];
     const footerdata = await this._Service.getListItems(this.props.siteUrl, this.props.settingsList)
-    console.log(footerdata);
     for (let i = 0; i < footerdata.length; i++) {
       if (footerdata[i].Logo !== null) {
         LogoUrl = footerdata[0].Logo.Url;

@@ -20,7 +20,6 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
       itemsPerPage: 1,
     }
     this._Service = new BaseService(this.props.context);
-    //this.dateChange =this.dateChange.bind(this);
     this.searchEvents = this.searchEvents.bind(this);
     this.handleScrollUp = this.handleScrollUp.bind(this);
     this.handleScrollDown = this.handleScrollDown.bind(this);
@@ -33,14 +32,17 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
     let recurrenceday: any;
     let recurrencedaysArray: any[] = [];
     let recurrencedays: any;
-    const today = moment(new Date().setMilliseconds(0)).format('YYYY-MM-DDT00:00:00.SSSSSSS');
-    const nextDay = moment(today).add(1, 'days').format('YYYY-MM-DDT00:00:00.SSSSSSS');
-    console.log(nextDay)
-    const eventdata = await this._Service.getevents(this.props.context, today, nextDay)
-    console.log(eventdata);
+    const today = new Date()
+//     const today = moment(new Date()).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
+// const endOfDay = moment(new Date()).endOf('day').format('YYYY-MM-DDTHH:mm:ss');
+    const firstday = moment(today.setMilliseconds(0)).format('YYYY-MM-DDT00:00:00.SSSSSSS');
+    const nextDay = moment(today.setMilliseconds(0)).format('YYYY-MM-DDT23:59:59.SSSSSSS');
+    const eventdata = await this._Service.getevents(this.props.context, firstday, nextDay)
     if (eventdata.length > 0) {
-
+console.log(eventdata);
       for (let i = 0; i < eventdata.length; i++) {
+        if(eventdata[i].start.dateTime <= firstday || eventdata[i].end.dateTime <= firstday){
+       
         /* const isostartdatetimestring = eventdata[i].start.dateTime + "Z";
         const isostartDateTime = new Date(isostartdatetimestring);
         const localstartDateTime = isostartDateTime.toLocaleDateString() + " " + isostartDateTime.toLocaleTimeString();
@@ -61,7 +63,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
         const isorendDateTime = new Date(isorenddatetimestring);
         const localrendDateTime = isorendDateTime.toLocaleDateString() + " " + isorendDateTime.toLocaleTimeString(); */
 
-
+const isAllDay = eventdata[i].isAllDay;
         const isostartdatetimestring = eventdata[i].start.dateTime + "Z";
         const isostartDateTime = new Date(isostartdatetimestring);
         const localstartDateTime = isostartDateTime
@@ -128,6 +130,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
             recurrencedays = recurrencedaysArray;
           }
         }
+        
         const eventdatavalue: any = {
           startDate: recurrence !== null ? rstartDate : startDate,
           endDate: recurrence !== null ? rendDate : endDate,
@@ -137,10 +140,14 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
           recurrence: recurrence,
           isOnlineMeeting: eventdata[i].isOnlineMeeting,
           onlineMeetingUrl: eventdata[i].isOnlineMeeting === true ? eventdata[i].onlineMeeting.joinUrl : "",
-          eventdays: recurrencedays
+          eventdays: recurrencedays,
+          isAllDay:isAllDay
         };
         eventdataArray.push(eventdatavalue);
-
+      }
+      else{
+        this.setState({ nodataFound: "No Data Found" })
+      }
       }
     }
     else {
@@ -157,7 +164,8 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
     const endDate = end !== undefined ? end.toDate() : start.toDate();
     this.setState({
       startDate: startDate,
-      endDate: endDate
+      endDate: endDate,
+      currentIndex: ""
     });
     this.searchEvents(startDate, endDate);
 
@@ -170,14 +178,14 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
     let recurrenceday: any;
     let recurrencedaysArray: any[] = [];
     let recurrencedays: any;
+    let formatStartDate = moment(startDate.setMilliseconds(0)).format('YYYY-MM-DDT00:00:00.SSSSSSS');
+    let formatEndDate = moment(endDate.setMilliseconds(0)).format('YYYY-MM-DDT23:59:59.SSSSSSS')
     const eventdata = await this._Service.getevents(this.props.context,
-      moment(startDate.setMilliseconds(0)).format('YYYY-MM-DDT00:00:00.SSSSSSS'),
-      moment(endDate.setMilliseconds(0)).format('YYYY-MM-DDT23:59:00.SSSSSSS'));
-
-    if (eventdata.length > 0) {
-      console.log(eventdata)
+      formatStartDate,formatEndDate);
+     if (eventdata.length > 0) {
       for (let i = 0; i < eventdata.length; i++) {
-        
+        if(eventdata[i].start.dateTime <= formatStartDate || eventdata[i].end.dateTime <= formatEndDate){
+        console.log(new Date(eventdata[i].start.dateTime))
         const isostartdatetimestring = eventdata[i].start.dateTime + "Z";
         const isostartDateTime = new Date(isostartdatetimestring);
         const localstartDateTime = isostartDateTime//.toLocaleDateString() + " " + isostartDateTime.toLocaleTimeString();
@@ -189,6 +197,7 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
         const starttime = moment(new Date(localstartDateTime)).format("hh:mm A");
         const endtime = moment(new Date(localendDateTime)).format("hh:mm A");
         const recurrence = eventdata[i].recurrence;
+        const isAllDay = eventdata[i].isAllDay;
         if (recurrence !== null) {
           rstartDate = moment(new Date(recurrence.range.startDate)).format("MMM-DD");
           rendDate = moment(new Date(recurrence.range.endDate)).format("MMM-DD");
@@ -243,12 +252,16 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
           recurrence: recurrence,
           isOnlineMeeting: eventdata[i].isOnlineMeeting,
           onlineMeetingUrl: eventdata[i].isOnlineMeeting === true ? eventdata[i].onlineMeeting.joinUrl : "",
-          eventdays: recurrencedays
+          eventdays: recurrencedays,
+          isAllDay:isAllDay
         };
 
         eventdataArray.push(eventdatavalue);
-      }
-
+        }
+        else{
+          this.setState({ nodataFound: "No Data Found" })
+        }
+    }
     }
     else {
       this.setState({ nodataFound: "No Data Found" })
@@ -259,14 +272,12 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
   private handleScrollUp() {
     const newIndex = Math.max(this.state.currentIndex - this.state.itemsPerPage, 0);
     this.setState({ currentIndex: newIndex });
-    console.log('upcurrentIndex: ', this.state.currentIndex);
   }
 
 
   private handleScrollDown() {
     const newIndex = Math.min(this.state.currentIndex + this.state.itemsPerPage, this.state.eventdataArray.length - 1);
     this.setState({ currentIndex: newIndex });
-    console.log('downcurrentIndex: ', this.state.currentIndex);
   }
   public render(): React.ReactElement<ICalenderProps> {
     const ChevronUp: IIconProps = { iconName: 'ChevronUp' };
@@ -310,7 +321,8 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
                             {item.recurrence !== null && <div className={styles.eventdsc}>Recurring Events</div>}
                             {item.recurrence === null && <div className={styles.eventdsc}>{item.subject}</div>}
                             {item.recurrence !== null && <div className={styles.eventdsc}>{item.eventdays}</div>}
-                            <div className={styles.eventdatetime}>{item.startTime}-{item.endTime}</div>
+                            {item.isAllDay === true && <div className={styles.eventdsc}>{"(Fullday Event)"}</div>}
+                            {item.isAllDay !== true && <div className={styles.eventdatetime}>{item.startTime}-{item.endTime}</div>}
                           </div>
                           <div>
                             {item.isOnlineMeeting !== false && <div className={styles.meetinglink}><a href={item.onlineMeetingUrl} target="_blank">
