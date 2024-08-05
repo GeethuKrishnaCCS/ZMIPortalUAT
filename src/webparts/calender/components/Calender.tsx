@@ -35,12 +35,14 @@ export default class Calender extends React.Component<ICalenderProps, ICalenderS
     const today = new Date()
 //     const today = moment(new Date()).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
 // const endOfDay = moment(new Date()).endOf('day').format('YYYY-MM-DDTHH:mm:ss');
-    const firstday = moment(today.setMilliseconds(0)).subtract(1, 'days').format('YYYY-MM-DDT18:30:00.SSSSSSS');
-    const nextDay = moment(today.setMilliseconds(0)).format('YYYY-MM-DDT18:30:00.SSSSSSS');
+    const firstday = moment(today.setMilliseconds(0)).format('YYYY-MM-DDT00:00:00.SSSSSSS');
+    const nextDay = moment(today.setMilliseconds(0)).format('YYYY-MM-DDT23:59:59.SSSSSSS');
     const eventdata = await this._Service.getevents(this.props.context, firstday, nextDay)
     if (eventdata.length > 0) {
 console.log(eventdata);
       for (let i = 0; i < eventdata.length; i++) {
+        if(eventdata[i].start.dateTime <= firstday || eventdata[i].end.dateTime <= firstday){
+       
         /* const isostartdatetimestring = eventdata[i].start.dateTime + "Z";
         const isostartDateTime = new Date(isostartdatetimestring);
         const localstartDateTime = isostartDateTime.toLocaleDateString() + " " + isostartDateTime.toLocaleTimeString();
@@ -142,7 +144,10 @@ const isAllDay = eventdata[i].isAllDay;
           isAllDay:isAllDay
         };
         eventdataArray.push(eventdatavalue);
-
+      }
+      else{
+        this.setState({ nodataFound: "No Data Found" })
+      }
       }
     }
     else {
@@ -173,14 +178,14 @@ const isAllDay = eventdata[i].isAllDay;
     let recurrenceday: any;
     let recurrencedaysArray: any[] = [];
     let recurrencedays: any;
+    let formatStartDate = moment(startDate.setMilliseconds(0)).format('YYYY-MM-DDT00:00:00.SSSSSSS');
+    let formatEndDate = moment(endDate.setMilliseconds(0)).format('YYYY-MM-DDT23:59:59.SSSSSSS')
     const eventdata = await this._Service.getevents(this.props.context,
-      moment(startDate.setMilliseconds(0)).subtract(1, 'days').format('YYYY-MM-DDT18:30:00.SSSSSSS'),
-      moment(endDate.setMilliseconds(0)).format('YYYY-MM-DDT18:30:00.SSSSSSS'));
-
-    if (eventdata.length > 0) {
-      console.log(eventdata)
+      formatStartDate,formatEndDate);
+     if (eventdata.length > 0) {
       for (let i = 0; i < eventdata.length; i++) {
-        
+        if(eventdata[i].start.dateTime <= formatStartDate || eventdata[i].end.dateTime <= formatEndDate){
+        console.log(new Date(eventdata[i].start.dateTime))
         const isostartdatetimestring = eventdata[i].start.dateTime + "Z";
         const isostartDateTime = new Date(isostartdatetimestring);
         const localstartDateTime = isostartDateTime//.toLocaleDateString() + " " + isostartDateTime.toLocaleTimeString();
@@ -252,8 +257,11 @@ const isAllDay = eventdata[i].isAllDay;
         };
 
         eventdataArray.push(eventdatavalue);
-      }
-
+        }
+        else{
+          this.setState({ nodataFound: "No Data Found" })
+        }
+    }
     }
     else {
       this.setState({ nodataFound: "No Data Found" })
